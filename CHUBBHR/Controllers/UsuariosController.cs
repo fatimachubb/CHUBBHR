@@ -6,12 +6,16 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CHUBBHR.Models;
+using System.Data.SqlClient;
+using Aspose.Cells;
+using System.Data;
 
 namespace CHUBBHR.Controllers
 {
     public class UsuariosController : Controller
     {
         private readonly RegistroContext _context;
+        private string connectionString = "Server=localhost\\SQLEXPRESS02;Database=REGISTRO; integrated security=true; Encrypt=False;";
 
         public UsuariosController(RegistroContext context)
         {
