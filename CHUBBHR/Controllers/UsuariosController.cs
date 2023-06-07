@@ -273,6 +273,54 @@ namespace CHUBBHR.Controllers
 
             return View();
         }
+
+        //Exportar a excel
+        public ActionResult Prueba(string fileName)
+        {
+            // Create a new DataTable
+            DataTable dataTable = new DataTable();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                string query = "SELECT * FROM Usuarios";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    SqlDataReader reader = command.ExecuteReader();
+                    dataTable.Load(reader);
+                    reader.Close();
+                }
+                connection.Close();
+            }
+
+            // Instantiating a Workbook object            
+            Workbook workbook = new Workbook();
+
+            // Obtaining the reference of the worksheet
+            Worksheet worksheet = workbook.Worksheets[0];
+
+            Style headerStyle = workbook.CreateStyle();
+            headerStyle.Font.IsBold = true;
+
+            // Apply the header style to the first row
+            worksheet.Cells.ApplyStyle(headerStyle, new StyleFlag() { All = true });
+
+            // Setting IsFieldNameShown property to true will add column names // of the DataTable to the worksheet as a header row
+            ImportTableOptions tableOptions = new ImportTableOptions();
+            tableOptions.IsFieldNameShown = true;
+
+            // Exporting the contents of DataTable at the first row and first column.
+            worksheet.Cells.ImportData(dataTable, 0, 0, tableOptions);
+
+            worksheet.Name = "MySheetName"; // Set the desired sheet name
+
+            // Saving the Excel file
+            // Cambiar la ruta por computadora
+            string filePath = Path.Combine("C:\\Users\\CHFERMI\\Desktop\\Proyectos", fileName + ".xlsx");
+
+            workbook.Save(filePath);
+
+            return View("Prueba");
+        }
     }
 }
 
