@@ -177,6 +177,8 @@ namespace CHUBBHR.Controllers
                 return NotFound();
             }
 
+
+
             var usuario = await _context.Usuarios
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (usuario == null)
@@ -184,10 +186,26 @@ namespace CHUBBHR.Controllers
                 return NotFound();
             }
 
+
             // Lógica de evaluación aquí
 
-            return View("Evaluar");
+
+            ViewData["Id"] = id;
+
+            var model = new TuModeloDeVista
+            {
+                Id = (int)id,
+                Usuario = usuario
+                // Otros datos del modelo
+            };
+
+            return View(model);
+
+
+
         }
+
+
 
 
         // POST: Usuarios/Evaluar
@@ -217,7 +235,18 @@ namespace CHUBBHR.Controllers
 
             ViewData["Titulo"] = "Competencias para " + seleccion;
 
-            return View();
+
+            ViewData["Id"] = id;
+
+            var model = new TuModeloDeVista
+            {
+                Id = (int)id,
+                Usuario = usuario
+                // Otros datos del modelo
+            };
+
+            return View(model);
+
         }
 
 
@@ -321,6 +350,13 @@ namespace CHUBBHR.Controllers
 
             return View("Prueba");
         }
+
+
+
+
+
     }
+
+    
 }
 
