@@ -1,4 +1,6 @@
-﻿
+﻿@model CHUBBHR.Models.Competencias
+
+
 @{
     ViewData["Title"] = "Evaluar";
 }
@@ -38,67 +40,149 @@
 </div>
 
 <div id="casillasContainer" class="competencias-container" style="display: none;">
-    <div id="colaboradorCasillas" class="competencia">
-        <input type="checkbox" name="competencias" value="resolucionProblemas" id="resolucionProblemas" />
-        <label for="resolucionProblemas">Resolución de Problemas</label>
-
-        <input type="checkbox" name="competencias" value="aprendizajeContinuo" id="aprendizajeContinuo" />
-        <label for="aprendizajeContinuo">Aprendizaje Continuo</label>
-
-        <input type="checkbox" name="competencias" value="iniciativa" id="iniciativa" />
-        <label for="iniciativa">Iniciativa</label>
-
-        <input type="checkbox" name="competencias" value="adaptabilidad" id="adaptabilidad" />
-        <label for="adaptabilidad">Adaptabilidad</label>
-
-        <input type="checkbox" name="competencias" value="orientacionResultados" id="orientacionResultados" />
-        <label for="orientacionResultados">Orientación a Resultados</label>
-
-        <input type="checkbox" name="competencias" value="orientacionValores" id="orientacionValores" />
-        <label for="orientacionValores">Orientación a Valores</label>
+    <div id="colaboradorCasillas" class="competencia" style="display: none;">
+        <div>
+            <input type="checkbox" name="competencias" value="resolucionProblemas" id="resolucionProblemas" />
+            <label for="resolucionProblemas">Resolución de Problemas</label>
+        </div>
+        <div id="resolucionProblemasContent" style="display: none;">
+            <h2>Contenido de Resolución de Problemas</h2>
+            <p>Aquí puedes agregar el contenido adicional para la competencia de Resolución de Problemas.</p>
+        </div>
+        <div>
+            <input type="checkbox" name="competencias" value="aprendizajeContinuo" id="aprendizajeContinuo" />
+            <label for="aprendizajeContinuo">Aprendizaje Continuo</label>
+        </div>
+        <div id="aprendizajeContinuoContent" style="display: none;">
+            <h2>Contenido de Aprendizaje Continuo</h2>
+            <p>Aquí puedes agregar el contenido adicional para la competencia de Aprendizaje Continuo.</p>
+        </div>
+        <div>
+            <input type="checkbox" name="competencias" value="iniciativa" id="iniciativa" />
+            <label for="iniciativa">Iniciativa</label>
+        </div>
+        <div id="iniciativaContent" style="display: none;">
+            <h2>Contenido de Iniciativa</h2>
+            <p>Aquí puedes agregar el contenido adicional para la competencia de Iniciativa.</p>
+        </div>
+        <div>
+            <input type="checkbox" name="competencias" value="adaptabilidad" id="adaptabilidad" />
+            <label for="adaptabilidad">Adaptabilidad</label>
+        </div>
+        <div id="adaptabilidadContent" style="display: none;">
+            <h2>Contenido de Adaptabilidad</h2>
+            <p>Aquí puedes agregar el contenido adicional para la competencia de Adaptabilidad.</p>
+        </div>
+        <div>
+            <input type="checkbox" name="competencias" value="orientacionResultados" id="orientacionResultados" />
+            <label for="orientacionResultados">Orientación a Resultados</label>
+        </div>
+        <div id="orientacionResultadosContent" style="display: none;">
+            <h2>Contenido de Orientación a Resultados</h2>
+            <p>Aquí puedes agregar el contenido adicional para la competencia de Orientación a Resultados.</p>
+        </div>
+        <div>
+            <input type="checkbox" name="competencias" value="orientacionValores" id="orientacionValores" />
+            <label for="orientacionValores">Orientación a Valores</label>
+        </div>
+        <div id="orientacionValoresContent" style="display: none;">
+            <h2>Contenido de Orientación a Valores</h2>
+            <p>Aquí puedes agregar el contenido adicional para la competencia de Orientación a Valores.</p>
+        </div>
     </div>
 
-    <div id="lideresCasillas" class="competencia">
-        <input type="checkbox" name="competencias" value="visionNegocio" id="visionNegocio" />
-        <label for="visionNegocio">Visión de Negocio</label>
-
-        <input type="checkbox" name="competencias" value="influencia" id="influencia" />
-        <label for="influencia">Influencia</label>
-
-        <input type="checkbox" name="competencias" value="liderazgoEquipoInclusivo" id="liderazgoEquipoInclusivo" />
-        <label for="liderazgoEquipoInclusivo">Liderazgo Equipo Inclusivo</label>
-
-        <input type="checkbox" name="competencias" value="ejecucion" id="ejecucion" />
-        <label for="ejecucion">Ejecución</label>
-
-        <input type="checkbox" name="competencias" value="ownership" id="ownership" />
-        <label for="ownership">Ownership</label>
-
-        <input type="checkbox" name="competencias" value="integridadCoraje" id="integridadCoraje" />
-        <label for="integridadCoraje">Integridad y Coraje</label>
-
-        <input type="checkbox" name="competencias" value="enfoqueEstrategico" id="enfoqueEstrategico" />
-        <label for="enfoqueEstrategico">Enfoque Estratégico</label>
+    <div id="lideresCasillas" class="competencia" style="display: none;">
+        <div>
+            <input type="checkbox" name="competencias" value="visionNegocio" id="visionNegocio" />
+            <label for="visionNegocio">Visión de Negocio</label>
+        </div>
+        <div id="visionNegocioContent" style="display: none;">
+            <h2>Contenido de Visión de Negocio</h2>
+            <p>Aquí puedes agregar el contenido adicional para la competencia de Visión de Negocio.</p>
+        </div>
+        <div>
+            <input type="checkbox" name="competencias" value="influencia" id="influencia" />
+            <label for="influencia">Influencia</label>
+        </div>
+        <div id="influenciaContent" style="display: none;">
+            <h2>Contenido de Influencia</h2>
+            <p>Aquí puedes agregar el contenido adicional para la competencia de Influencia.</p>
+        </div>
+        <div>
+            <input type="checkbox" name="competencias" value="liderazgoEquipoInclusivo" id="liderazgoEquipoInclusivo" />
+            <label for="liderazgoEquipoInclusivo">Liderazgo Equipo Inclusivo</label>
+        </div>
+        <div id="liderazgoEquipoInclusivoContent" style="display: none;">
+            <h2>Contenido de Liderazgo Equipo Inclusivo</h2>
+            <p>Aquí puedes agregar el contenido adicional para la competencia de Liderazgo Equipo Inclusivo.</p>
+        </div>
+        <div>
+            <input type="checkbox" name="competencias" value="ejecucion" id="ejecucion" />
+            <label for="ejecucion">Ejecución</label>
+        </div>
+        <div id="ejecucionContent" style="display: none;">
+            <h2>Contenido de Ejecución</h2>
+            <p>Aquí puedes agregar el contenido adicional para la competencia de Ejecución.</p>
+        </div>
+        <div>
+            <input type="checkbox" name="competencias" value="ownership" id="ownership" />
+            <label for="ownership">Ownership</label>
+        </div>
+        <div id="ownershipContent" style="display: none;">
+            <h2>Contenido de Ownership</h2>
+            <p>Aquí puedes agregar el contenido adicional para la competencia de Ownership.</p>
+        </div>
+        <div>
+            <input type="checkbox" name="competencias" value="integridadCoraje" id="integridadCoraje" />
+            <label for="integridadCoraje">Integridad y Coraje</label>
+        </div>
+        <div id="integridadCorajeContent" style="display: none;">
+            <h2>Contenido de Integridad y Coraje</h2>
+            <p>Aquí puedes agregar el contenido adicional para la competencia de Integridad y Coraje.</p>
+        </div>
+        <div>
+            <input type="checkbox" name="competencias" value="enfoqueEstrategico" id="enfoqueEstrategico" />
+            <label for="enfoqueEstrategico">Enfoque Estratégico</label>
+        </div>
+        <div id="enfoqueEstrategicoContent" style="display: none;">
+            <h2>Contenido de Enfoque Estratégico</h2>
+            <p>Aquí puedes agregar el contenido adicional para la competencia de Enfoque Estratégico.</p>
+        </div>
     </div>
 
-
-    <div id="todosCasillas" class="competencia">
-        <input type="checkbox" name="competencias" value="compatibilidad" id="compatibilidad" />
-        <label for="compatibilidad">Compatibilidad</label>
-
-        <input type="checkbox" name="competencias" value="orientacionCliente" id="orientacionCliente" />
-        <label for="orientacionCliente">Orientación al Cliente</label>
-
-        <input type="checkbox" name="competencias" value="trabajoBajoPresion" id="trabajoBajoPresion" />
-        <label for="trabajoBajoPresion">Trabajo bajo Presión</label>
+    <div id="todosCasillas" class="competencia" style="display: none;">
+        <div>
+            <input type="checkbox" name="competencias" value="compatibilidad" id="compatibilidad" />
+            <label for="compatibilidad">Compatibilidad</label>
+        </div>
+        <div id="compatibilidadContent" style="display: none;">
+            <h2>Contenido de Compatibilidad</h2>
+            <p>Aquí puedes agregar el contenido adicional para la competencia de Compatibilidad.</p>
+        </div>
+        <div>
+            <input type="checkbox" name="competencias" value="orientacionCliente" id="orientacionCliente" />
+            <label for="orientacionCliente">Orientación al Cliente</label>
+        </div>
+        <div id="orientacionClienteContent" style="display: none;">
+            <h2>Contenido de Orientación al Cliente</h2>
+            <p>Aquí puedes agregar el contenido adicional para la competencia de Orientación al Cliente.</p>
+        </div>
+        <div>
+            <input type="checkbox" name="competencias" value="trabajoBajoPresion" id="trabajoBajoPresion" />
+            <label for="trabajoBajoPresion">Trabajo bajo Presión</label>
+        </div>
+        <div id="trabajoBajoPresionContent" style="display: none;">
+            <h2>Contenido de Trabajo bajo Presión</h2>
+            <p>Aquí puedes agregar el contenido adicional para la competencia de Trabajo bajo Presión.</p>
+        </div>
     </div>
 
 
     <button onclick="obtenerResultados()">Iniciar Evaluación</button>
 </div>
+
 <script>
     function mostrarCasillas(opcion) {
-        // Oculta todas las casillas y muestra solo las correspondientes a la opción seleccionada
         var casillasContainer = document.getElementById('casillasContainer');
         var colaboradorCasillas = document.getElementById('colaboradorCasillas');
         var lideresCasillas = document.getElementById('lideresCasillas');
@@ -120,24 +204,65 @@
     }
 
     function obtenerResultados() {
-        // Obtén los valores seleccionados de las casillas y realiza la acción deseada
         var checkboxes = document.querySelectorAll('input[name="competencias"]:checked');
         var competenciasSeleccionadas = Array.from(checkboxes).map(function (checkbox) {
             return checkbox.value;
         });
 
-        // Redirecciona a la vista de evaluación con las competencias seleccionadas
-        var url = '/Usuarios/Evaluar?competencias=' + competenciasSeleccionadas.join(',');
-        window.location.href = url;
+        competenciasSeleccionadas.forEach(function (competencia) {
+            var competenciaContent = document.getElementById(competencia + 'Content');
+            if (competenciaContent) {
+                competenciaContent.style.display = 'block';
+            }
+        });
     }
-
 </script>
 
-<h2>Id recibido: @Model.Id</h2>
-<h2>Nombre del usuario: @Model.Usuario.Nombre</h2>
+
+
+
+<h1>Prueba 2</h1>
+
+
+
+@using (Html.BeginForm("GuardarEvaluacion", "Usuarios", FormMethod.Post))
+{
+    <label>Situacion:</label>
+    @Html.TextBoxFor(model => model.Situacion)
+    <br>
+
+    <label>Tarea:</label>
+    @Html.TextBoxFor(model => model.Tarea)
+    <br>
+
+    <label>Accion:</label>
+    @Html.TextBoxFor(model => model.Accion)
+    <br>
+
+    <label>Resultado:</label>
+    @Html.TextBoxFor(model => model.Resultado)
+    <br>
+
+    <label>Comentario:</label>
+    @Html.TextBoxFor(model => model.Comentario)
+    <br>
+
+    <label>Usuario Id:</label>
+    @Html.TextBoxFor(model => model.UsuarioId, new { type = "number" })
+
+    <label>Puntaje:</label>
+    @Html.TextBoxFor(model => model.Puntaje, new { type = "number" })
+
+    <!-- Agrega más elementos y etiquetas <br> según sea necesario -->
+
+    <input type="submit" value="Enviar" />
+}
+
+
 
 
 <form method="post" action="/Usuarios/Prueba">
     <input type="text" name="fileName" placeholder="Enter file name">
     <button type="submit">Save Excel File</button>
 </form>
+

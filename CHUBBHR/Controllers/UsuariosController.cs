@@ -9,11 +9,16 @@ using CHUBBHR.Models;
 using System.Data.SqlClient;
 using Aspose.Cells;
 using System.Data;
+using SkiaSharp;
 
 namespace CHUBBHR.Controllers
 {
     public class UsuariosController : Controller
     {
+
+
+
+
         private readonly RegistroContext _context;
         private string connectionString = "Server=localhost\\SQLEXPRESS02;Database=REGISTRO; integrated security=true; Encrypt=False;";
 
@@ -21,6 +26,9 @@ namespace CHUBBHR.Controllers
         {
             _context = context;
         }
+
+
+   
 
         // GET: Usuarios
         public async Task<IActionResult> Index()
@@ -187,19 +195,7 @@ namespace CHUBBHR.Controllers
             }
 
 
-            // Lógica de evaluación aquí
-
-
-            ViewData["Id"] = id;
-
-            var model = new TuModeloDeVista
-            {
-                Id = (int)id,
-                Usuario = usuario
-                // Otros datos del modelo
-            };
-
-            return View(model);
+            return View("Evaluar");
 
 
 
@@ -235,17 +231,8 @@ namespace CHUBBHR.Controllers
 
             ViewData["Titulo"] = "Competencias para " + seleccion;
 
+            return View("Evaluar");
 
-            ViewData["Id"] = id;
-
-            var model = new TuModeloDeVista
-            {
-                Id = (int)id,
-                Usuario = usuario
-                // Otros datos del modelo
-            };
-
-            return View(model);
 
         }
 
@@ -311,7 +298,7 @@ namespace CHUBBHR.Controllers
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                string query = "SELECT * FROM Usuarios";
+                string query = "SELECT *\r\nFROM Usuarios\r\nINNER JOIN Competencias ON Usuarios.id = Competencias.UsuarioId\r\nWHERE Usuarios.id = 20;";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     SqlDataReader reader = command.ExecuteReader();
@@ -352,11 +339,26 @@ namespace CHUBBHR.Controllers
         }
 
 
+        [HttpPost]
+        public ActionResult GuardarEvaluacion(Competencias evaluacion)
+        {
+            // Guardar evaluación en la base de datos utilizando Entity Framework
+
+            using (var context = new RegistroContext()) // Reemplaza "TuContextoDeDatos" con el nombre real de tu contexto de datos
+            {
+                _context.Competencias.Add(evaluacion); // Agrega la evaluación al contexto de datos
+                _context.SaveChanges(); // Guarda los cambios en la base de datos
+            }
+
+            return RedirectToAction("Prueba"); // Redirige a alguna acción o vista según lo que desees mostrar después de guardar la evaluación
+        }
+
+       
 
 
 
     }
 
-    
+
 }
 
