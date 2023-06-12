@@ -30,8 +30,6 @@
     }
 </style>
 
-
-
 <h1>Evaluación de Competencias</h1>
 <div>
     <button class="btn" onclick="mostrarCasillas('colaborador')">Colaborador Individual</button>
@@ -219,14 +217,16 @@
 </script>
 
 
-
-
 <h1>Prueba 2</h1>
 
+<p>El ID del usuario es: @ViewBag.UsuarioId</p>
 
 
 @using (Html.BeginForm("GuardarEvaluacion", "Usuarios", FormMethod.Post))
 {
+    @Html.Hidden("UsuarioId", (object)ViewBag.UsuarioId)
+
+
     <label>Situacion:</label>
     @Html.TextBoxFor(model => model.Situacion)
     <br>
@@ -247,13 +247,8 @@
     @Html.TextBoxFor(model => model.Comentario)
     <br>
 
-    <label>Usuario Id:</label>
-    @Html.TextBoxFor(model => model.UsuarioId, new { type = "number" })
-
     <label>Puntaje:</label>
     @Html.TextBoxFor(model => model.Puntaje, new { type = "number" })
-
-    <!-- Agrega más elementos y etiquetas <br> según sea necesario -->
 
     <input type="submit" value="Enviar" />
 }

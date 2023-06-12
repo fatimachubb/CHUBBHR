@@ -178,7 +178,7 @@ namespace CHUBBHR.Controllers
 
 
         // GET: Usuarios/Evaluar/5
-        public async Task<IActionResult> Evaluar(int? id, string competencia)
+        public async Task<IActionResult> Evaluar(int? id, string competencia, string fileName)
         {
             if (id == null || _context.Usuarios == null)
             {
@@ -194,8 +194,12 @@ namespace CHUBBHR.Controllers
                 return NotFound();
             }
 
+            ViewBag.UsuarioId = id;
+
+
 
             return View("Evaluar");
+
 
 
 
@@ -230,6 +234,9 @@ namespace CHUBBHR.Controllers
             }
 
             ViewData["Titulo"] = "Competencias para " + seleccion;
+
+
+            ViewBag.UsuarioId = id;
 
             return View("Evaluar");
 
@@ -293,12 +300,14 @@ namespace CHUBBHR.Controllers
         //Exportar a excel
         public ActionResult Prueba(string fileName)
         {
+            var usuarioIdEvaluar = ViewBag.UsuarioId;
+
             // Create a new DataTable
             DataTable dataTable = new DataTable();
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                string query = "SELECT *\r\nFROM Usuarios\r\nINNER JOIN Competencias ON Usuarios.id = Competencias.UsuarioId\r\nWHERE Usuarios.id = 20;";
+                string query = "SELECT Usuarios.Nombre, Usuarios.Fecha, Usuarios.posicion_fk,\r\n Competencias.UsuarioId, Competencias.Situacion, Competencias.Tarea, Competencias.Accion,\r\n       Competencias.Resultado, Competencias.Comentario, Competencias.Puntaje\r\nFROM Usuarios\r\nINNER JOIN Competencias ON Usuarios.id = Competencias.UsuarioId\r\nWHERE Usuarios.id = 20;";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     SqlDataReader reader = command.ExecuteReader();
