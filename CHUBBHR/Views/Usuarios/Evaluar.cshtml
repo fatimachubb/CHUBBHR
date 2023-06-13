@@ -28,6 +28,38 @@
     .competencia {
         margin-bottom: 10px;
     }
+
+    body {
+        font-family: Georgia, serif; /* Cambia "Arial, sans-serif" por "Georgia, serif" */
+    }
+
+    p {
+        font-size: 18px;
+        color: #333;
+        line-height: 1.5;
+        margin-bottom: 10px;
+        border: 1px solid #ccc; /* Agrega un borde de 1px sólido en color gris claro */
+        padding: 10px;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        max-width: 800px;
+        margin: auto;
+        margin-top: 20px;
+    }
+
+    th, td {
+        text-align: left;
+        padding: 8px;
+        border: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
 </style>
 
 <h1>Evaluación de Competencias</h1>
@@ -38,6 +70,260 @@
 </div>
 
 <div id="casillasContainer" class="competencias-container" style="display: none;">
+    <div id="colaboradorCasillas" class="competencia" style="display: none;">
+        <div>
+            <input type="checkbox" name="competencias" value="resolucionProblemas" id="resolucionProblemas" />
+<<<<<<< HEAD
+            <label for="resolucionProblemas">Resolución de Problemas</label>
+        </div>
+        <div id="resolucionProblemasContent" style="display: none;">
+            <h2>Contenido de Resolución de Problemas</h2>
+            <p>Aquí puedes agregar el contenido adicional para la competencia de Resolución de Problemas.</p>
+        </div>
+        <div>
+            <input type="checkbox" name="competencias" value="aprendizajeContinuo" id="aprendizajeContinuo" />
+            <label for="aprendizajeContinuo">Aprendizaje Continuo</label>
+        </div>
+        <div id="aprendizajeContinuoContent" style="display: none;">
+            <h2>Contenido de Aprendizaje Continuo</h2>
+            <p>Aquí puedes agregar el contenido adicional para la competencia de Aprendizaje Continuo.</p>
+        </div>
+        <div>
+            <input type="checkbox" name="competencias" value="iniciativa" id="iniciativa" />
+            <label for="iniciativa">Iniciativa</label>
+        </div>
+        <div id="iniciativaContent" style="display: none;">
+            <h2>Contenido de Iniciativa</h2>
+            <p>Aquí puedes agregar el contenido adicional para la competencia de Iniciativa.</p>
+        </div>
+        <div>
+            <input type="checkbox" name="competencias" value="adaptabilidad" id="adaptabilidad" />
+            <label for="adaptabilidad">Adaptabilidad</label>
+        </div>
+        <div id="adaptabilidadContent" style="display: none;">
+            <h2>Contenido de Adaptabilidad</h2>
+            <p>Aquí puedes agregar el contenido adicional para la competencia de Adaptabilidad.</p>
+        </div>
+        <div>
+            <input type="checkbox" name="competencias" value="orientacionResultados" id="orientacionResultados" />
+            <label for="orientacionResultados">Orientación a Resultados</label>
+        </div>
+        <div id="orientacionResultadosContent" style="display: none;">
+            <h2>Contenido de Orientación a Resultados</h2>
+            <p>Aquí puedes agregar el contenido adicional para la competencia de Orientación a Resultados.</p>
+        </div>
+        <div>
+            <input type="checkbox" name="competencias" value="orientacionValores" id="orientacionValores" />
+            <label for="orientacionValores">Orientación a Valores</label>
+        </div>
+        <div id="orientacionValoresContent" style="display: none;">
+            <h2>Contenido de Orientación a Valores</h2>
+            <p>Aquí puedes agregar el contenido adicional para la competencia de Orientación a Valores.</p>
+        </div>
+    </div>
+
+    <div id="lideresCasillas" class="competencia" style="display: none;">
+        <div>
+            <input type="checkbox" name="competencias" value="visionNegocio" id="visionNegocio" />
+            <label for="visionNegocio">Visión de Negocio</label>
+        </div>
+        <div id="visionNegocioContent" style="display: none;">
+            <h2>Contenido de Visión de Negocio</h2>
+            <p>Aquí puedes agregar el contenido adicional para la competencia de Visión de Negocio.</p>
+        </div>
+        <div>
+            <input type="checkbox" name="competencias" value="influencia" id="influencia" />
+            <label for="influencia">Influencia</label>
+        </div>
+        <div id="influenciaContent" style="display: none;">
+            <h2>Contenido de Influencia</h2>
+            <p>Aquí puedes agregar el contenido adicional para la competencia de Influencia.</p>
+        </div>
+        <div>
+            <input type="checkbox" name="competencias" value="liderazgoEquipoInclusivo" id="liderazgoEquipoInclusivo" />
+            <label for="liderazgoEquipoInclusivo">Liderazgo Equipo Inclusivo</label>
+        </div>
+        <div id="liderazgoEquipoInclusivoContent" style="display: none;">
+            <h2>Contenido de Liderazgo Equipo Inclusivo</h2>
+            <p>Aquí puedes agregar el contenido adicional para la competencia de Liderazgo Equipo Inclusivo.</p>
+        </div>
+        <div>
+            <input type="checkbox" name="competencias" value="ejecucion" id="ejecucion" />
+            <label for="ejecucion">Ejecución</label>
+        </div>
+        <div id="ejecucionContent" style="display: none;">
+            <h2>Contenido de Ejecución</h2>
+            <p>Aquí puedes agregar el contenido adicional para la competencia de Ejecución.</p>
+        </div>
+        <div>
+            <input type="checkbox" name="competencias" value="ownership" id="ownership" />
+            <label for="ownership">Ownership</label>
+        </div>
+        <div id="ownershipContent" style="display: none;">
+            <h2>Contenido de Ownership</h2>
+            <p>Aquí puedes agregar el contenido adicional para la competencia de Ownership.</p>
+        </div>
+        <div>
+            <input type="checkbox" name="competencias" value="integridadCoraje" id="integridadCoraje" />
+            <label for="integridadCoraje">Integridad y Coraje</label>
+        </div>
+        <div id="integridadCorajeContent" style="display: none;">
+            <h2>Contenido de Integridad y Coraje</h2>
+            <p>Aquí puedes agregar el contenido adicional para la competencia de Integridad y Coraje.</p>
+        </div>
+        <div>
+            <input type="checkbox" name="competencias" value="enfoqueEstrategico" id="enfoqueEstrategico" />
+            <label for="enfoqueEstrategico">Enfoque Estratégico</label>
+        </div>
+        <div id="enfoqueEstrategicoContent" style="display: none;">
+            <h2>Contenido de Enfoque Estratégico</h2>
+            <p>Aquí puedes agregar el contenido adicional para la competencia de Enfoque Estratégico.</p>
+        </div>
+    </div>
+
+=======
+            <label for="resolucionProblemas"><mark style="background-color: orange; color: black;">Resolución de Problemas</mark></label>
+        </div>
+        <div id="resolucionProblemasContent" style="display: none;">
+            <h2>Contenido de Resolución de Problemas</h2>
+            <p>El candidato:</p>
+            <ul>
+                <li>Tiene un enfoque organizado y lógico para reflexionar sobre los problemas y asuntos complejos.</li>
+                <li>Simplifica la complejidad desglosando los problemas en partes manejables.</li>
+                <li>Busca más allá de lo obvio para lograr resultados.</li>
+                <li>Desarrolla introspección de los problemas, asuntos y situaciones de forma efectiva y ágil.</li>
+            </ul>
+
+            <p> <strong>Selecciona 1 o 2 preguntas sugeridas para evaluar esta competencia</strong>.</p>
+
+            <ol>
+                <li>
+                    Cuéntame de alguna situación en la que no pudiste cumplir con el tiempo establecido de entrega.
+                    <ol type="a">
+                        <li>¿Qué pasó?</li>
+                        <li>¿Con qué obstáculos te enfrentaste?</li>
+                        <li>¿Cómo lo resolviste?</li>
+                        <li>¿Cuál fue el resultado?</li>
+                    </ol>
+                </li>
+                <li>
+                    Descríbeme el mayor problema que hayas experimentado en tu rol actual.
+                    <ol type="a">
+                        <li>¿Qué sucedió?</li>
+                        <li>¿Qué te llevó a hacerlo de esa manera?</li>
+                        <li>¿Qué aprendiste?</li>
+                    </ol>
+                </li>
+                <li>
+                    Cuéntame de alguna situación en la que tuviste que abordar un problema y no contabas con toda la información necesaria.
+                    <ol type="a">
+                        <li>¿Qué se esperaba de ti?</li>
+                        <li>¿Qué acciones llevaste a cabo?</li>
+                        <li>¿Cuál fue el resultado de acuerdo con tus acciones?</li>
+                    </ol>
+                </li>
+                <li>
+                    Háblame de alguna ocasión en la que hayas tenido que cambiar tu estrategia para lograr solucionar un problema.
+                    <ol type="a">
+                        <li>¿Qué pasó?</li>
+                        <li>¿Qué esperaban de ti?</li>
+                        <li>¿Qué hiciste?</li>
+                        <li>¿Cuál fue el resultado?</li>
+                    </ol>
+                </li>
+            </ol>
+
+            <p> <strong>Documenta brevemente las respuestas del candidato, de acuerdo con el MODELO STAR</strong>.</p>
+
+            <table>
+                <tr>
+                    <th>Situación</th>
+                    <th>Tarea</th>
+                    <th>Acción</th>
+                    <th>Resultado</th>
+                </tr>
+                <tr>
+                    <td contenteditable="true" style="width: 300px;"></td>
+                    <td contenteditable="true" style="width: 300px;"></td>
+                    <td contenteditable="true" style="width: 300px;"></td>
+                    <td contenteditable="true" style="width: 300px;"></td>
+
+                </tr>
+            </table>
+
+
+            <p> <strong>Comentarios / Observaciones Generales:</strong>.</p>
+
+            <div>
+                <label for="comentarios"></label>
+                <textarea id="comentarios" name="comentarios" rows="5"></textarea>
+            </div>
+
+
+            <p> <strong>Evalúa la respuesta del candidato de acuerdo con la escala de calificación:</strong>.</p>
+
+            <table>
+                <tr>
+                    <th>Carece o N/A</th>
+                    <th>Conocimiento general</th>
+                    <th>Conocimiento sólido</th>
+                    <th>Conocimiento profundo</th>
+                    <th>Alto Dominio</th>
+                </tr>
+                <tr>
+                    <td><button onclick="seleccionarValor(1)">1</button></td>
+                    <td><button onclick="seleccionarValor(2)">2</button></td>
+                    <td><button onclick="seleccionarValor(3)">3</button></td>
+                    <td><button onclick="seleccionarValor(4)">4</button></td>
+                    <td><button onclick="seleccionarValor(5)">5</button></td>
+                </tr>
+            </table>
+
+
+
+          
+        </div>
+        <div>
+            <input type="checkbox" name="competencias" value="aprendizajeContinuo" id="aprendizajeContinuo" />
+            <label for="aprendizajeContinuo"><mark style="background-color:purple; color: white;">Aprendizaje Continuo</mark></label>
+        </div>
+        <div id="aprendizajeContinuoContent" style="display: none;">
+            <h2>Contenido de Aprendizaje Continuo</h2>
+            <p>Aquí puedes agregar el contenido adicional para la competencia de Aprendizaje Continuo.</p>
+        </div>
+        <div>
+            <input type="checkbox" name="competencias" value="iniciativa" id="iniciativa" />
+            <label for="iniciativa"><mark style="background-color: orange; color: black;">Iniciativa</mark></label>
+        </div>
+        <div id="iniciativaContent" style="display: none;">
+            <h2>Contenido de Iniciativa</h2>
+            <p>Aquí puedes agregar el contenido adicional para la competencia de Iniciativa.</p>
+        </div>
+        <div>
+            <input type="checkbox" name="competencias" value="adaptabilidad" id="adaptabilidad" />
+            <label for="adaptabilidad"><mark style="background-color:purple; color: white;">Adaptabilidad</mark></label>
+        </div>
+        <div id="adaptabilidadContent" style="display: none;">
+            <h2>Contenido de Adaptabilidad</h2>
+            <p>Aquí puedes agregar el contenido adicional para la competencia de Adaptabilidad.</p>
+        </div>
+        <div>
+            <input type="checkbox" name="competencias" value="orientacionResultados" id="orientacionResultados" />
+            <label for="orientacionResultados"><mark style="background-color: orange; color: black;">Orientación a Resultados</mark></label>
+        </div>
+        <div id="orientacionResultadosContent" style="display: none;">
+            <h2>Contenido de Orientación a Resultados</h2>
+            <p>Aquí puedes agregar el contenido adicional para la competencia de Orientación a Resultados.</p>
+        </div>
+        <div>
+            <input type="checkbox" name="competencias" value="orientacionValores" id="orientacionValores" />
+            <label for="orientacionValores"><mark style="background-color:purple; color: white;">Orientación a Valores</mark></label>
+        </div>
+        <div id="orientacionValoresContent" style="display: none;">
+            <h2>Contenido de Orientación a Valores</h2>
+            <p>Aquí puedes agregar el contenido adicional para la competencia de Orientación a Valores.</p>
+        </div>
+    </div>
     <div id="colaboradorCasillas" class="competencia" style="display: none;">
         <div>
             <input type="checkbox" name="competencias" value="resolucionProblemas" id="resolucionProblemas" />
@@ -148,6 +434,7 @@
         </div>
     </div>
 
+>>>>>>> 076a0748955cb756094307ebbe1bbbd638557fc9
     <div id="todosCasillas" class="competencia" style="display: none;">
         <div>
             <input type="checkbox" name="competencias" value="compatibilidad" id="compatibilidad" />
@@ -215,6 +502,7 @@
         });
     }
 </script>
+<<<<<<< HEAD
 
 
 <h1>Prueba 2</h1>
@@ -257,3 +545,5 @@
 
 
 
+=======
+>>>>>>> 076a0748955cb756094307ebbe1bbbd638557fc9
