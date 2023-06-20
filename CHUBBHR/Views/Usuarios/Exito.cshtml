@@ -1,0 +1,17 @@
+﻿@{
+    ViewData["Title"] = "Exito";
+}
+
+<h2>Felicidades, completaste la evaluación del usuario con el ID @ViewBag.UsuarioId</h2>
+
+
+<a asp-action="Index">Volver a Usuarios</a>
+
+<form method="post" action="/Usuarios/Prueba">
+    <input type="hidden" name="UsuarioId" value="@ViewBag.UsuarioId" />
+    <input type="text" name="fileName" placeholder="Enter file name">
+    <button type="submit">Save Excel File</button>
+</form>
+
+
+

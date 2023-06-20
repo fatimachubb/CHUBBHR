@@ -6,17 +6,26 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CHUBBHR.Models;
+using System.Data.SqlClient;
+using Aspose.Cells;
+using System.Data;
+using SkiaSharp;
 
 namespace CHUBBHR.Controllers
 {
     public class UsuariosController : Controller
     {
+
+
         private readonly RegistroContext _context;
+        private string connectionString = "Server=localhost\\SQLEXPRESS02;Database=REGISTRO; integrated security=true; Encrypt=False;";
 
         public UsuariosController(RegistroContext context)
         {
             _context = context;
         }
+
+   
 
         // GET: Usuarios
         public async Task<IActionResult> Index()
@@ -166,12 +175,14 @@ namespace CHUBBHR.Controllers
 
 
         // GET: Usuarios/Evaluar/5
-        public async Task<IActionResult> Evaluar(int? id, string competencia)
+        public async Task<IActionResult> Evaluar(int? id, string competencia, string fileName)
         {
             if (id == null || _context.Usuarios == null)
             {
                 return NotFound();
             }
+
+
 
             var usuario = await _context.Usuarios
                 .FirstOrDefaultAsync(m => m.Id == id);
@@ -180,10 +191,18 @@ namespace CHUBBHR.Controllers
                 return NotFound();
             }
 
-            // Lógica de evaluación aquí
+            ViewBag.UsuarioId = id;
+
+
 
             return View("Evaluar");
+
+
+
+
         }
+
+
 
 
         // POST: Usuarios/Evaluar
@@ -213,7 +232,12 @@ namespace CHUBBHR.Controllers
 
             ViewData["Titulo"] = "Competencias para " + seleccion;
 
-            return View();
+
+            ViewBag.UsuarioId = id;
+
+            return View("Evaluar");
+
+
         }
 
 
@@ -269,6 +293,84 @@ namespace CHUBBHR.Controllers
 
             return View();
         }
+
+        //Exportar a excel
+        public ActionResult Prueba(string fileName, int UsuarioId)
+        {
+            var usuarioIdEvaluar = ViewBag.UsuarioId;
+
+            // Create a new DataTable
+            DataTable dataTable = new DataTable();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                string query = "SELECT Usuarios.Nombre, Usuarios.Fecha, Usuarios.posicion_fk,\r\n     " +
+                    "  Competencias.UsuarioId, Competencias.Situacion, Competencias.Tarea, Competencias.Accion,\r\n       " +
+                    "Competencias.Resultado, Competencias.Comentario, Competencias.Puntaje\r\nFROM Usuarios\r\n" +
+                    "INNER JOIN Competencias ON Usuarios.id = Competencias.UsuarioId\r\nWHERE Usuarios.id =" + UsuarioId;
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    SqlDataReader reader = command.ExecuteReader();
+                    dataTable.Load(reader);
+                    reader.Close();
+                }
+                connection.Close();
+            }
+
+            // Instantiating a Workbook object            
+            Workbook workbook = new Workbook();
+
+            // Obtaining the reference of the worksheet
+            Worksheet worksheet = workbook.Worksheets[0];
+
+            Style headerStyle = workbook.CreateStyle();
+            headerStyle.Font.IsBold = true;
+
+            // Apply the header style to the first row
+            worksheet.Cells.ApplyStyle(headerStyle, new StyleFlag() { All = true });
+
+            // Setting IsFieldNameShown property to true will add column names // of the DataTable to the worksheet as a header row
+            ImportTableOptions tableOptions = new ImportTableOptions();
+            tableOptions.IsFieldNameShown = true;
+
+            // Exporting the contents of DataTable at the first row and first column.
+            worksheet.Cells.ImportData(dataTable, 0, 0, tableOptions);
+
+            worksheet.Name = "MySheetName"; // Set the desired sheet name
+
+            // Saving the Excel file
+            // Cambiar la ruta por computadora
+            string filePath = Path.Combine("C:\\Users\\CHFERMI\\Desktop\\Proyectos", fileName + ".xlsx");
+
+            workbook.Save(filePath);
+
+            return View("Prueba");
+        }
+
+
+        [HttpPost]
+        public ActionResult GuardarEvaluacion(Competencias evaluacion)
+        {
+            // Guardar evaluación en la base de datos utilizando Entity Framework
+
+            using (var context = new RegistroContext()) // Reemplaza "TuContextoDeDatos" con el nombre real de tu contexto de datos
+            {
+                _context.Competencias.Add(evaluacion); // Agrega la evaluación al contexto de datos
+                _context.SaveChanges(); // Guarda los cambios en la base de datos
+            }
+
+            return Content("OK"); // Redirige a alguna acción o vista según lo que desees mostrar después de guardar la evaluación
+        }
+
+        public ActionResult EvaluacionCompleta(int id)
+        {
+            ViewBag.UsuarioId = id;
+            return View("Exito");
+        }
+
+
     }
+
+
 }
 
