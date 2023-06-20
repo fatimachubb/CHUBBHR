@@ -17,8 +17,6 @@ namespace CHUBBHR.Controllers
     {
 
 
-
-
         private readonly RegistroContext _context;
         private string connectionString = "Server=localhost\\SQLEXPRESS02;Database=REGISTRO; integrated security=true; Encrypt=False;";
 
@@ -26,7 +24,6 @@ namespace CHUBBHR.Controllers
         {
             _context = context;
         }
-
 
    
 
