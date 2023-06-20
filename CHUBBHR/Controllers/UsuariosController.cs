@@ -349,7 +349,7 @@ namespace CHUBBHR.Controllers
 
 
         [HttpPost]
-        public ActionResult GuardarEvaluacion(Competencias evaluacion, int UsuarioId)
+        public ActionResult GuardarEvaluacion(Competencias evaluacion)
         {
             // Guardar evaluación en la base de datos utilizando Entity Framework
 
@@ -359,7 +359,7 @@ namespace CHUBBHR.Controllers
                 _context.SaveChanges(); // Guarda los cambios en la base de datos
             }
 
-            return RedirectToAction("EvaluacionCompleta", new { id = UsuarioId }); // Redirige a alguna acción o vista según lo que desees mostrar después de guardar la evaluación
+            return Content("OK"); // Redirige a alguna acción o vista según lo que desees mostrar después de guardar la evaluación
         }
 
         public ActionResult EvaluacionCompleta(int id)

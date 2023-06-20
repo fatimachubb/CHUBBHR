@@ -5,6 +5,38 @@
     ViewData["Title"] = "Evaluar";
 }
 
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("form").submit(function (e) {
+                e.preventDefault(); // Evita que se envíe el formulario de forma tradicional
+
+                var form = $(this);
+
+                $.ajax({
+                    url: form.attr("action"),
+                    method: form.attr("method"),
+                    data: form.serialize(),
+                    success: function (response) {
+                        if (response === "OK") {
+                            // Mostrar mensaje de éxito o realizar alguna acción adicional
+                            alert("Formulario enviado correctamente");
+                        } else {
+                            // Mostrar mensaje de error si la respuesta no es "OK"
+                            alert("Error al enviar el formulario");
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        // Manejo de errores, si es necesario
+                        alert("Error al enviar el formulario");
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+
 <style>
     body {
         font-family: Georgia, serif;
@@ -397,6 +429,106 @@
     <input type="submit" value="Enviar" />
 }
 
+<h1>Prueba formularios multiples</h1>
+
+<h2>Prueba formularios 1</h2>
 
 
+@using (Html.BeginForm("GuardarEvaluacion", "Usuarios", FormMethod.Post, new { id = "formulario1" }))
+{
+    @Html.Hidden("UsuarioId", (object)ViewBag.UsuarioId)
+
+
+    <label>Situacion:</label>
+    @Html.TextBoxFor(model => model.Situacion)
+    <br>
+
+    <label>Tarea:</label>
+    @Html.TextBoxFor(model => model.Tarea)
+    <br>
+
+    <label>Accion:</label>
+    @Html.TextBoxFor(model => model.Accion)
+    <br>
+
+    <label>Resultado:</label>
+    @Html.TextBoxFor(model => model.Resultado)
+    <br>
+
+    <label>Comentario:</label>
+    @Html.TextBoxFor(model => model.Comentario)
+    <br>
+
+    <label>Puntaje:</label>
+    @Html.TextBoxFor(model => model.Puntaje, new { type = "number" })
+ 
+    <input type="submit" value="Enviar" />
+}
+<h2>Prueba formularios 2</h2>
+
+
+@using (Html.BeginForm("GuardarEvaluacion", "Usuarios", FormMethod.Post, new { id = "formulario2" }))
+{
+    @Html.Hidden("UsuarioId", (object)ViewBag.UsuarioId)
+
+
+    <label>Situacion:</label>
+    @Html.TextBoxFor(model => model.Situacion)
+    <br>
+
+    <label>Tarea:</label>
+    @Html.TextBoxFor(model => model.Tarea)
+    <br>
+
+    <label>Accion:</label>
+    @Html.TextBoxFor(model => model.Accion)
+    <br>
+
+    <label>Resultado:</label>
+    @Html.TextBoxFor(model => model.Resultado)
+    <br>
+
+    <label>Comentario:</label>
+    @Html.TextBoxFor(model => model.Comentario)
+    <br>
+
+    <label>Puntaje:</label>
+    @Html.TextBoxFor(model => model.Puntaje, new { type = "number" })
+
+    <input type="submit" value="Enviar" />
+}
+<h2>Prueba formularios 3</h2>
+
+@using (Html.BeginForm("GuardarEvaluacion", "Usuarios", FormMethod.Post, new { id = "formulario3" }))
+{
+    @Html.Hidden("UsuarioId", (object)ViewBag.UsuarioId)
+
+
+    <label>Situacion:</label>
+    @Html.TextBoxFor(model => model.Situacion)
+    <br>
+
+    <label>Tarea:</label>
+    @Html.TextBoxFor(model => model.Tarea)
+    <br>
+
+    <label>Accion:</label>
+    @Html.TextBoxFor(model => model.Accion)
+    <br>
+
+    <label>Resultado:</label>
+    @Html.TextBoxFor(model => model.Resultado)
+    <br>
+
+    <label>Comentario:</label>
+    @Html.TextBoxFor(model => model.Comentario)
+    <br>
+
+    <label>Puntaje:</label>
+    @Html.TextBoxFor(model => model.Puntaje, new { type = "number" })
+
+    <input type="submit" value="Enviar" />
+}
+
+<a asp-action="Index">Volver a Usuarios</a>
 
