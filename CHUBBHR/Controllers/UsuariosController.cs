@@ -175,7 +175,7 @@ namespace CHUBBHR.Controllers
 
 
         // GET: Usuarios/Evaluar/5
-        public async Task<IActionResult> Evaluar(int? id, string competencia, string fileName)
+        public async Task<IActionResult> Evaluar(int? id)
         {
             if (id == null || _context.Usuarios == null)
             {
@@ -305,7 +305,7 @@ namespace CHUBBHR.Controllers
             {
                 connection.Open();
                 string query = "SELECT Usuarios.Nombre, Usuarios.Fecha, Usuarios.posicion_fk,\r\n     " +
-                    "  Competencias.UsuarioId, Competencias.Situacion, Competencias.Tarea, Competencias.Accion,\r\n       " +
+                    "  Competencias.UsuarioId, Competencias.Nombre_C, Competencias.Situacion, Competencias.Tarea, Competencias.Accion,\r\n       " +
                     "Competencias.Resultado, Competencias.Comentario, Competencias.Puntaje\r\nFROM Usuarios\r\n" +
                     "INNER JOIN Competencias ON Usuarios.id = Competencias.UsuarioId\r\nWHERE Usuarios.id =" + UsuarioId;
                 using (SqlCommand command = new SqlCommand(query, connection))
@@ -362,7 +362,7 @@ namespace CHUBBHR.Controllers
             return Content("OK"); // Redirige a alguna acción o vista según lo que desees mostrar después de guardar la evaluación
         }
 
-        public ActionResult EvaluacionCompleta(int id)
+        public ActionResult EvaluacionCompleta(int? id)
         {
             ViewBag.UsuarioId = id;
             return View("Exito");

@@ -888,10 +888,9 @@
 
 
 <a asp-action="Index">Volver a Usuarios</a>
+<br>
 
-<form method="post" action="/Usuarios/Prueba">
-    <input type="hidden" name="UsuarioId" value="@ViewBag.UsuarioId" />
-    <input type="text" name="fileName" placeholder="Enter file name">
-    <button type="submit">Save Excel File</button>
-</form>
+<a asp-action="EvaluacionCompleta" class="btn btn-secondary" asp-route-id="@ViewBag.UsuarioId">Excel</a>
+
+
 
