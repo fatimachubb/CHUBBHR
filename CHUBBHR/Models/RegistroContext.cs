@@ -21,7 +21,12 @@ public partial class RegistroContext : DbContext
 
     public virtual DbSet<Usuario> Usuarios { get; set; }
 
+    // Conexion Base de datos para Competencias
     public virtual DbSet<Competencias> Competencias { get; set; }
+
+    // Conexion Base de datos para archivos PDF
+    public virtual DbSet<Archivos> Archivos { get; set; }
+
 
 
 

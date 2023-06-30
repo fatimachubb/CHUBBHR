@@ -9,6 +9,8 @@
 
 <a asp-action="Index">Volver a Usuarios</a>
 
+
+
 <form method="post" action="/Usuarios/Prueba">
     <input type="hidden" name="UsuarioId" value="@ViewBag.UsuarioId" />
     <input type="text" name="fileName" placeholder="Enter file name">
@@ -16,4 +18,8 @@
 </form>
 
 
-
+@using (Html.BeginForm("CargarArchivo", "Usuarios", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <input type="file" name="archivo" />
+    <button type="submit">Importar PDF</button>
+}
