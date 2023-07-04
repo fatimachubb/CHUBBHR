@@ -10,6 +10,8 @@ using System.Data.SqlClient;
 using Aspose.Cells;
 using System.Data;
 using SkiaSharp;
+using System.Web;
+
 
 namespace CHUBBHR.Controllers
 {
@@ -25,11 +27,12 @@ namespace CHUBBHR.Controllers
             _context = context;
         }
 
-   
+
 
         // GET: Usuarios
         public async Task<IActionResult> Index()
         {
+
             var registroContext = _context.Usuarios.Include(u => u.PosicionFkNavigation);
             return View(await registroContext.ToListAsync());
         }
@@ -163,19 +166,19 @@ namespace CHUBBHR.Controllers
             {
                 _context.Usuarios.Remove(usuario);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool UsuarioExists(int id)
         {
-          return (_context.Usuarios?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Usuarios?.Any(e => e.Id == id)).GetValueOrDefault();
         }
 
 
         // GET: Usuarios/Evaluar/5
-        public async Task<IActionResult> Evaluar(int? id, string competencia, string fileName)
+        public async Task<IActionResult> Evaluar(int? id)
         {
             if (id == null || _context.Usuarios == null)
             {
@@ -294,7 +297,8 @@ namespace CHUBBHR.Controllers
             return View();
         }
 
-        //Exportar a excel
+        //Exportar a Excel
+        // En este boton es importante que *int UsuarioId* se llame igual que en la vista
         public ActionResult Prueba(string fileName, int UsuarioId)
         {
             var usuarioIdEvaluar = ViewBag.UsuarioId;
@@ -304,8 +308,9 @@ namespace CHUBBHR.Controllers
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
+                // Este query toma todos los datos historicos de un Id de usuario en especifico con columnas especificas
                 string query = "SELECT Usuarios.Nombre, Usuarios.Fecha, Usuarios.posicion_fk,\r\n     " +
-                    "  Competencias.UsuarioId, Competencias.Situacion, Competencias.Tarea, Competencias.Accion,\r\n       " +
+                    "  Competencias.UsuarioId, Competencias.Nombre_C, Competencias.Situacion, Competencias.Tarea, Competencias.Accion,\r\n       " +
                     "Competencias.Resultado, Competencias.Comentario, Competencias.Puntaje\r\nFROM Usuarios\r\n" +
                     "INNER JOIN Competencias ON Usuarios.id = Competencias.UsuarioId\r\nWHERE Usuarios.id =" + UsuarioId;
                 using (SqlCommand command = new SqlCommand(query, connection))
@@ -326,7 +331,7 @@ namespace CHUBBHR.Controllers
             Style headerStyle = workbook.CreateStyle();
             headerStyle.Font.IsBold = true;
 
-            // Apply the header style to the first row
+            // Pone en negrita todo
             worksheet.Cells.ApplyStyle(headerStyle, new StyleFlag() { All = true });
 
             // Setting IsFieldNameShown property to true will add column names // of the DataTable to the worksheet as a header row
@@ -336,10 +341,10 @@ namespace CHUBBHR.Controllers
             // Exporting the contents of DataTable at the first row and first column.
             worksheet.Cells.ImportData(dataTable, 0, 0, tableOptions);
 
-            worksheet.Name = "MySheetName"; // Set the desired sheet name
+            worksheet.Name = "Evaluacion"; // Set the desired sheet name
 
             // Saving the Excel file
-            // Cambiar la ruta por computadora
+            // Cambiar la ruta por tu propia computadora
             string filePath = Path.Combine("C:\\Users\\CHFERMI\\Desktop\\Proyectos", fileName + ".xlsx");
 
             workbook.Save(filePath);
@@ -353,24 +358,89 @@ namespace CHUBBHR.Controllers
         {
             // Guardar evaluación en la base de datos utilizando Entity Framework
 
-            using (var context = new RegistroContext()) // Reemplaza "TuContextoDeDatos" con el nombre real de tu contexto de datos
+            using (var context = new RegistroContext()) 
             {
                 _context.Competencias.Add(evaluacion); // Agrega la evaluación al contexto de datos
                 _context.SaveChanges(); // Guarda los cambios en la base de datos
             }
 
-            return Content("OK"); // Redirige a alguna acción o vista según lo que desees mostrar después de guardar la evaluación
+            return Content("OK"); // Redirige un OK que para la vista si se obtiene un OK se devuelve el mensaje de que el formulario fue enviado correctamente
         }
 
-        public ActionResult EvaluacionCompleta(int id)
+        public ActionResult EvaluacionCompleta(int? id)
         {
             ViewBag.UsuarioId = id;
             return View("Exito");
         }
 
 
+        [HttpPost]
+        public async Task<IActionResult> CargarArchivo(IFormFile archivo)
+        {
+            if (archivo != null && archivo.Length > 0)
+            {
+                // Obtener el nombre y la extensión del archivo
+                string nombreArchivo = archivo.FileName;
+                string extensionArchivo = Path.GetExtension(nombreArchivo);
+
+                // Validar la extensión del archivo (opcional)
+                if (extensionArchivo != ".pdf")
+                {
+                    ModelState.AddModelError("", "Solo se permiten archivos PDF");
+                    return View();
+                }
+
+                // Leer el contenido del archivo
+                using (var ms = new MemoryStream())
+                {
+                    archivo.CopyTo(ms);
+                    byte[] contenidoArchivo = ms.ToArray();
+
+                    // Crear un nuevo objeto Archivo para almacenar en la base de datos
+                    var archivoDb = new Archivos
+                    {
+                        Nombre = nombreArchivo,
+                        Contenido = contenidoArchivo
+                    };
+
+                    // Guardar el archivo en la base de datos
+                    _context.Archivos.Add(archivoDb);
+                    await _context.SaveChangesAsync();
+
+                }
+
+                return View("CargarArchivo");
+            }
+            return View("Error");
+
+
+
+        }
+
+        public List<Archivos> ObtenerArchivosImportados()
+        {
+            List<Archivos> archivos;
+
+            using (var dbContext = new RegistroContext())
+            {
+                archivos = dbContext.Archivos.ToList();
+            }
+
+            return archivos;
+        }
+
+        public ActionResult MostrarArchivos()
+        {
+            List<Archivos> archivos = ObtenerArchivosImportados(); // Obtener la lista de archivos desde tu base de datos
+
+            return View(archivos);
+        }
+
+        public ActionResult Importar()
+        {
+            return View("Importar");
+        }
+
+
     }
-
-
 }
-

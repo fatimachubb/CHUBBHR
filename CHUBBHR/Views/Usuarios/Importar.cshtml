@@ -1,0 +1,14 @@
+﻿@model List<Archivos>
+
+@{
+    ViewData["Title"] = "Importar";
+}
+
+<h1>Archivo Cargado</h1>
+
+@foreach (var archivo in Model)
+{
+    <p>@archivo.Nombre</p>
+}
+
+<a asp-action="Index">Volver a Usuarios</a>

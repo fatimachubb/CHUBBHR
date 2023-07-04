@@ -60,7 +60,56 @@
     .competencia {
         margin-bottom: 10px;
     }
+
+    .textbox {
+        width: 300px;
+        height: 30px;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 14px;
+    }
+
+    /* Estilos para el campo de entrada de texto de Puntaje */
+    .bold-text {
+        font-weight: bold;
+    }
+
+    /* Estilos para el área de texto de Comentario */
+    .textarea {
+        width: 500px;
+        height: 100px;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 14px;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        max-width: 800px;
+        margin: auto;
+        margin-top: 20px;
+    }
+
+    th, td {
+        text-align: left;
+        padding: 8px;
+        border: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+
 </style>
+
+<p>El ID del usuario es: @ViewBag.UsuarioId</p>
+
+
+
 
 <h1>Evaluación de Competencias</h1>
 <div>
@@ -76,7 +125,7 @@
             <label for="resolucionProblemas"><mark style="background-color: orange; color: black;">Resolución de Problemas</mark></label>
         </div>
         <div id="resolucionProblemasContent" style="display: none;">
-            <h2>Contenido de Resolución de Problemas</h2>
+            <h2>Resolución de Problemas</h2>
             <p>El candidato:</p>
             <ul>
                 <li>Tiene un enfoque organizado y lógico para reflexionar sobre los problemas y asuntos complejos.</li>
@@ -126,49 +175,44 @@
 
             <p> <strong>Documenta brevemente las respuestas del candidato, de acuerdo con el MODELO STAR</strong>.</p>
 
-            <table>
-                <tr>
-                    <th>Situación</th>
-                    <th>Tarea</th>
-                    <th>Acción</th>
-                    <th>Resultado</th>
-                </tr>
-                <tr>
-                    <td contenteditable="true" style="width: 300px;"></td>
-                    <td contenteditable="true" style="width: 300px;"></td>
-                    <td contenteditable="true" style="width: 300px;"></td>
-                    <td contenteditable="true" style="width: 300px;"></td>
+            @using (Html.BeginForm("GuardarEvaluacion", "Usuarios", FormMethod.Post, new { id = "formulario1" }))
+            {
+                @Html.Hidden("UsuarioId", (object)ViewBag.UsuarioId)
 
-                </tr>
-            </table>
+                @Html.Hidden("Nombre_C", "Resolucion de Problemas")
+
+                <table>
+                    <tr>
+                        <th><label>Situacion:</label></th>
+                        <td>@Html.TextBoxFor(model => model.Situacion, new { @class = "textbox" })</td>
+                    </tr>
+                    <tr>
+                        <th><label>Tarea:</label></th>
+                        <td>@Html.TextBoxFor(model => model.Tarea, new { @class = "textbox" })</td>
+                    </tr>
+                    <tr>
+                        <th><label>Acción:</label></th>
+                        <td>@Html.TextBoxFor(model => model.Accion, new { @class = "textbox" })</td>
+                    </tr>
+                    <tr>
+                        <th><label>Resultado:</label></th>
+                        <td>@Html.TextBoxFor(model => model.Resultado, new { @class = "textbox" })</td>
+                    </tr>
+                </table>
 
 
-            <p> <strong>Comentarios / Observaciones Generales:</strong>.</p>
+                <p> <strong>Comentarios / Observaciones Generales:</strong>.</p>
 
-            <div>
-                <label for="comentarios"></label>
-                <textarea id="comentarios" name="comentarios" rows="5"></textarea>
-            </div>
+                @Html.TextAreaFor(model => model.Comentario, new { @class = "textarea" })
+
+                <p> <strong>Evalúa la respuesta del candidato de acuerdo con la escala de calificación:</strong>.</p>
+
+                
+                @Html.TextBoxFor(model => model.Puntaje, new { type = "number", min = "1", max = "5" })
 
 
-            <p> <strong>Evalúa la respuesta del candidato de acuerdo con la escala de calificación:</strong>.</p>
-
-            <table>
-                <tr>
-                    <th>Carece o N/A</th>
-                    <th>Conocimiento general</th>
-                    <th>Conocimiento sólido</th>
-                    <th>Conocimiento profundo</th>
-                    <th>Alto Dominio</th>
-                </tr>
-                <tr>
-                    <td><button onclick="seleccionarValor(1)">1</button></td>
-                    <td><button onclick="seleccionarValor(2)">2</button></td>
-                    <td><button onclick="seleccionarValor(3)">3</button></td>
-                    <td><button onclick="seleccionarValor(4)">4</button></td>
-                    <td><button onclick="seleccionarValor(5)">5</button></td>
-                </tr>
-            </table>
+                <input type="submit" value="Enviar" />
+            }
 
 
 
@@ -179,40 +223,489 @@
             <label for="aprendizajeContinuo"><mark style="background-color:purple; color: white;">Aprendizaje Continuo</mark></label>
         </div>
         <div id="aprendizajeContinuoContent" style="display: none;">
-            <h2>Contenido de Aprendizaje Continuo</h2>
-            <p>Aquí puedes agregar el contenido adicional para la competencia de Aprendizaje Continuo.</p>
+            <h2>Aprendizaje Continuo</h2>
+            <p>El candidato:</p>
+            <ul>
+                <li>Demuestra el interés y capacidad de ampliar su experiencia profesional y desarrollar nuevas habilidades.</li>
+                <li>Cuenta con autoaprendizaje y automotivación para adquirir nuevos conocimientos y profundizar la experiencia técnica de forma autónoma y desarrollar sus capacidades por su cuenta.</li>
+                <li>Asume asignaciones de trabajo desafiantes que conducen a crecimiento profesional.</li>
+
+            </ul>
+
+
+
+
+            <p> <strong>Selecciona 1 o 2 preguntas sugeridas para evaluar esta competencia</strong>.</p>
+
+            <ol>
+                <li>
+                    Cuéntame de alguna situación en la que no pudiste cumplir con el tiempo establecido de entrega.
+                    <ol type="a">
+                        <li>¿Qué pasó?</li>
+                        <li>¿Con qué obstáculos te enfrentaste?</li>
+                        <li>¿Cómo lo resolviste?</li>
+                        <li>¿Cuál fue el resultado?</li>
+                    </ol>
+                </li>
+                <li>
+                    Descríbeme el mayor problema que hayas experimentado en tu rol actual.
+                    <ol type="a">
+                        <li>¿Qué sucedió?</li>
+                        <li>¿Qué te llevó a hacerlo de esa manera?</li>
+                        <li>¿Qué aprendiste?</li>
+                    </ol>
+                </li>
+                <li>
+                    Cuéntame de alguna situación en la que tuviste que abordar un problema y no contabas con toda la información necesaria.
+                    <ol type="a">
+                        <li>¿Qué se esperaba de ti?</li>
+                        <li>¿Qué acciones llevaste a cabo?</li>
+                        <li>¿Cuál fue el resultado de acuerdo con tus acciones?</li>
+                    </ol>
+                </li>
+                <li>
+                    Háblame de alguna ocasión en la que hayas tenido que cambiar tu estrategia para lograr solucionar un problema.
+                    <ol type="a">
+                        <li>¿Qué pasó?</li>
+                        <li>¿Qué esperaban de ti?</li>
+                        <li>¿Qué hiciste?</li>
+                        <li>¿Cuál fue el resultado?</li>
+                    </ol>
+                </li>
+            </ol>
+
+            <p> <strong>Documenta brevemente las respuestas del candidato, de acuerdo con el MODELO STAR</strong>.</p>
+
+            @using (Html.BeginForm("GuardarEvaluacion", "Usuarios", FormMethod.Post, new { id = "formulario2" }))
+            {
+                @Html.Hidden("UsuarioId", (object)ViewBag.UsuarioId)
+
+                @Html.Hidden("Nombre_C", "Aprendizaje Continuo")
+
+                <table>
+                    <tr>
+                        <th><label>Situacion:</label></th>
+                        <td>@Html.TextBoxFor(model => model.Situacion, new { @class = "textbox" })</td>
+                    </tr>
+                    <tr>
+                        <th><label>Tarea:</label></th>
+                        <td>@Html.TextBoxFor(model => model.Tarea, new { @class = "textbox" })</td>
+                    </tr>
+                    <tr>
+                        <th><label>Acción:</label></th>
+                        <td>@Html.TextBoxFor(model => model.Accion, new { @class = "textbox" })</td>
+                    </tr>
+                    <tr>
+                        <th><label>Resultado:</label></th>
+                        <td>@Html.TextBoxFor(model => model.Resultado, new { @class = "textbox" })</td>
+                    </tr>
+                </table>
+
+
+                <p> <strong>Comentarios / Observaciones Generales:</strong>.</p>
+
+
+                @Html.TextAreaFor(model => model.Comentario, new { @class = "textarea" })
+
+                <p> <strong>Evalúa la respuesta del candidato de acuerdo con la escala de calificación:</strong>.</p>
+
+                @Html.TextBoxFor(model => model.Puntaje, new { type = "number", min = "1", max = "5" })
+
+
+                <input type="submit" value="Enviar" />
+            }
+
         </div>
+
         <div>
             <input type="checkbox" name="competencias" value="iniciativa" id="iniciativa" />
             <label for="iniciativa"><mark style="background-color: orange; color: black;">Iniciativa</mark></label>
         </div>
         <div id="iniciativaContent" style="display: none;">
-            <h2>Contenido de Iniciativa</h2>
-            <p>Aquí puedes agregar el contenido adicional para la competencia de Iniciativa.</p>
+            <h2>Iniciativa</h2>
+            <p>El candidato:</p>
+            <ul>
+                <li>Está dispuesto a hacer más de lo que se requiere o se espera.</li>
+                <li>Propone y toma acciones con el fin de lograr un objetivo que contribuya a la visión del equipo, sin que se le haya solicitado.</li>
+                <li>Muestra empuje y disposición de hacer un esfuerzo adicional, en términos de agilidad y energía.</li>
+                <li>Es auto motivado y aprovecha oportunidades para hacer la diferencia y generar valor para su área y para los demás</li>
+            </ul>
+
+
+
+            <p> <strong>Selecciona 1 o 2 preguntas sugeridas para evaluar esta competencia</strong>.</p>
+
+            <ol>
+                <li>
+                    Cuéntame de alguna situación en la que no pudiste cumplir con el tiempo establecido de entrega.
+                    <ol type="a">
+                        <li>¿Qué pasó?</li>
+                        <li>¿Con qué obstáculos te enfrentaste?</li>
+                        <li>¿Cómo lo resolviste?</li>
+                        <li>¿Cuál fue el resultado?</li>
+                    </ol>
+                </li>
+                <li>
+                    Descríbeme el mayor problema que hayas experimentado en tu rol actual.
+                    <ol type="a">
+                        <li>¿Qué sucedió?</li>
+                        <li>¿Qué te llevó a hacerlo de esa manera?</li>
+                        <li>¿Qué aprendiste?</li>
+                    </ol>
+                </li>
+                <li>
+                    Cuéntame de alguna situación en la que tuviste que abordar un problema y no contabas con toda la información necesaria.
+                    <ol type="a">
+                        <li>¿Qué se esperaba de ti?</li>
+                        <li>¿Qué acciones llevaste a cabo?</li>
+                        <li>¿Cuál fue el resultado de acuerdo con tus acciones?</li>
+                    </ol>
+                </li>
+                <li>
+                    Háblame de alguna ocasión en la que hayas tenido que cambiar tu estrategia para lograr solucionar un problema.
+                    <ol type="a">
+                        <li>¿Qué pasó?</li>
+                        <li>¿Qué esperaban de ti?</li>
+                        <li>¿Qué hiciste?</li>
+                        <li>¿Cuál fue el resultado?</li>
+                    </ol>
+                </li>
+            </ol>
+            <p> <strong>Documenta brevemente las respuestas del candidato, de acuerdo con el MODELO STAR</strong>.</p>
+
+            @using (Html.BeginForm("GuardarEvaluacion", "Usuarios", FormMethod.Post, new { id = "formulario3" }))
+            {
+                @Html.Hidden("UsuarioId", (object)ViewBag.UsuarioId)
+
+                @Html.Hidden("Nombre_C", "Iniciativa")
+
+                <table>
+                    <tr>
+                        <th><label>Situacion:</label></th>
+                        <td>@Html.TextBoxFor(model => model.Situacion, new { @class = "textbox" })</td>
+                    </tr>
+                    <tr>
+                        <th><label>Tarea:</label></th>
+                        <td>@Html.TextBoxFor(model => model.Tarea, new { @class = "textbox" })</td>
+                    </tr>
+                    <tr>
+                        <th><label>Acción:</label></th>
+                        <td>@Html.TextBoxFor(model => model.Accion, new { @class = "textbox" })</td>
+                    </tr>
+                    <tr>
+                        <th><label>Resultado:</label></th>
+                        <td>@Html.TextBoxFor(model => model.Resultado, new { @class = "textbox" })</td>
+                    </tr>
+                </table>
+
+
+                <p> <strong>Comentarios / Observaciones Generales:</strong>.</p>
+
+
+                @Html.TextAreaFor(model => model.Comentario, new { @class = "textarea" })
+
+                <p> <strong>Evalúa la respuesta del candidato de acuerdo con la escala de calificación:</strong>.</p>
+
+                @Html.TextBoxFor(model => model.Puntaje, new { type = "number", min = "1", max = "5" })
+
+
+                <input type="submit" value="Enviar" />
+            }
+
         </div>
         <div>
             <input type="checkbox" name="competencias" value="adaptabilidad" id="adaptabilidad" />
             <label for="adaptabilidad"><mark style="background-color:purple; color: white;">Adaptabilidad</mark></label>
         </div>
         <div id="adaptabilidadContent" style="display: none;">
-            <h2>Contenido de Adaptabilidad</h2>
-            <p>Aquí puedes agregar el contenido adicional para la competencia de Adaptabilidad.</p>
+            <h2>Adaptabilidad</h2>
+            <p>El candidato:</p>
+            <ul>
+                <li>Muestra habilidad para redireccionar esfuerzos personales en respuesta a circunstancias cambiantes.</li>
+                <li>Es receptivo a nuevas ideas y formas de hacer las cosas, sumando e incorporando éstas a su estilo de trabajo.</li>
+                <li>Prioriza efectivamente en conformidad con demandas competitivas y objetivos cambiantes.</li>
+                <li>DPuede navegar a través de la incertidumbre y sabe cuándo cambiar el rumbo, siendo flexible y versátil a las situaciones diferentes acepta los cambios de forma positiva y constructiva.</li>
+            </ul>
+
+
+            -  -  -
+
+            <p> <strong>Selecciona 1 o 2 preguntas sugeridas para evaluar esta competencia</strong>.</p>
+
+            <ol>
+                <li>
+                    Cuéntame de alguna situación en la que no pudiste cumplir con el tiempo establecido de entrega.
+                    <ol type="a">
+                        <li>¿Qué pasó?</li>
+                        <li>¿Con qué obstáculos te enfrentaste?</li>
+                        <li>¿Cómo lo resolviste?</li>
+                        <li>¿Cuál fue el resultado?</li>
+                    </ol>
+                </li>
+                <li>
+                    Descríbeme el mayor problema que hayas experimentado en tu rol actual.
+                    <ol type="a">
+                        <li>¿Qué sucedió?</li>
+                        <li>¿Qué te llevó a hacerlo de esa manera?</li>
+                        <li>¿Qué aprendiste?</li>
+                    </ol>
+                </li>
+                <li>
+                    Cuéntame de alguna situación en la que tuviste que abordar un problema y no contabas con toda la información necesaria.
+                    <ol type="a">
+                        <li>¿Qué se esperaba de ti?</li>
+                        <li>¿Qué acciones llevaste a cabo?</li>
+                        <li>¿Cuál fue el resultado de acuerdo con tus acciones?</li>
+                    </ol>
+                </li>
+                <li>
+                    Háblame de alguna ocasión en la que hayas tenido que cambiar tu estrategia para lograr solucionar un problema.
+                    <ol type="a">
+                        <li>¿Qué pasó?</li>
+                        <li>¿Qué esperaban de ti?</li>
+                        <li>¿Qué hiciste?</li>
+                        <li>¿Cuál fue el resultado?</li>
+                    </ol>
+                </li>
+            </ol>
+
+            <p> <strong>Documenta brevemente las respuestas del candidato, de acuerdo con el MODELO STAR</strong>.</p>
+
+            @using (Html.BeginForm("GuardarEvaluacion", "Usuarios", FormMethod.Post, new { id = "formulario4" }))
+            {
+                @Html.Hidden("UsuarioId", (object)ViewBag.UsuarioId)
+                @Html.Hidden("Nombre_C", "Adaptabilidad")
+
+                <table>
+                    <tr>
+                        <th><label>Situacion:</label></th>
+                        <td>@Html.TextBoxFor(model => model.Situacion, new { @class = "textbox" })</td>
+                    </tr>
+                    <tr>
+                        <th><label>Tarea:</label></th>
+                        <td>@Html.TextBoxFor(model => model.Tarea, new { @class = "textbox" })</td>
+                    </tr>
+                    <tr>
+                        <th><label>Acción:</label></th>
+                        <td>@Html.TextBoxFor(model => model.Accion, new { @class = "textbox" })</td>
+                    </tr>
+                    <tr>
+                        <th><label>Resultado:</label></th>
+                        <td>@Html.TextBoxFor(model => model.Resultado, new { @class = "textbox" })</td>
+                    </tr>
+                </table>
+
+
+                <p> <strong>Comentarios / Observaciones Generales:</strong>.</p>
+
+
+                @Html.TextAreaFor(model => model.Comentario, new { @class = "textarea" })
+
+                <p> <strong>Evalúa la respuesta del candidato de acuerdo con la escala de calificación:</strong>.</p>
+
+                @Html.TextBoxFor(model => model.Puntaje, new { type = "number", min = "1", max = "5" })
+
+
+                <input type="submit" value="Enviar" />
+            }
+
         </div>
         <div>
             <input type="checkbox" name="competencias" value="orientacionResultados" id="orientacionResultados" />
             <label for="orientacionResultados"><mark style="background-color: orange; color: black;">Orientación a Resultados</mark></label>
         </div>
         <div id="orientacionResultadosContent" style="display: none;">
-            <h2>Contenido de Orientación a Resultados</h2>
-            <p>Aquí puedes agregar el contenido adicional para la competencia de Orientación a Resultados.</p>
+            <h2>Orientación a Resultados</h2>
+            <p>El candidato:</p>
+            <ul>
+                <li>Ejecuta con eficacia y conforme a los planes; con enfoque a resultados, tomando responsabilidad por los resultados.</li>
+                <li>Alcanza consistentemente los resultados, desarrolla alternativas para prevenir obstáculos y poder sobrepasarlos para lograr los resultados.</li>
+                <li>
+                    Reconoce y capitaliza las oportunidades. - Asume la responsabilidad de sus acciones, decisiones, comportamientos y desempeño hacia el logro de sus resultados.
+                </li>
+                <li>Asume la responsabilidad de sus acciones, decisiones, comportamientos y desempeño hacia el logro de sus resultados.</li>
+            </ul>
+
+            -  -
+            <p> <strong>Selecciona 1 o 2 preguntas sugeridas para evaluar esta competencia</strong>.</p>
+
+            <ol>
+                <li>
+                    Cuéntame de alguna situación en la que no pudiste cumplir con el tiempo establecido de entrega.
+                    <ol type="a">
+                        <li>¿Qué pasó?</li>
+                        <li>¿Con qué obstáculos te enfrentaste?</li>
+                        <li>¿Cómo lo resolviste?</li>
+                        <li>¿Cuál fue el resultado?</li>
+                    </ol>
+                </li>
+                <li>
+                    Descríbeme el mayor problema que hayas experimentado en tu rol actual.
+                    <ol type="a">
+                        <li>¿Qué sucedió?</li>
+                        <li>¿Qué te llevó a hacerlo de esa manera?</li>
+                        <li>¿Qué aprendiste?</li>
+                    </ol>
+                </li>
+                <li>
+                    Cuéntame de alguna situación en la que tuviste que abordar un problema y no contabas con toda la información necesaria.
+                    <ol type="a">
+                        <li>¿Qué se esperaba de ti?</li>
+                        <li>¿Qué acciones llevaste a cabo?</li>
+                        <li>¿Cuál fue el resultado de acuerdo con tus acciones?</li>
+                    </ol>
+                </li>
+                <li>
+                    Háblame de alguna ocasión en la que hayas tenido que cambiar tu estrategia para lograr solucionar un problema.
+                    <ol type="a">
+                        <li>¿Qué pasó?</li>
+                        <li>¿Qué esperaban de ti?</li>
+                        <li>¿Qué hiciste?</li>
+                        <li>¿Cuál fue el resultado?</li>
+                    </ol>
+                </li>
+            </ol>
+
+            <p> <strong>Documenta brevemente las respuestas del candidato, de acuerdo con el MODELO STAR</strong>.</p>
+
+            @using (Html.BeginForm("GuardarEvaluacion", "Usuarios", FormMethod.Post, new { id = "formulario5" }))
+            {
+                @Html.Hidden("UsuarioId", (object)ViewBag.UsuarioId)
+                @Html.Hidden("Nombre_C", "Orientación a Resultados")
+
+                <table>
+                    <tr>
+                        <th><label>Situacion:</label></th>
+                        <td>@Html.TextBoxFor(model => model.Situacion, new { @class = "textbox" })</td>
+                    </tr>
+                    <tr>
+                        <th><label>Tarea:</label></th>
+                        <td>@Html.TextBoxFor(model => model.Tarea, new { @class = "textbox" })</td>
+                    </tr>
+                    <tr>
+                        <th><label>Acción:</label></th>
+                        <td>@Html.TextBoxFor(model => model.Accion, new { @class = "textbox" })</td>
+                    </tr>
+                    <tr>
+                        <th><label>Resultado:</label></th>
+                        <td>@Html.TextBoxFor(model => model.Resultado, new { @class = "textbox" })</td>
+                    </tr>
+                </table>
+
+
+                <p> <strong>Comentarios / Observaciones Generales:</strong>.</p>
+
+
+                @Html.TextAreaFor(model => model.Comentario, new { @class = "textarea" })
+
+                <p> <strong>Evalúa la respuesta del candidato de acuerdo con la escala de calificación:</strong>.</p>
+
+                @Html.TextBoxFor(model => model.Puntaje, new { type = "number", min = "1", max = "5" })
+
+
+                <input type="submit" value="Enviar" />
+            }
+
+
         </div>
         <div>
             <input type="checkbox" name="competencias" value="orientacionValores" id="orientacionValores" />
             <label for="orientacionValores"><mark style="background-color:purple; color: white;">Orientación a Valores</mark></label>
         </div>
         <div id="orientacionValoresContent" style="display: none;">
-            <h2>Contenido de Orientación a Valores</h2>
-            <p>Aquí puedes agregar el contenido adicional para la competencia de Orientación a Valores.</p>
+            <h2>Orientación a Valores</h2>
+            <p>El candidato:</p>
+            <ul>
+                <li>Sostiene y modela los valores Chubb y siempre hace lo correcto para la Compañía, los colegas y clientes.</li>
+                <li>Es una persona directa, veraz y digna de confianza. - Actúa dentro del marco del bien común, promueve una cultura organizacional de respeto a normas y de trabajo colaborativo.</li>
+                <li>Actúa dentro del marco del bien común, promueve una cultura organizacional de respeto a normas y de trabajo colaborativo.</li>
+                <li>Se comporta éticamente y mantiene un alto nivel de integridad profesional.</li>
+                <li>Fomenta la colaboración “de alto nivel” con su equipo y con la compañía; actúa y piensa constantemente como "One Chubb”</li>
+            </ul>
+
+
+
+            <p> <strong>Selecciona 1 o 2 preguntas sugeridas para evaluar esta competencia</strong>.</p>
+
+            <ol>
+                <li>
+                    Cuéntame de alguna situación en la que no pudiste cumplir con el tiempo establecido de entrega.
+                    <ol type="a">
+                        <li>¿Qué pasó?</li>
+                        <li>¿Con qué obstáculos te enfrentaste?</li>
+                        <li>¿Cómo lo resolviste?</li>
+                        <li>¿Cuál fue el resultado?</li>
+                    </ol>
+                </li>
+                <li>
+                    Descríbeme el mayor problema que hayas experimentado en tu rol actual.
+                    <ol type="a">
+                        <li>¿Qué sucedió?</li>
+                        <li>¿Qué te llevó a hacerlo de esa manera?</li>
+                        <li>¿Qué aprendiste?</li>
+                    </ol>
+                </li>
+                <li>
+                    Cuéntame de alguna situación en la que tuviste que abordar un problema y no contabas con toda la información necesaria.
+                    <ol type="a">
+                        <li>¿Qué se esperaba de ti?</li>
+                        <li>¿Qué acciones llevaste a cabo?</li>
+                        <li>¿Cuál fue el resultado de acuerdo con tus acciones?</li>
+                    </ol>
+                </li>
+                <li>
+                    Háblame de alguna ocasión en la que hayas tenido que cambiar tu estrategia para lograr solucionar un problema.
+                    <ol type="a">
+                        <li>¿Qué pasó?</li>
+                        <li>¿Qué esperaban de ti?</li>
+                        <li>¿Qué hiciste?</li>
+                        <li>¿Cuál fue el resultado?</li>
+                    </ol>
+                </li>
+            </ol>
+
+            <p> <strong>Documenta brevemente las respuestas del candidato, de acuerdo con el MODELO STAR</strong>.</p>
+
+            @using (Html.BeginForm("GuardarEvaluacion", "Usuarios", FormMethod.Post, new { id = "formulario6" }))
+            {
+                @Html.Hidden("UsuarioId", (object)ViewBag.UsuarioId)
+                @Html.Hidden("Nombre_C", "Orientación a valores")
+
+                <table>
+                    <tr>
+                        <th><label>Situacion:</label></th>
+                        <td>@Html.TextBoxFor(model => model.Situacion, new { @class = "textbox" })</td>
+                    </tr>
+                    <tr>
+                        <th><label>Tarea:</label></th>
+                        <td>@Html.TextBoxFor(model => model.Tarea, new { @class = "textbox" })</td>
+                    </tr>
+                    <tr>
+                        <th><label>Acción:</label></th>
+                        <td>@Html.TextBoxFor(model => model.Accion, new { @class = "textbox" })</td>
+                    </tr>
+                    <tr>
+                        <th><label>Resultado:</label></th>
+                        <td>@Html.TextBoxFor(model => model.Resultado, new { @class = "textbox" })</td>
+                    </tr>
+                </table>
+
+
+                <p> <strong>Comentarios / Observaciones Generales:</strong>.</p>
+
+
+                @Html.TextAreaFor(model => model.Comentario, new { @class = "textarea" })
+
+                <p> <strong>Evalúa la respuesta del candidato de acuerdo con la escala de calificación:</strong>.</p>
+
+                @Html.TextBoxFor(model => model.Puntaje, new { type = "number", min = "1", max = "5" })
+
+
+                <input type="submit" value="Enviar" />
+            }
+
+
+
         </div>
     </div>
     <div id="colaboradorCasillas" class="competencia" style="display: none;">
@@ -393,142 +886,11 @@
     }
 </script>
 
-<h1>Prueba 2</h1>
-
-<p>El ID del usuario es: @ViewBag.UsuarioId</p>
-
-
-@using (Html.BeginForm("GuardarEvaluacion", "Usuarios", FormMethod.Post))
-{
-    @Html.Hidden("UsuarioId", (object)ViewBag.UsuarioId)
-
-
-    <label>Situacion:</label>
-    @Html.TextBoxFor(model => model.Situacion)
-    <br>
-
-    <label>Tarea:</label>
-    @Html.TextBoxFor(model => model.Tarea)
-    <br>
-
-    <label>Accion:</label>
-    @Html.TextBoxFor(model => model.Accion)
-    <br>
-
-    <label>Resultado:</label>
-    @Html.TextBoxFor(model => model.Resultado)
-    <br>
-
-    <label>Comentario:</label>
-    @Html.TextBoxFor(model => model.Comentario)
-    <br>
-
-    <label>Puntaje:</label>
-    @Html.TextBoxFor(model => model.Puntaje, new { type = "number" })
-
-    <input type="submit" value="Enviar" />
-}
-
-<h1>Prueba formularios multiples</h1>
-
-<h2>Prueba formularios 1</h2>
-
-
-@using (Html.BeginForm("GuardarEvaluacion", "Usuarios", FormMethod.Post, new { id = "formulario1" }))
-{
-    @Html.Hidden("UsuarioId", (object)ViewBag.UsuarioId)
-
-
-    <label>Situacion:</label>
-    @Html.TextBoxFor(model => model.Situacion)
-    <br>
-
-    <label>Tarea:</label>
-    @Html.TextBoxFor(model => model.Tarea)
-    <br>
-
-    <label>Accion:</label>
-    @Html.TextBoxFor(model => model.Accion)
-    <br>
-
-    <label>Resultado:</label>
-    @Html.TextBoxFor(model => model.Resultado)
-    <br>
-
-    <label>Comentario:</label>
-    @Html.TextBoxFor(model => model.Comentario)
-    <br>
-
-    <label>Puntaje:</label>
-    @Html.TextBoxFor(model => model.Puntaje, new { type = "number" })
- 
-    <input type="submit" value="Enviar" />
-}
-<h2>Prueba formularios 2</h2>
-
-
-@using (Html.BeginForm("GuardarEvaluacion", "Usuarios", FormMethod.Post, new { id = "formulario2" }))
-{
-    @Html.Hidden("UsuarioId", (object)ViewBag.UsuarioId)
-
-
-    <label>Situacion:</label>
-    @Html.TextBoxFor(model => model.Situacion)
-    <br>
-
-    <label>Tarea:</label>
-    @Html.TextBoxFor(model => model.Tarea)
-    <br>
-
-    <label>Accion:</label>
-    @Html.TextBoxFor(model => model.Accion)
-    <br>
-
-    <label>Resultado:</label>
-    @Html.TextBoxFor(model => model.Resultado)
-    <br>
-
-    <label>Comentario:</label>
-    @Html.TextBoxFor(model => model.Comentario)
-    <br>
-
-    <label>Puntaje:</label>
-    @Html.TextBoxFor(model => model.Puntaje, new { type = "number" })
-
-    <input type="submit" value="Enviar" />
-}
-<h2>Prueba formularios 3</h2>
-
-@using (Html.BeginForm("GuardarEvaluacion", "Usuarios", FormMethod.Post, new { id = "formulario3" }))
-{
-    @Html.Hidden("UsuarioId", (object)ViewBag.UsuarioId)
-
-
-    <label>Situacion:</label>
-    @Html.TextBoxFor(model => model.Situacion)
-    <br>
-
-    <label>Tarea:</label>
-    @Html.TextBoxFor(model => model.Tarea)
-    <br>
-
-    <label>Accion:</label>
-    @Html.TextBoxFor(model => model.Accion)
-    <br>
-
-    <label>Resultado:</label>
-    @Html.TextBoxFor(model => model.Resultado)
-    <br>
-
-    <label>Comentario:</label>
-    @Html.TextBoxFor(model => model.Comentario)
-    <br>
-
-    <label>Puntaje:</label>
-    @Html.TextBoxFor(model => model.Puntaje, new { type = "number" })
-
-    <input type="submit" value="Enviar" />
-}
 
 <a asp-action="Index">Volver a Usuarios</a>
+<br>
+
+<a asp-action="EvaluacionCompleta" class="btn btn-secondary" asp-route-id="@ViewBag.UsuarioId">Exportar a excel o importar PDF</a>
+
+
 

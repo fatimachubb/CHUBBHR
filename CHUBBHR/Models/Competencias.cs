@@ -21,6 +21,8 @@ public partial class Competencias
 
     public string? Comentario { get; set; }
 
+    public string? Nombre_C { get; set; }
+
     public int Puntaje { get; set; }
 
     public virtual Usuario? Usuario { get; set; }
