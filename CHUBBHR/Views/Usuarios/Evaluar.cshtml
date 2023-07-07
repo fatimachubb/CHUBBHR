@@ -708,56 +708,7 @@
 
         </div>
     </div>
-    <div id="colaboradorCasillas" class="competencia" style="display: none;">
-        <div>
-            <input type="checkbox" name="competencias" value="resolucionProblemas" id="resolucionProblemas" />
-            <label for="resolucionProblemas">Resolución de Problemas</label>
-        </div>
-        <div id="resolucionProblemasContent" style="display: none;">
-            <h2>Contenido de Resolución de Problemas</h2>
-            <p>Aquí puedes agregar el contenido adicional para la competencia de Resolución de Problemas.</p>
-        </div>
-        <div>
-            <input type="checkbox" name="competencias" value="aprendizajeContinuo" id="aprendizajeContinuo" />
-            <label for="aprendizajeContinuo">Aprendizaje Continuo</label>
-        </div>
-        <div id="aprendizajeContinuoContent" style="display: none;">
-            <h2>Contenido de Aprendizaje Continuo</h2>
-            <p>Aquí puedes agregar el contenido adicional para la competencia de Aprendizaje Continuo.</p>
-        </div>
-        <div>
-            <input type="checkbox" name="competencias" value="iniciativa" id="iniciativa" />
-            <label for="iniciativa">Iniciativa</label>
-        </div>
-        <div id="iniciativaContent" style="display: none;">
-            <h2>Contenido de Iniciativa</h2>
-            <p>Aquí puedes agregar el contenido adicional para la competencia de Iniciativa.</p>
-        </div>
-        <div>
-            <input type="checkbox" name="competencias" value="adaptabilidad" id="adaptabilidad" />
-            <label for="adaptabilidad">Adaptabilidad</label>
-        </div>
-        <div id="adaptabilidadContent" style="display: none;">
-            <h2>Contenido de Adaptabilidad</h2>
-            <p>Aquí puedes agregar el contenido adicional para la competencia de Adaptabilidad.</p>
-        </div>
-        <div>
-            <input type="checkbox" name="competencias" value="orientacionResultados" id="orientacionResultados" />
-            <label for="orientacionResultados">Orientación a Resultados</label>
-        </div>
-        <div id="orientacionResultadosContent" style="display: none;">
-            <h2>Contenido de Orientación a Resultados</h2>
-            <p>Aquí puedes agregar el contenido adicional para la competencia de Orientación a Resultados.</p>
-        </div>
-        <div>
-            <input type="checkbox" name="competencias" value="orientacionValores" id="orientacionValores" />
-            <label for="orientacionValores">Orientación a Valores</label>
-        </div>
-        <div id="orientacionValoresContent" style="display: none;">
-            <h2>Contenido de Orientación a Valores</h2>
-            <p>Aquí puedes agregar el contenido adicional para la competencia de Orientación a Valores.</p>
-        </div>
-    </div>
+
 
     <div id="lideresCasillas" class="competencia" style="display: none;">
         <div>
@@ -818,9 +769,9 @@
         </div>
     </div>
 
-    <div id="todosCasillas" class="competencia" style="display: none;">
+   <div id="todosCasillas" class="competencia" style="display: none;">
         <div>
-            <input type="checkbox" name="competencias" value="compatibilidad" id="compatibilidad" />
+            <input type="checkbox" name="competencias" value="compatibilidad" id="compatibilidad" onclick="iniciarCasillas(this)" />
             <label for="compatibilidad">Compatibilidad</label>
         </div>
         <div id="compatibilidadContent" style="display: none;">
@@ -828,7 +779,7 @@
             <p>Aquí puedes agregar el contenido adicional para la competencia de Compatibilidad.</p>
         </div>
         <div>
-            <input type="checkbox" name="competencias" value="orientacionCliente" id="orientacionCliente" />
+            <input type="checkbox" name="competencias" value="orientacionCliente" id="orientacionCliente" onclick="iniciarCasillas(this)" />
             <label for="orientacionCliente">Orientación al Cliente</label>
         </div>
         <div id="orientacionClienteContent" style="display: none;">
@@ -836,17 +787,20 @@
             <p>Aquí puedes agregar el contenido adicional para la competencia de Orientación al Cliente.</p>
         </div>
         <div>
-            <input type="checkbox" name="competencias" value="trabajoBajoPresion" id="trabajoBajoPresion" />
+            <input type="checkbox" name="competencias" value="trabajoBajoPresion" id="trabajoBajoPresion" onclick="iniciarCasillas(this)" />
             <label for="trabajoBajoPresion">Trabajo bajo Presión</label>
         </div>
         <div id="trabajoBajoPresionContent" style="display: none;">
             <h2>Contenido de Trabajo bajo Presión</h2>
             <p>Aquí puedes agregar el contenido adicional para la competencia de Trabajo bajo Presión.</p>
         </div>
-    </div>
+   </div>
+
 
 
     <button onclick="obtenerResultados()">Iniciar Evaluación</button>
+    <button onclick="verTodasLasCompetencias()">Ver todas las competencias</button>
+
 </div>
 
 <script>
@@ -871,19 +825,46 @@
         casillasContainer.style.display = 'block';
     }
 
-    function obtenerResultados() {
-        var checkboxes = document.querySelectorAll('input[name="competencias"]:checked');
-        var competenciasSeleccionadas = Array.from(checkboxes).map(function (checkbox) {
-            return checkbox.value;
-        });
 
-        competenciasSeleccionadas.forEach(function (competencia) {
-            var competenciaContent = document.getElementById(competencia + 'Content');
+    function obtenerResultados() {
+        var checkboxes = document.querySelectorAll('input[name="competencias"]');
+        var casillasContainer = document.getElementById('casillasContainer');
+
+        var alMenosUnCheckboxSeleccionado = false;
+
+        checkboxes.forEach(function (checkbox) {
+            var competenciaContent = document.getElementById(checkbox.value + 'Content');
+
             if (competenciaContent) {
-                competenciaContent.style.display = 'block';
+                if (checkbox.checked) {
+                    competenciaContent.style.display = 'block';
+                    alMenosUnCheckboxSeleccionado = true;
+                } else {
+                    competenciaContent.style.display = 'none';
+                    checkbox.parentElement.style.display = 'none';
+                }
             }
         });
+
+        if (!alMenosUnCheckboxSeleccionado) {
+            alert("Por favor selecciona al menos una competencia");
+            verTodasLasCompetencias();
+        }
+
+        casillasContainer.style.display = 'block';
     }
+
+    function verTodasLasCompetencias() {
+        var checkboxes = document.querySelectorAll('input[name="competencias"]');
+        var casillasContainer = document.getElementById('casillasContainer');
+
+        checkboxes.forEach(function (checkbox) {
+            checkbox.parentElement.style.display = 'block';
+        });
+
+        casillasContainer.style.display = 'block';
+    }
+
 </script>
 
 
