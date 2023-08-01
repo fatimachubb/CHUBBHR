@@ -2,3 +2,4 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
+/*! For license information please see html2pdf.bundle.min.js.LICENSE.txt */

@@ -11,7 +11,7 @@ using Aspose.Cells;
 using System.Data;
 using SkiaSharp;
 using System.Web;
-
+using Rotativa.AspNetCore;
 
 namespace CHUBBHR.Controllers
 {
@@ -20,7 +20,7 @@ namespace CHUBBHR.Controllers
 
 
         private readonly RegistroContext _context;
-        private string connectionString = "Server=localhost\\SQLEXPRESS02;Database=REGISTRO; integrated security=true; Encrypt=False;";
+        private string connectionString = "Server=LAPTOP-4IKMKHGF\\SQLEXPRESS;Database=REGISTRO; integrated security=true; Encrypt=False;";
 
         public UsuariosController(RegistroContext context)
         {
@@ -345,7 +345,7 @@ namespace CHUBBHR.Controllers
 
             // Saving the Excel file
             // Cambiar la ruta por tu propia computadora
-            string filePath = Path.Combine("C:\\Users\\CHFERMI\\Desktop\\Proyectos", fileName + ".xlsx");
+            string filePath = Path.Combine("C:\\Users\\GusTavo\\Documents\\HRFATIMA", fileName + ".xlsx");
 
             workbook.Save(filePath);
 
@@ -440,6 +440,22 @@ namespace CHUBBHR.Controllers
         {
             return View("Importar");
         }
+
+
+        public ActionResult PrintViewToPdf()
+        {
+            var report = new ViewAsPdf("Usuarios/Evaluar", new { name = "Giorgio" })
+            {
+                FileName = "Test.pdf",
+                PageSize = Rotativa.AspNetCore.Options.Size.A4,
+                PageOrientation = Rotativa.AspNetCore.Options.Orientation.Portrait,
+                PageMargins = new Rotativa.AspNetCore.Options.Margins(0, 0, 0, 0),
+                CustomSwitches = "--disable-smart-shrinking"
+            };
+            return report;
+        }
+
+
 
 
     }

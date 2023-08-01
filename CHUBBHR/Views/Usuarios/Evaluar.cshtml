@@ -6,36 +6,18 @@
 }
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $("form").submit(function (e) {
-                e.preventDefault(); // Evita que se envíe el formulario de forma tradicional
-
-                var form = $(this);
-
-                $.ajax({
-                    url: form.attr("action"),
-                    method: form.attr("method"),
-                    data: form.serialize(),
-                    success: function (response) {
-                        if (response === "OK") {
-                            // Mostrar mensaje de éxito o realizar alguna acción adicional
-                            alert("Formulario enviado correctamente");
-                        } else {
-                            // Mostrar mensaje de error si la respuesta no es "OK"
-                            alert("Error al enviar el formulario");
-                        }
-                    },
-                    error: function (xhr, status, error) {
-                        // Manejo de errores, si es necesario
-                        alert("Error al enviar el formulario");
-                    }
-                });
-            });
-        });
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>
+        /* Estilos para tu contenido */
+        #contenidoParaPdf {
+            /* Estilos adicionales aquí */
+        }
+    </style>
 </head>
+
 
 <style>
     body {
@@ -110,697 +92,699 @@
 
 
 
+<div id="contenidoParaPdf">
+    <h1>Evaluación de Competencias</h1>
+    <div>
+        <button class="btn" onclick="mostrarCasillas('colaborador')">Colaborador Individual</button>
+        <button class="btn" onclick="mostrarCasillas('lideres')">Líderes</button>
+        <button class="btn" onclick="mostrarCasillas('todos')">Todos los Niveles</button>
+    </div>
 
-<h1>Evaluación de Competencias</h1>
-<div>
-    <button class="btn" onclick="mostrarCasillas('colaborador')">Colaborador Individual</button>
-    <button class="btn" onclick="mostrarCasillas('lideres')">Líderes</button>
-    <button class="btn" onclick="mostrarCasillas('todos')">Todos los Niveles</button>
-</div>
+    <div id="casillasContainer" class="competencias-container" style="display: none;">
+        <div id="colaboradorCasillas" class="competencia" style="display: none;">
+            <div>
+                <input type="checkbox" name="competencias" value="resolucionProblemas" id="resolucionProblemas" />
+                <label for="resolucionProblemas"><mark style="background-color: orange; color: black;">Resolución de Problemas</mark></label>
+            </div>
+            <div id="resolucionProblemasContent" style="display: none;">
+                <h2>Resolución de Problemas</h2>
+                <p>El candidato:</p>
+                <ul>
+                    <li>Tiene un enfoque organizado y lógico para reflexionar sobre los problemas y asuntos complejos.</li>
+                    <li>Simplifica la complejidad desglosando los problemas en partes manejables.</li>
+                    <li>Busca más allá de lo obvio para lograr resultados.</li>
+                    <li>Desarrolla introspección de los problemas, asuntos y situaciones de forma efectiva y ágil.</li>
+                </ul>
 
-<div id="casillasContainer" class="competencias-container" style="display: none;">
-    <div id="colaboradorCasillas" class="competencia" style="display: none;">
-        <div>
-            <input type="checkbox" name="competencias" value="resolucionProblemas" id="resolucionProblemas" />
-            <label for="resolucionProblemas"><mark style="background-color: orange; color: black;">Resolución de Problemas</mark></label>
-        </div>
-        <div id="resolucionProblemasContent" style="display: none;">
-            <h2>Resolución de Problemas</h2>
-            <p>El candidato:</p>
-            <ul>
-                <li>Tiene un enfoque organizado y lógico para reflexionar sobre los problemas y asuntos complejos.</li>
-                <li>Simplifica la complejidad desglosando los problemas en partes manejables.</li>
-                <li>Busca más allá de lo obvio para lograr resultados.</li>
-                <li>Desarrolla introspección de los problemas, asuntos y situaciones de forma efectiva y ágil.</li>
-            </ul>
+                <p> <strong>Selecciona 1 o 2 preguntas sugeridas para evaluar esta competencia</strong>.</p>
 
-            <p> <strong>Selecciona 1 o 2 preguntas sugeridas para evaluar esta competencia</strong>.</p>
+                <ol>
+                    <li>
+                        Cuéntame de alguna situación en la que no pudiste cumplir con el tiempo establecido de entrega.
+                        <ol type="a">
+                            <li>¿Qué pasó?</li>
+                            <li>¿Con qué obstáculos te enfrentaste?</li>
+                            <li>¿Cómo lo resolviste?</li>
+                            <li>¿Cuál fue el resultado?</li>
+                        </ol>
+                    </li>
+                    <li>
+                        Descríbeme el mayor problema que hayas experimentado en tu rol actual.
+                        <ol type="a">
+                            <li>¿Qué sucedió?</li>
+                            <li>¿Qué te llevó a hacerlo de esa manera?</li>
+                            <li>¿Qué aprendiste?</li>
+                        </ol>
+                    </li>
+                    <li>
+                        Cuéntame de alguna situación en la que tuviste que abordar un problema y no contabas con toda la información necesaria.
+                        <ol type="a">
+                            <li>¿Qué se esperaba de ti?</li>
+                            <li>¿Qué acciones llevaste a cabo?</li>
+                            <li>¿Cuál fue el resultado de acuerdo con tus acciones?</li>
+                        </ol>
+                    </li>
+                    <li>
+                        Háblame de alguna ocasión en la que hayas tenido que cambiar tu estrategia para lograr solucionar un problema.
+                        <ol type="a">
+                            <li>¿Qué pasó?</li>
+                            <li>¿Qué esperaban de ti?</li>
+                            <li>¿Qué hiciste?</li>
+                            <li>¿Cuál fue el resultado?</li>
+                        </ol>
+                    </li>
+                </ol>
 
-            <ol>
-                <li>
-                    Cuéntame de alguna situación en la que no pudiste cumplir con el tiempo establecido de entrega.
-                    <ol type="a">
-                        <li>¿Qué pasó?</li>
-                        <li>¿Con qué obstáculos te enfrentaste?</li>
-                        <li>¿Cómo lo resolviste?</li>
-                        <li>¿Cuál fue el resultado?</li>
-                    </ol>
-                </li>
-                <li>
-                    Descríbeme el mayor problema que hayas experimentado en tu rol actual.
-                    <ol type="a">
-                        <li>¿Qué sucedió?</li>
-                        <li>¿Qué te llevó a hacerlo de esa manera?</li>
-                        <li>¿Qué aprendiste?</li>
-                    </ol>
-                </li>
-                <li>
-                    Cuéntame de alguna situación en la que tuviste que abordar un problema y no contabas con toda la información necesaria.
-                    <ol type="a">
-                        <li>¿Qué se esperaba de ti?</li>
-                        <li>¿Qué acciones llevaste a cabo?</li>
-                        <li>¿Cuál fue el resultado de acuerdo con tus acciones?</li>
-                    </ol>
-                </li>
-                <li>
-                    Háblame de alguna ocasión en la que hayas tenido que cambiar tu estrategia para lograr solucionar un problema.
-                    <ol type="a">
-                        <li>¿Qué pasó?</li>
-                        <li>¿Qué esperaban de ti?</li>
-                        <li>¿Qué hiciste?</li>
-                        <li>¿Cuál fue el resultado?</li>
-                    </ol>
-                </li>
-            </ol>
+                <p> <strong>Documenta brevemente las respuestas del candidato, de acuerdo con el MODELO STAR</strong>.</p>
 
-            <p> <strong>Documenta brevemente las respuestas del candidato, de acuerdo con el MODELO STAR</strong>.</p>
+                @using (Html.BeginForm("GuardarEvaluacion", "Usuarios", FormMethod.Post, new { id = "formulario1" }))
+                {
+                    @Html.Hidden("UsuarioId", (object)ViewBag.UsuarioId)
 
-            @using (Html.BeginForm("GuardarEvaluacion", "Usuarios", FormMethod.Post, new { id = "formulario1" }))
-            {
-                @Html.Hidden("UsuarioId", (object)ViewBag.UsuarioId)
+                    @Html.Hidden("Nombre_C", "Resolucion de Problemas")
 
-                @Html.Hidden("Nombre_C", "Resolucion de Problemas")
-
-                <table>
-                    <tr>
-                        <th><label>Situacion:</label></th>
-                        <td>@Html.TextBoxFor(model => model.Situacion, new { @class = "textbox" })</td>
-                    </tr>
-                    <tr>
-                        <th><label>Tarea:</label></th>
-                        <td>@Html.TextBoxFor(model => model.Tarea, new { @class = "textbox" })</td>
-                    </tr>
-                    <tr>
-                        <th><label>Acción:</label></th>
-                        <td>@Html.TextBoxFor(model => model.Accion, new { @class = "textbox" })</td>
-                    </tr>
-                    <tr>
-                        <th><label>Resultado:</label></th>
-                        <td>@Html.TextBoxFor(model => model.Resultado, new { @class = "textbox" })</td>
-                    </tr>
-                </table>
+                    <table>
+                        <tr>
+                            <th><label>Situacion:</label></th>
+                            <td>@Html.TextBoxFor(model => model.Situacion, new { @class = "textbox" })</td>
+                        </tr>
+                        <tr>
+                            <th><label>Tarea:</label></th>
+                            <td>@Html.TextBoxFor(model => model.Tarea, new { @class = "textbox" })</td>
+                        </tr>
+                        <tr>
+                            <th><label>Acción:</label></th>
+                            <td>@Html.TextBoxFor(model => model.Accion, new { @class = "textbox" })</td>
+                        </tr>
+                        <tr>
+                            <th><label>Resultado:</label></th>
+                            <td>@Html.TextBoxFor(model => model.Resultado, new { @class = "textbox" })</td>
+                        </tr>
+                    </table>
 
 
-                <p> <strong>Comentarios / Observaciones Generales:</strong>.</p>
+                    <p> <strong>Comentarios / Observaciones Generales:</strong>.</p>
 
-                @Html.TextAreaFor(model => model.Comentario, new { @class = "textarea" })
+                    @Html.TextAreaFor(model => model.Comentario, new { @class = "textarea" })
 
-                <p> <strong>Evalúa la respuesta del candidato de acuerdo con la escala de calificación:</strong>.</p>
+                    <p> <strong>Evalúa la respuesta del candidato de acuerdo con la escala de calificación:</strong>.</p>
 
                 
-                @Html.TextBoxFor(model => model.Puntaje, new { type = "number", min = "1", max = "5" })
+                    @Html.TextBoxFor(model => model.Puntaje, new { type = "number", min = "1", max = "5" })
 
 
-                <input type="submit" value="Enviar" />
-            }
+                    <input type="submit" value="Enviar" />
+                }
 
 
 
 
+            </div>
+            <div>
+                <input type="checkbox" name="competencias" value="aprendizajeContinuo" id="aprendizajeContinuo" />
+                <label for="aprendizajeContinuo"><mark style="background-color:purple; color: white;">Aprendizaje Continuo</mark></label>
+            </div>
+            <div id="aprendizajeContinuoContent" style="display: none;">
+                <h2>Aprendizaje Continuo</h2>
+                <p>El candidato:</p>
+                <ul>
+                    <li>Demuestra el interés y capacidad de ampliar su experiencia profesional y desarrollar nuevas habilidades.</li>
+                    <li>Cuenta con autoaprendizaje y automotivación para adquirir nuevos conocimientos y profundizar la experiencia técnica de forma autónoma y desarrollar sus capacidades por su cuenta.</li>
+                    <li>Asume asignaciones de trabajo desafiantes que conducen a crecimiento profesional.</li>
+
+                </ul>
+
+
+
+
+                <p> <strong>Selecciona 1 o 2 preguntas sugeridas para evaluar esta competencia</strong>.</p>
+
+                <ol>
+                    <li>
+                        Cuéntame de alguna situación en la que no pudiste cumplir con el tiempo establecido de entrega.
+                        <ol type="a">
+                            <li>¿Qué pasó?</li>
+                            <li>¿Con qué obstáculos te enfrentaste?</li>
+                            <li>¿Cómo lo resolviste?</li>
+                            <li>¿Cuál fue el resultado?</li>
+                        </ol>
+                    </li>
+                    <li>
+                        Descríbeme el mayor problema que hayas experimentado en tu rol actual.
+                        <ol type="a">
+                            <li>¿Qué sucedió?</li>
+                            <li>¿Qué te llevó a hacerlo de esa manera?</li>
+                            <li>¿Qué aprendiste?</li>
+                        </ol>
+                    </li>
+                    <li>
+                        Cuéntame de alguna situación en la que tuviste que abordar un problema y no contabas con toda la información necesaria.
+                        <ol type="a">
+                            <li>¿Qué se esperaba de ti?</li>
+                            <li>¿Qué acciones llevaste a cabo?</li>
+                            <li>¿Cuál fue el resultado de acuerdo con tus acciones?</li>
+                        </ol>
+                    </li>
+                    <li>
+                        Háblame de alguna ocasión en la que hayas tenido que cambiar tu estrategia para lograr solucionar un problema.
+                        <ol type="a">
+                            <li>¿Qué pasó?</li>
+                            <li>¿Qué esperaban de ti?</li>
+                            <li>¿Qué hiciste?</li>
+                            <li>¿Cuál fue el resultado?</li>
+                        </ol>
+                    </li>
+                </ol>
+
+                <p> <strong>Documenta brevemente las respuestas del candidato, de acuerdo con el MODELO STAR</strong>.</p>
+
+                @using (Html.BeginForm("GuardarEvaluacion", "Usuarios", FormMethod.Post, new { id = "formulario2" }))
+                {
+                    @Html.Hidden("UsuarioId", (object)ViewBag.UsuarioId)
+
+                    @Html.Hidden("Nombre_C", "Aprendizaje Continuo")
+
+                    <table>
+                        <tr>
+                            <th><label>Situacion:</label></th>
+                            <td>@Html.TextBoxFor(model => model.Situacion, new { @class = "textbox" })</td>
+                        </tr>
+                        <tr>
+                            <th><label>Tarea:</label></th>
+                            <td>@Html.TextBoxFor(model => model.Tarea, new { @class = "textbox" })</td>
+                        </tr>
+                        <tr>
+                            <th><label>Acción:</label></th>
+                            <td>@Html.TextBoxFor(model => model.Accion, new { @class = "textbox" })</td>
+                        </tr>
+                        <tr>
+                            <th><label>Resultado:</label></th>
+                            <td>@Html.TextBoxFor(model => model.Resultado, new { @class = "textbox" })</td>
+                        </tr>
+                    </table>
+
+
+                    <p> <strong>Comentarios / Observaciones Generales:</strong>.</p>
+
+
+                    @Html.TextAreaFor(model => model.Comentario, new { @class = "textarea" })
+
+                    <p> <strong>Evalúa la respuesta del candidato de acuerdo con la escala de calificación:</strong>.</p>
+
+                    @Html.TextBoxFor(model => model.Puntaje, new { type = "number", min = "1", max = "5" })
+
+
+                    <input type="submit" value="Enviar" />
+                }
+
+            </div>
+
+            <div>
+                <input type="checkbox" name="competencias" value="iniciativa" id="iniciativa" />
+                <label for="iniciativa"><mark style="background-color: orange; color: black;">Iniciativa</mark></label>
+            </div>
+            <div id="iniciativaContent" style="display: none;">
+                <h2>Iniciativa</h2>
+                <p>El candidato:</p>
+                <ul>
+                    <li>Está dispuesto a hacer más de lo que se requiere o se espera.</li>
+                    <li>Propone y toma acciones con el fin de lograr un objetivo que contribuya a la visión del equipo, sin que se le haya solicitado.</li>
+                    <li>Muestra empuje y disposición de hacer un esfuerzo adicional, en términos de agilidad y energía.</li>
+                    <li>Es auto motivado y aprovecha oportunidades para hacer la diferencia y generar valor para su área y para los demás</li>
+                </ul>
+
+
+
+                <p> <strong>Selecciona 1 o 2 preguntas sugeridas para evaluar esta competencia</strong>.</p>
+
+                <ol>
+                    <li>
+                        Cuéntame de alguna situación en la que no pudiste cumplir con el tiempo establecido de entrega.
+                        <ol type="a">
+                            <li>¿Qué pasó?</li>
+                            <li>¿Con qué obstáculos te enfrentaste?</li>
+                            <li>¿Cómo lo resolviste?</li>
+                            <li>¿Cuál fue el resultado?</li>
+                        </ol>
+                    </li>
+                    <li>
+                        Descríbeme el mayor problema que hayas experimentado en tu rol actual.
+                        <ol type="a">
+                            <li>¿Qué sucedió?</li>
+                            <li>¿Qué te llevó a hacerlo de esa manera?</li>
+                            <li>¿Qué aprendiste?</li>
+                        </ol>
+                    </li>
+                    <li>
+                        Cuéntame de alguna situación en la que tuviste que abordar un problema y no contabas con toda la información necesaria.
+                        <ol type="a">
+                            <li>¿Qué se esperaba de ti?</li>
+                            <li>¿Qué acciones llevaste a cabo?</li>
+                            <li>¿Cuál fue el resultado de acuerdo con tus acciones?</li>
+                        </ol>
+                    </li>
+                    <li>
+                        Háblame de alguna ocasión en la que hayas tenido que cambiar tu estrategia para lograr solucionar un problema.
+                        <ol type="a">
+                            <li>¿Qué pasó?</li>
+                            <li>¿Qué esperaban de ti?</li>
+                            <li>¿Qué hiciste?</li>
+                            <li>¿Cuál fue el resultado?</li>
+                        </ol>
+                    </li>
+                </ol>
+                <p> <strong>Documenta brevemente las respuestas del candidato, de acuerdo con el MODELO STAR</strong>.</p>
+
+                @using (Html.BeginForm("GuardarEvaluacion", "Usuarios", FormMethod.Post, new { id = "formulario3" }))
+                {
+                    @Html.Hidden("UsuarioId", (object)ViewBag.UsuarioId)
+
+                    @Html.Hidden("Nombre_C", "Iniciativa")
+
+                    <table>
+                        <tr>
+                            <th><label>Situacion:</label></th>
+                            <td>@Html.TextBoxFor(model => model.Situacion, new { @class = "textbox" })</td>
+                        </tr>
+                        <tr>
+                            <th><label>Tarea:</label></th>
+                            <td>@Html.TextBoxFor(model => model.Tarea, new { @class = "textbox" })</td>
+                        </tr>
+                        <tr>
+                            <th><label>Acción:</label></th>
+                            <td>@Html.TextBoxFor(model => model.Accion, new { @class = "textbox" })</td>
+                        </tr>
+                        <tr>
+                            <th><label>Resultado:</label></th>
+                            <td>@Html.TextBoxFor(model => model.Resultado, new { @class = "textbox" })</td>
+                        </tr>
+                    </table>
+
+
+                    <p> <strong>Comentarios / Observaciones Generales:</strong>.</p>
+
+
+                    @Html.TextAreaFor(model => model.Comentario, new { @class = "textarea" })
+
+                    <p> <strong>Evalúa la respuesta del candidato de acuerdo con la escala de calificación:</strong>.</p>
+
+                    @Html.TextBoxFor(model => model.Puntaje, new { type = "number", min = "1", max = "5" })
+
+
+                    <input type="submit" value="Enviar" />
+                }
+
+            </div>
+            <div>
+                <input type="checkbox" name="competencias" value="adaptabilidad" id="adaptabilidad" />
+                <label for="adaptabilidad"><mark style="background-color:purple; color: white;">Adaptabilidad</mark></label>
+            </div>
+            <div id="adaptabilidadContent" style="display: none;">
+                <h2>Adaptabilidad</h2>
+                <p>El candidato:</p>
+                <ul>
+                    <li>Muestra habilidad para redireccionar esfuerzos personales en respuesta a circunstancias cambiantes.</li>
+                    <li>Es receptivo a nuevas ideas y formas de hacer las cosas, sumando e incorporando éstas a su estilo de trabajo.</li>
+                    <li>Prioriza efectivamente en conformidad con demandas competitivas y objetivos cambiantes.</li>
+                    <li>DPuede navegar a través de la incertidumbre y sabe cuándo cambiar el rumbo, siendo flexible y versátil a las situaciones diferentes acepta los cambios de forma positiva y constructiva.</li>
+                </ul>
+
+
+                -  -  -
+
+                <p> <strong>Selecciona 1 o 2 preguntas sugeridas para evaluar esta competencia</strong>.</p>
+
+                <ol>
+                    <li>
+                        Cuéntame de alguna situación en la que no pudiste cumplir con el tiempo establecido de entrega.
+                        <ol type="a">
+                            <li>¿Qué pasó?</li>
+                            <li>¿Con qué obstáculos te enfrentaste?</li>
+                            <li>¿Cómo lo resolviste?</li>
+                            <li>¿Cuál fue el resultado?</li>
+                        </ol>
+                    </li>
+                    <li>
+                        Descríbeme el mayor problema que hayas experimentado en tu rol actual.
+                        <ol type="a">
+                            <li>¿Qué sucedió?</li>
+                            <li>¿Qué te llevó a hacerlo de esa manera?</li>
+                            <li>¿Qué aprendiste?</li>
+                        </ol>
+                    </li>
+                    <li>
+                        Cuéntame de alguna situación en la que tuviste que abordar un problema y no contabas con toda la información necesaria.
+                        <ol type="a">
+                            <li>¿Qué se esperaba de ti?</li>
+                            <li>¿Qué acciones llevaste a cabo?</li>
+                            <li>¿Cuál fue el resultado de acuerdo con tus acciones?</li>
+                        </ol>
+                    </li>
+                    <li>
+                        Háblame de alguna ocasión en la que hayas tenido que cambiar tu estrategia para lograr solucionar un problema.
+                        <ol type="a">
+                            <li>¿Qué pasó?</li>
+                            <li>¿Qué esperaban de ti?</li>
+                            <li>¿Qué hiciste?</li>
+                            <li>¿Cuál fue el resultado?</li>
+                        </ol>
+                    </li>
+                </ol>
+
+                <p> <strong>Documenta brevemente las respuestas del candidato, de acuerdo con el MODELO STAR</strong>.</p>
+
+                @using (Html.BeginForm("GuardarEvaluacion", "Usuarios", FormMethod.Post, new { id = "formulario4" }))
+                {
+                    @Html.Hidden("UsuarioId", (object)ViewBag.UsuarioId)
+                    @Html.Hidden("Nombre_C", "Adaptabilidad")
+
+                    <table>
+                        <tr>
+                            <th><label>Situacion:</label></th>
+                            <td>@Html.TextBoxFor(model => model.Situacion, new { @class = "textbox" })</td>
+                        </tr>
+                        <tr>
+                            <th><label>Tarea:</label></th>
+                            <td>@Html.TextBoxFor(model => model.Tarea, new { @class = "textbox" })</td>
+                        </tr>
+                        <tr>
+                            <th><label>Acción:</label></th>
+                            <td>@Html.TextBoxFor(model => model.Accion, new { @class = "textbox" })</td>
+                        </tr>
+                        <tr>
+                            <th><label>Resultado:</label></th>
+                            <td>@Html.TextBoxFor(model => model.Resultado, new { @class = "textbox" })</td>
+                        </tr>
+                    </table>
+
+
+                    <p> <strong>Comentarios / Observaciones Generales:</strong>.</p>
+
+
+                    @Html.TextAreaFor(model => model.Comentario, new { @class = "textarea" })
+
+                    <p> <strong>Evalúa la respuesta del candidato de acuerdo con la escala de calificación:</strong>.</p>
+
+                    @Html.TextBoxFor(model => model.Puntaje, new { type = "number", min = "1", max = "5" })
+
+
+                    <input type="submit" value="Enviar" />
+                }
+
+            </div>
+            <div>
+                <input type="checkbox" name="competencias" value="orientacionResultados" id="orientacionResultados" />
+                <label for="orientacionResultados"><mark style="background-color: orange; color: black;">Orientación a Resultados</mark></label>
+            </div>
+            <div id="orientacionResultadosContent" style="display: none;">
+                <h2>Orientación a Resultados</h2>
+                <p>El candidato:</p>
+                <ul>
+                    <li>Ejecuta con eficacia y conforme a los planes; con enfoque a resultados, tomando responsabilidad por los resultados.</li>
+                    <li>Alcanza consistentemente los resultados, desarrolla alternativas para prevenir obstáculos y poder sobrepasarlos para lograr los resultados.</li>
+                    <li>
+                        Reconoce y capitaliza las oportunidades. - Asume la responsabilidad de sus acciones, decisiones, comportamientos y desempeño hacia el logro de sus resultados.
+                    </li>
+                    <li>Asume la responsabilidad de sus acciones, decisiones, comportamientos y desempeño hacia el logro de sus resultados.</li>
+                </ul>
+
+                -  -
+                <p> <strong>Selecciona 1 o 2 preguntas sugeridas para evaluar esta competencia</strong>.</p>
+
+                <ol>
+                    <li>
+                        Cuéntame de alguna situación en la que no pudiste cumplir con el tiempo establecido de entrega.
+                        <ol type="a">
+                            <li>¿Qué pasó?</li>
+                            <li>¿Con qué obstáculos te enfrentaste?</li>
+                            <li>¿Cómo lo resolviste?</li>
+                            <li>¿Cuál fue el resultado?</li>
+                        </ol>
+                    </li>
+                    <li>
+                        Descríbeme el mayor problema que hayas experimentado en tu rol actual.
+                        <ol type="a">
+                            <li>¿Qué sucedió?</li>
+                            <li>¿Qué te llevó a hacerlo de esa manera?</li>
+                            <li>¿Qué aprendiste?</li>
+                        </ol>
+                    </li>
+                    <li>
+                        Cuéntame de alguna situación en la que tuviste que abordar un problema y no contabas con toda la información necesaria.
+                        <ol type="a">
+                            <li>¿Qué se esperaba de ti?</li>
+                            <li>¿Qué acciones llevaste a cabo?</li>
+                            <li>¿Cuál fue el resultado de acuerdo con tus acciones?</li>
+                        </ol>
+                    </li>
+                    <li>
+                        Háblame de alguna ocasión en la que hayas tenido que cambiar tu estrategia para lograr solucionar un problema.
+                        <ol type="a">
+                            <li>¿Qué pasó?</li>
+                            <li>¿Qué esperaban de ti?</li>
+                            <li>¿Qué hiciste?</li>
+                            <li>¿Cuál fue el resultado?</li>
+                        </ol>
+                    </li>
+                </ol>
+
+                <p> <strong>Documenta brevemente las respuestas del candidato, de acuerdo con el MODELO STAR</strong>.</p>
+
+                @using (Html.BeginForm("GuardarEvaluacion", "Usuarios", FormMethod.Post, new { id = "formulario5" }))
+                {
+                    @Html.Hidden("UsuarioId", (object)ViewBag.UsuarioId)
+                    @Html.Hidden("Nombre_C", "Orientación a Resultados")
+
+                    <table>
+                        <tr>
+                            <th><label>Situacion:</label></th>
+                            <td>@Html.TextBoxFor(model => model.Situacion, new { @class = "textbox" })</td>
+                        </tr>
+                        <tr>
+                            <th><label>Tarea:</label></th>
+                            <td>@Html.TextBoxFor(model => model.Tarea, new { @class = "textbox" })</td>
+                        </tr>
+                        <tr>
+                            <th><label>Acción:</label></th>
+                            <td>@Html.TextBoxFor(model => model.Accion, new { @class = "textbox" })</td>
+                        </tr>
+                        <tr>
+                            <th><label>Resultado:</label></th>
+                            <td>@Html.TextBoxFor(model => model.Resultado, new { @class = "textbox" })</td>
+                        </tr>
+                    </table>
+
+
+                    <p> <strong>Comentarios / Observaciones Generales:</strong>.</p>
+
+
+                    @Html.TextAreaFor(model => model.Comentario, new { @class = "textarea" })
+
+                    <p> <strong>Evalúa la respuesta del candidato de acuerdo con la escala de calificación:</strong>.</p>
+
+                    @Html.TextBoxFor(model => model.Puntaje, new { type = "number", min = "1", max = "5" })
+
+
+                    <input type="submit" value="Enviar" />
+                }
+
+
+            </div>
+            <div>
+                <input type="checkbox" name="competencias" value="orientacionValores" id="orientacionValores" />
+                <label for="orientacionValores"><mark style="background-color:purple; color: white;">Orientación a Valores</mark></label>
+            </div>
+            <div id="orientacionValoresContent" style="display: none;">
+                <h2>Orientación a Valores</h2>
+                <p>El candidato:</p>
+                <ul>
+                    <li>Sostiene y modela los valores Chubb y siempre hace lo correcto para la Compañía, los colegas y clientes.</li>
+                    <li>Es una persona directa, veraz y digna de confianza. - Actúa dentro del marco del bien común, promueve una cultura organizacional de respeto a normas y de trabajo colaborativo.</li>
+                    <li>Actúa dentro del marco del bien común, promueve una cultura organizacional de respeto a normas y de trabajo colaborativo.</li>
+                    <li>Se comporta éticamente y mantiene un alto nivel de integridad profesional.</li>
+                    <li>Fomenta la colaboración “de alto nivel” con su equipo y con la compañía; actúa y piensa constantemente como "One Chubb”</li>
+                </ul>
+
+
+
+                <p> <strong>Selecciona 1 o 2 preguntas sugeridas para evaluar esta competencia</strong>.</p>
+
+                <ol>
+                    <li>
+                        Cuéntame de alguna situación en la que no pudiste cumplir con el tiempo establecido de entrega.
+                        <ol type="a">
+                            <li>¿Qué pasó?</li>
+                            <li>¿Con qué obstáculos te enfrentaste?</li>
+                            <li>¿Cómo lo resolviste?</li>
+                            <li>¿Cuál fue el resultado?</li>
+                        </ol>
+                    </li>
+                    <li>
+                        Descríbeme el mayor problema que hayas experimentado en tu rol actual.
+                        <ol type="a">
+                            <li>¿Qué sucedió?</li>
+                            <li>¿Qué te llevó a hacerlo de esa manera?</li>
+                            <li>¿Qué aprendiste?</li>
+                        </ol>
+                    </li>
+                    <li>
+                        Cuéntame de alguna situación en la que tuviste que abordar un problema y no contabas con toda la información necesaria.
+                        <ol type="a">
+                            <li>¿Qué se esperaba de ti?</li>
+                            <li>¿Qué acciones llevaste a cabo?</li>
+                            <li>¿Cuál fue el resultado de acuerdo con tus acciones?</li>
+                        </ol>
+                    </li>
+                    <li>
+                        Háblame de alguna ocasión en la que hayas tenido que cambiar tu estrategia para lograr solucionar un problema.
+                        <ol type="a">
+                            <li>¿Qué pasó?</li>
+                            <li>¿Qué esperaban de ti?</li>
+                            <li>¿Qué hiciste?</li>
+                            <li>¿Cuál fue el resultado?</li>
+                        </ol>
+                    </li>
+                </ol>
+
+                <p> <strong>Documenta brevemente las respuestas del candidato, de acuerdo con el MODELO STAR</strong>.</p>
+
+                @using (Html.BeginForm("GuardarEvaluacion", "Usuarios", FormMethod.Post, new { id = "formulario6" }))
+                {
+                    @Html.Hidden("UsuarioId", (object)ViewBag.UsuarioId)
+                    @Html.Hidden("Nombre_C", "Orientación a valores")
+
+                    <table>
+                        <tr>
+                            <th><label>Situacion:</label></th>
+                            <td>@Html.TextBoxFor(model => model.Situacion, new { @class = "textbox" })</td>
+                        </tr>
+                        <tr>
+                            <th><label>Tarea:</label></th>
+                            <td>@Html.TextBoxFor(model => model.Tarea, new { @class = "textbox" })</td>
+                        </tr>
+                        <tr>
+                            <th><label>Acción:</label></th>
+                            <td>@Html.TextBoxFor(model => model.Accion, new { @class = "textbox" })</td>
+                        </tr>
+                        <tr>
+                            <th><label>Resultado:</label></th>
+                            <td>@Html.TextBoxFor(model => model.Resultado, new { @class = "textbox" })</td>
+                        </tr>
+                    </table>
+
+
+                    <p> <strong>Comentarios / Observaciones Generales:</strong>.</p>
+
+
+                    @Html.TextAreaFor(model => model.Comentario, new { @class = "textarea" })
+
+                    <p> <strong>Evalúa la respuesta del candidato de acuerdo con la escala de calificación:</strong>.</p>
+
+                    @Html.TextBoxFor(model => model.Puntaje, new { type = "number", min = "1", max = "5" })
+
+
+                    <input type="submit" value="Enviar" />
+                }
+
+
+
+            </div>
         </div>
-        <div>
-            <input type="checkbox" name="competencias" value="aprendizajeContinuo" id="aprendizajeContinuo" />
-            <label for="aprendizajeContinuo"><mark style="background-color:purple; color: white;">Aprendizaje Continuo</mark></label>
-        </div>
-        <div id="aprendizajeContinuoContent" style="display: none;">
-            <h2>Aprendizaje Continuo</h2>
-            <p>El candidato:</p>
-            <ul>
-                <li>Demuestra el interés y capacidad de ampliar su experiencia profesional y desarrollar nuevas habilidades.</li>
-                <li>Cuenta con autoaprendizaje y automotivación para adquirir nuevos conocimientos y profundizar la experiencia técnica de forma autónoma y desarrollar sus capacidades por su cuenta.</li>
-                <li>Asume asignaciones de trabajo desafiantes que conducen a crecimiento profesional.</li>
-
-            </ul>
 
 
-
-
-            <p> <strong>Selecciona 1 o 2 preguntas sugeridas para evaluar esta competencia</strong>.</p>
-
-            <ol>
-                <li>
-                    Cuéntame de alguna situación en la que no pudiste cumplir con el tiempo establecido de entrega.
-                    <ol type="a">
-                        <li>¿Qué pasó?</li>
-                        <li>¿Con qué obstáculos te enfrentaste?</li>
-                        <li>¿Cómo lo resolviste?</li>
-                        <li>¿Cuál fue el resultado?</li>
-                    </ol>
-                </li>
-                <li>
-                    Descríbeme el mayor problema que hayas experimentado en tu rol actual.
-                    <ol type="a">
-                        <li>¿Qué sucedió?</li>
-                        <li>¿Qué te llevó a hacerlo de esa manera?</li>
-                        <li>¿Qué aprendiste?</li>
-                    </ol>
-                </li>
-                <li>
-                    Cuéntame de alguna situación en la que tuviste que abordar un problema y no contabas con toda la información necesaria.
-                    <ol type="a">
-                        <li>¿Qué se esperaba de ti?</li>
-                        <li>¿Qué acciones llevaste a cabo?</li>
-                        <li>¿Cuál fue el resultado de acuerdo con tus acciones?</li>
-                    </ol>
-                </li>
-                <li>
-                    Háblame de alguna ocasión en la que hayas tenido que cambiar tu estrategia para lograr solucionar un problema.
-                    <ol type="a">
-                        <li>¿Qué pasó?</li>
-                        <li>¿Qué esperaban de ti?</li>
-                        <li>¿Qué hiciste?</li>
-                        <li>¿Cuál fue el resultado?</li>
-                    </ol>
-                </li>
-            </ol>
-
-            <p> <strong>Documenta brevemente las respuestas del candidato, de acuerdo con el MODELO STAR</strong>.</p>
-
-            @using (Html.BeginForm("GuardarEvaluacion", "Usuarios", FormMethod.Post, new { id = "formulario2" }))
-            {
-                @Html.Hidden("UsuarioId", (object)ViewBag.UsuarioId)
-
-                @Html.Hidden("Nombre_C", "Aprendizaje Continuo")
-
-                <table>
-                    <tr>
-                        <th><label>Situacion:</label></th>
-                        <td>@Html.TextBoxFor(model => model.Situacion, new { @class = "textbox" })</td>
-                    </tr>
-                    <tr>
-                        <th><label>Tarea:</label></th>
-                        <td>@Html.TextBoxFor(model => model.Tarea, new { @class = "textbox" })</td>
-                    </tr>
-                    <tr>
-                        <th><label>Acción:</label></th>
-                        <td>@Html.TextBoxFor(model => model.Accion, new { @class = "textbox" })</td>
-                    </tr>
-                    <tr>
-                        <th><label>Resultado:</label></th>
-                        <td>@Html.TextBoxFor(model => model.Resultado, new { @class = "textbox" })</td>
-                    </tr>
-                </table>
-
-
-                <p> <strong>Comentarios / Observaciones Generales:</strong>.</p>
-
-
-                @Html.TextAreaFor(model => model.Comentario, new { @class = "textarea" })
-
-                <p> <strong>Evalúa la respuesta del candidato de acuerdo con la escala de calificación:</strong>.</p>
-
-                @Html.TextBoxFor(model => model.Puntaje, new { type = "number", min = "1", max = "5" })
-
-
-                <input type="submit" value="Enviar" />
-            }
-
+        <div id="lideresCasillas" class="competencia" style="display: none;">
+            <div>
+                <input type="checkbox" name="competencias" value="visionNegocio" id="visionNegocio" />
+                <label for="visionNegocio">Visión de Negocio</label>
+            </div>
+            <div id="visionNegocioContent" style="display: none;">
+                <h2>Contenido de Visión de Negocio</h2>
+                <p>Aquí puedes agregar el contenido adicional para la competencia de Visión de Negocio.</p>
+            </div>
+            <div>
+                <input type="checkbox" name="competencias" value="influencia" id="influencia" />
+                <label for="influencia">Influencia</label>
+            </div>
+            <div id="influenciaContent" style="display: none;">
+                <h2>Contenido de Influencia</h2>
+                <p>Aquí puedes agregar el contenido adicional para la competencia de Influencia.</p>
+            </div>
+            <div>
+                <input type="checkbox" name="competencias" value="liderazgoEquipoInclusivo" id="liderazgoEquipoInclusivo" />
+                <label for="liderazgoEquipoInclusivo">Liderazgo Equipo Inclusivo</label>
+            </div>
+            <div id="liderazgoEquipoInclusivoContent" style="display: none;">
+                <h2>Contenido de Liderazgo Equipo Inclusivo</h2>
+                <p>Aquí puedes agregar el contenido adicional para la competencia de Liderazgo Equipo Inclusivo.</p>
+            </div>
+            <div>
+                <input type="checkbox" name="competencias" value="ejecucion" id="ejecucion" />
+                <label for="ejecucion">Ejecución</label>
+            </div>
+            <div id="ejecucionContent" style="display: none;">
+                <h2>Contenido de Ejecución</h2>
+                <p>Aquí puedes agregar el contenido adicional para la competencia de Ejecución.</p>
+            </div>
+            <div>
+                <input type="checkbox" name="competencias" value="ownership" id="ownership" />
+                <label for="ownership">Ownership</label>
+            </div>
+            <div id="ownershipContent" style="display: none;">
+                <h2>Contenido de Ownership</h2>
+                <p>Aquí puedes agregar el contenido adicional para la competencia de Ownership.</p>
+            </div>
+            <div>
+                <input type="checkbox" name="competencias" value="integridadCoraje" id="integridadCoraje" />
+                <label for="integridadCoraje">Integridad y Coraje</label>
+            </div>
+            <div id="integridadCorajeContent" style="display: none;">
+                <h2>Contenido de Integridad y Coraje</h2>
+                <p>Aquí puedes agregar el contenido adicional para la competencia de Integridad y Coraje.</p>
+            </div>
+            <div>
+                <input type="checkbox" name="competencias" value="enfoqueEstrategico" id="enfoqueEstrategico" />
+                <label for="enfoqueEstrategico">Enfoque Estratégico</label>
+            </div>
+            <div id="enfoqueEstrategicoContent" style="display: none;">
+                <h2>Contenido de Enfoque Estratégico</h2>
+                <p>Aquí puedes agregar el contenido adicional para la competencia de Enfoque Estratégico.</p>
+            </div>
         </div>
 
-        <div>
-            <input type="checkbox" name="competencias" value="iniciativa" id="iniciativa" />
-            <label for="iniciativa"><mark style="background-color: orange; color: black;">Iniciativa</mark></label>
-        </div>
-        <div id="iniciativaContent" style="display: none;">
-            <h2>Iniciativa</h2>
-            <p>El candidato:</p>
-            <ul>
-                <li>Está dispuesto a hacer más de lo que se requiere o se espera.</li>
-                <li>Propone y toma acciones con el fin de lograr un objetivo que contribuya a la visión del equipo, sin que se le haya solicitado.</li>
-                <li>Muestra empuje y disposición de hacer un esfuerzo adicional, en términos de agilidad y energía.</li>
-                <li>Es auto motivado y aprovecha oportunidades para hacer la diferencia y generar valor para su área y para los demás</li>
-            </ul>
+       <div id="todosCasillas" class="competencia" style="display: none;">
+            <div>
+                <input type="checkbox" name="competencias" value="compatibilidad" id="compatibilidad" onclick="iniciarCasillas(this)" />
+                <label for="compatibilidad">Compatibilidad</label>
+            </div>
+            <div id="compatibilidadContent" style="display: none;">
+                <h2>Contenido de Compatibilidad</h2>
+                <p>Aquí puedes agregar el contenido adicional para la competencia de Compatibilidad.</p>
+            </div>
+            <div>
+                <input type="checkbox" name="competencias" value="orientacionCliente" id="orientacionCliente" onclick="iniciarCasillas(this)" />
+                <label for="orientacionCliente">Orientación al Cliente</label>
+            </div>
+            <div id="orientacionClienteContent" style="display: none;">
+                <h2>Contenido de Orientación al Cliente</h2>
+                <p>Aquí puedes agregar el contenido adicional para la competencia de Orientación al Cliente.</p>
+            </div>
+            <div>
+                <input type="checkbox" name="competencias" value="trabajoBajoPresion" id="trabajoBajoPresion" onclick="iniciarCasillas(this)" />
+                <label for="trabajoBajoPresion">Trabajo bajo Presión</label>
+            </div>
+            <div id="trabajoBajoPresionContent" style="display: none;">
+                <h2>Contenido de Trabajo bajo Presión</h2>
+                <p>Aquí puedes agregar el contenido adicional para la competencia de Trabajo bajo Presión.</p>
+            </div>
+       </div>
+
+
+
+        <button onclick="obtenerResultados()">Iniciar Evaluación Digital </button>
+        <button onclick="generarPDF()">Generar PDF</button>
+        <button onclick="verTodasLasCompetencias()">Ver todas las competencias</button>
 
-
-
-            <p> <strong>Selecciona 1 o 2 preguntas sugeridas para evaluar esta competencia</strong>.</p>
-
-            <ol>
-                <li>
-                    Cuéntame de alguna situación en la que no pudiste cumplir con el tiempo establecido de entrega.
-                    <ol type="a">
-                        <li>¿Qué pasó?</li>
-                        <li>¿Con qué obstáculos te enfrentaste?</li>
-                        <li>¿Cómo lo resolviste?</li>
-                        <li>¿Cuál fue el resultado?</li>
-                    </ol>
-                </li>
-                <li>
-                    Descríbeme el mayor problema que hayas experimentado en tu rol actual.
-                    <ol type="a">
-                        <li>¿Qué sucedió?</li>
-                        <li>¿Qué te llevó a hacerlo de esa manera?</li>
-                        <li>¿Qué aprendiste?</li>
-                    </ol>
-                </li>
-                <li>
-                    Cuéntame de alguna situación en la que tuviste que abordar un problema y no contabas con toda la información necesaria.
-                    <ol type="a">
-                        <li>¿Qué se esperaba de ti?</li>
-                        <li>¿Qué acciones llevaste a cabo?</li>
-                        <li>¿Cuál fue el resultado de acuerdo con tus acciones?</li>
-                    </ol>
-                </li>
-                <li>
-                    Háblame de alguna ocasión en la que hayas tenido que cambiar tu estrategia para lograr solucionar un problema.
-                    <ol type="a">
-                        <li>¿Qué pasó?</li>
-                        <li>¿Qué esperaban de ti?</li>
-                        <li>¿Qué hiciste?</li>
-                        <li>¿Cuál fue el resultado?</li>
-                    </ol>
-                </li>
-            </ol>
-            <p> <strong>Documenta brevemente las respuestas del candidato, de acuerdo con el MODELO STAR</strong>.</p>
-
-            @using (Html.BeginForm("GuardarEvaluacion", "Usuarios", FormMethod.Post, new { id = "formulario3" }))
-            {
-                @Html.Hidden("UsuarioId", (object)ViewBag.UsuarioId)
-
-                @Html.Hidden("Nombre_C", "Iniciativa")
-
-                <table>
-                    <tr>
-                        <th><label>Situacion:</label></th>
-                        <td>@Html.TextBoxFor(model => model.Situacion, new { @class = "textbox" })</td>
-                    </tr>
-                    <tr>
-                        <th><label>Tarea:</label></th>
-                        <td>@Html.TextBoxFor(model => model.Tarea, new { @class = "textbox" })</td>
-                    </tr>
-                    <tr>
-                        <th><label>Acción:</label></th>
-                        <td>@Html.TextBoxFor(model => model.Accion, new { @class = "textbox" })</td>
-                    </tr>
-                    <tr>
-                        <th><label>Resultado:</label></th>
-                        <td>@Html.TextBoxFor(model => model.Resultado, new { @class = "textbox" })</td>
-                    </tr>
-                </table>
-
-
-                <p> <strong>Comentarios / Observaciones Generales:</strong>.</p>
-
-
-                @Html.TextAreaFor(model => model.Comentario, new { @class = "textarea" })
-
-                <p> <strong>Evalúa la respuesta del candidato de acuerdo con la escala de calificación:</strong>.</p>
-
-                @Html.TextBoxFor(model => model.Puntaje, new { type = "number", min = "1", max = "5" })
-
-
-                <input type="submit" value="Enviar" />
-            }
-
-        </div>
-        <div>
-            <input type="checkbox" name="competencias" value="adaptabilidad" id="adaptabilidad" />
-            <label for="adaptabilidad"><mark style="background-color:purple; color: white;">Adaptabilidad</mark></label>
-        </div>
-        <div id="adaptabilidadContent" style="display: none;">
-            <h2>Adaptabilidad</h2>
-            <p>El candidato:</p>
-            <ul>
-                <li>Muestra habilidad para redireccionar esfuerzos personales en respuesta a circunstancias cambiantes.</li>
-                <li>Es receptivo a nuevas ideas y formas de hacer las cosas, sumando e incorporando éstas a su estilo de trabajo.</li>
-                <li>Prioriza efectivamente en conformidad con demandas competitivas y objetivos cambiantes.</li>
-                <li>DPuede navegar a través de la incertidumbre y sabe cuándo cambiar el rumbo, siendo flexible y versátil a las situaciones diferentes acepta los cambios de forma positiva y constructiva.</li>
-            </ul>
-
-
-            -  -  -
-
-            <p> <strong>Selecciona 1 o 2 preguntas sugeridas para evaluar esta competencia</strong>.</p>
-
-            <ol>
-                <li>
-                    Cuéntame de alguna situación en la que no pudiste cumplir con el tiempo establecido de entrega.
-                    <ol type="a">
-                        <li>¿Qué pasó?</li>
-                        <li>¿Con qué obstáculos te enfrentaste?</li>
-                        <li>¿Cómo lo resolviste?</li>
-                        <li>¿Cuál fue el resultado?</li>
-                    </ol>
-                </li>
-                <li>
-                    Descríbeme el mayor problema que hayas experimentado en tu rol actual.
-                    <ol type="a">
-                        <li>¿Qué sucedió?</li>
-                        <li>¿Qué te llevó a hacerlo de esa manera?</li>
-                        <li>¿Qué aprendiste?</li>
-                    </ol>
-                </li>
-                <li>
-                    Cuéntame de alguna situación en la que tuviste que abordar un problema y no contabas con toda la información necesaria.
-                    <ol type="a">
-                        <li>¿Qué se esperaba de ti?</li>
-                        <li>¿Qué acciones llevaste a cabo?</li>
-                        <li>¿Cuál fue el resultado de acuerdo con tus acciones?</li>
-                    </ol>
-                </li>
-                <li>
-                    Háblame de alguna ocasión en la que hayas tenido que cambiar tu estrategia para lograr solucionar un problema.
-                    <ol type="a">
-                        <li>¿Qué pasó?</li>
-                        <li>¿Qué esperaban de ti?</li>
-                        <li>¿Qué hiciste?</li>
-                        <li>¿Cuál fue el resultado?</li>
-                    </ol>
-                </li>
-            </ol>
-
-            <p> <strong>Documenta brevemente las respuestas del candidato, de acuerdo con el MODELO STAR</strong>.</p>
-
-            @using (Html.BeginForm("GuardarEvaluacion", "Usuarios", FormMethod.Post, new { id = "formulario4" }))
-            {
-                @Html.Hidden("UsuarioId", (object)ViewBag.UsuarioId)
-                @Html.Hidden("Nombre_C", "Adaptabilidad")
-
-                <table>
-                    <tr>
-                        <th><label>Situacion:</label></th>
-                        <td>@Html.TextBoxFor(model => model.Situacion, new { @class = "textbox" })</td>
-                    </tr>
-                    <tr>
-                        <th><label>Tarea:</label></th>
-                        <td>@Html.TextBoxFor(model => model.Tarea, new { @class = "textbox" })</td>
-                    </tr>
-                    <tr>
-                        <th><label>Acción:</label></th>
-                        <td>@Html.TextBoxFor(model => model.Accion, new { @class = "textbox" })</td>
-                    </tr>
-                    <tr>
-                        <th><label>Resultado:</label></th>
-                        <td>@Html.TextBoxFor(model => model.Resultado, new { @class = "textbox" })</td>
-                    </tr>
-                </table>
-
-
-                <p> <strong>Comentarios / Observaciones Generales:</strong>.</p>
-
-
-                @Html.TextAreaFor(model => model.Comentario, new { @class = "textarea" })
-
-                <p> <strong>Evalúa la respuesta del candidato de acuerdo con la escala de calificación:</strong>.</p>
-
-                @Html.TextBoxFor(model => model.Puntaje, new { type = "number", min = "1", max = "5" })
-
-
-                <input type="submit" value="Enviar" />
-            }
-
-        </div>
-        <div>
-            <input type="checkbox" name="competencias" value="orientacionResultados" id="orientacionResultados" />
-            <label for="orientacionResultados"><mark style="background-color: orange; color: black;">Orientación a Resultados</mark></label>
-        </div>
-        <div id="orientacionResultadosContent" style="display: none;">
-            <h2>Orientación a Resultados</h2>
-            <p>El candidato:</p>
-            <ul>
-                <li>Ejecuta con eficacia y conforme a los planes; con enfoque a resultados, tomando responsabilidad por los resultados.</li>
-                <li>Alcanza consistentemente los resultados, desarrolla alternativas para prevenir obstáculos y poder sobrepasarlos para lograr los resultados.</li>
-                <li>
-                    Reconoce y capitaliza las oportunidades. - Asume la responsabilidad de sus acciones, decisiones, comportamientos y desempeño hacia el logro de sus resultados.
-                </li>
-                <li>Asume la responsabilidad de sus acciones, decisiones, comportamientos y desempeño hacia el logro de sus resultados.</li>
-            </ul>
-
-            -  -
-            <p> <strong>Selecciona 1 o 2 preguntas sugeridas para evaluar esta competencia</strong>.</p>
-
-            <ol>
-                <li>
-                    Cuéntame de alguna situación en la que no pudiste cumplir con el tiempo establecido de entrega.
-                    <ol type="a">
-                        <li>¿Qué pasó?</li>
-                        <li>¿Con qué obstáculos te enfrentaste?</li>
-                        <li>¿Cómo lo resolviste?</li>
-                        <li>¿Cuál fue el resultado?</li>
-                    </ol>
-                </li>
-                <li>
-                    Descríbeme el mayor problema que hayas experimentado en tu rol actual.
-                    <ol type="a">
-                        <li>¿Qué sucedió?</li>
-                        <li>¿Qué te llevó a hacerlo de esa manera?</li>
-                        <li>¿Qué aprendiste?</li>
-                    </ol>
-                </li>
-                <li>
-                    Cuéntame de alguna situación en la que tuviste que abordar un problema y no contabas con toda la información necesaria.
-                    <ol type="a">
-                        <li>¿Qué se esperaba de ti?</li>
-                        <li>¿Qué acciones llevaste a cabo?</li>
-                        <li>¿Cuál fue el resultado de acuerdo con tus acciones?</li>
-                    </ol>
-                </li>
-                <li>
-                    Háblame de alguna ocasión en la que hayas tenido que cambiar tu estrategia para lograr solucionar un problema.
-                    <ol type="a">
-                        <li>¿Qué pasó?</li>
-                        <li>¿Qué esperaban de ti?</li>
-                        <li>¿Qué hiciste?</li>
-                        <li>¿Cuál fue el resultado?</li>
-                    </ol>
-                </li>
-            </ol>
-
-            <p> <strong>Documenta brevemente las respuestas del candidato, de acuerdo con el MODELO STAR</strong>.</p>
-
-            @using (Html.BeginForm("GuardarEvaluacion", "Usuarios", FormMethod.Post, new { id = "formulario5" }))
-            {
-                @Html.Hidden("UsuarioId", (object)ViewBag.UsuarioId)
-                @Html.Hidden("Nombre_C", "Orientación a Resultados")
-
-                <table>
-                    <tr>
-                        <th><label>Situacion:</label></th>
-                        <td>@Html.TextBoxFor(model => model.Situacion, new { @class = "textbox" })</td>
-                    </tr>
-                    <tr>
-                        <th><label>Tarea:</label></th>
-                        <td>@Html.TextBoxFor(model => model.Tarea, new { @class = "textbox" })</td>
-                    </tr>
-                    <tr>
-                        <th><label>Acción:</label></th>
-                        <td>@Html.TextBoxFor(model => model.Accion, new { @class = "textbox" })</td>
-                    </tr>
-                    <tr>
-                        <th><label>Resultado:</label></th>
-                        <td>@Html.TextBoxFor(model => model.Resultado, new { @class = "textbox" })</td>
-                    </tr>
-                </table>
-
-
-                <p> <strong>Comentarios / Observaciones Generales:</strong>.</p>
-
-
-                @Html.TextAreaFor(model => model.Comentario, new { @class = "textarea" })
-
-                <p> <strong>Evalúa la respuesta del candidato de acuerdo con la escala de calificación:</strong>.</p>
-
-                @Html.TextBoxFor(model => model.Puntaje, new { type = "number", min = "1", max = "5" })
-
-
-                <input type="submit" value="Enviar" />
-            }
-
-
-        </div>
-        <div>
-            <input type="checkbox" name="competencias" value="orientacionValores" id="orientacionValores" />
-            <label for="orientacionValores"><mark style="background-color:purple; color: white;">Orientación a Valores</mark></label>
-        </div>
-        <div id="orientacionValoresContent" style="display: none;">
-            <h2>Orientación a Valores</h2>
-            <p>El candidato:</p>
-            <ul>
-                <li>Sostiene y modela los valores Chubb y siempre hace lo correcto para la Compañía, los colegas y clientes.</li>
-                <li>Es una persona directa, veraz y digna de confianza. - Actúa dentro del marco del bien común, promueve una cultura organizacional de respeto a normas y de trabajo colaborativo.</li>
-                <li>Actúa dentro del marco del bien común, promueve una cultura organizacional de respeto a normas y de trabajo colaborativo.</li>
-                <li>Se comporta éticamente y mantiene un alto nivel de integridad profesional.</li>
-                <li>Fomenta la colaboración “de alto nivel” con su equipo y con la compañía; actúa y piensa constantemente como "One Chubb”</li>
-            </ul>
-
-
-
-            <p> <strong>Selecciona 1 o 2 preguntas sugeridas para evaluar esta competencia</strong>.</p>
-
-            <ol>
-                <li>
-                    Cuéntame de alguna situación en la que no pudiste cumplir con el tiempo establecido de entrega.
-                    <ol type="a">
-                        <li>¿Qué pasó?</li>
-                        <li>¿Con qué obstáculos te enfrentaste?</li>
-                        <li>¿Cómo lo resolviste?</li>
-                        <li>¿Cuál fue el resultado?</li>
-                    </ol>
-                </li>
-                <li>
-                    Descríbeme el mayor problema que hayas experimentado en tu rol actual.
-                    <ol type="a">
-                        <li>¿Qué sucedió?</li>
-                        <li>¿Qué te llevó a hacerlo de esa manera?</li>
-                        <li>¿Qué aprendiste?</li>
-                    </ol>
-                </li>
-                <li>
-                    Cuéntame de alguna situación en la que tuviste que abordar un problema y no contabas con toda la información necesaria.
-                    <ol type="a">
-                        <li>¿Qué se esperaba de ti?</li>
-                        <li>¿Qué acciones llevaste a cabo?</li>
-                        <li>¿Cuál fue el resultado de acuerdo con tus acciones?</li>
-                    </ol>
-                </li>
-                <li>
-                    Háblame de alguna ocasión en la que hayas tenido que cambiar tu estrategia para lograr solucionar un problema.
-                    <ol type="a">
-                        <li>¿Qué pasó?</li>
-                        <li>¿Qué esperaban de ti?</li>
-                        <li>¿Qué hiciste?</li>
-                        <li>¿Cuál fue el resultado?</li>
-                    </ol>
-                </li>
-            </ol>
-
-            <p> <strong>Documenta brevemente las respuestas del candidato, de acuerdo con el MODELO STAR</strong>.</p>
-
-            @using (Html.BeginForm("GuardarEvaluacion", "Usuarios", FormMethod.Post, new { id = "formulario6" }))
-            {
-                @Html.Hidden("UsuarioId", (object)ViewBag.UsuarioId)
-                @Html.Hidden("Nombre_C", "Orientación a valores")
-
-                <table>
-                    <tr>
-                        <th><label>Situacion:</label></th>
-                        <td>@Html.TextBoxFor(model => model.Situacion, new { @class = "textbox" })</td>
-                    </tr>
-                    <tr>
-                        <th><label>Tarea:</label></th>
-                        <td>@Html.TextBoxFor(model => model.Tarea, new { @class = "textbox" })</td>
-                    </tr>
-                    <tr>
-                        <th><label>Acción:</label></th>
-                        <td>@Html.TextBoxFor(model => model.Accion, new { @class = "textbox" })</td>
-                    </tr>
-                    <tr>
-                        <th><label>Resultado:</label></th>
-                        <td>@Html.TextBoxFor(model => model.Resultado, new { @class = "textbox" })</td>
-                    </tr>
-                </table>
-
-
-                <p> <strong>Comentarios / Observaciones Generales:</strong>.</p>
-
-
-                @Html.TextAreaFor(model => model.Comentario, new { @class = "textarea" })
-
-                <p> <strong>Evalúa la respuesta del candidato de acuerdo con la escala de calificación:</strong>.</p>
-
-                @Html.TextBoxFor(model => model.Puntaje, new { type = "number", min = "1", max = "5" })
-
-
-                <input type="submit" value="Enviar" />
-            }
-
-
-
-        </div>
     </div>
-
-
-    <div id="lideresCasillas" class="competencia" style="display: none;">
-        <div>
-            <input type="checkbox" name="competencias" value="visionNegocio" id="visionNegocio" />
-            <label for="visionNegocio">Visión de Negocio</label>
-        </div>
-        <div id="visionNegocioContent" style="display: none;">
-            <h2>Contenido de Visión de Negocio</h2>
-            <p>Aquí puedes agregar el contenido adicional para la competencia de Visión de Negocio.</p>
-        </div>
-        <div>
-            <input type="checkbox" name="competencias" value="influencia" id="influencia" />
-            <label for="influencia">Influencia</label>
-        </div>
-        <div id="influenciaContent" style="display: none;">
-            <h2>Contenido de Influencia</h2>
-            <p>Aquí puedes agregar el contenido adicional para la competencia de Influencia.</p>
-        </div>
-        <div>
-            <input type="checkbox" name="competencias" value="liderazgoEquipoInclusivo" id="liderazgoEquipoInclusivo" />
-            <label for="liderazgoEquipoInclusivo">Liderazgo Equipo Inclusivo</label>
-        </div>
-        <div id="liderazgoEquipoInclusivoContent" style="display: none;">
-            <h2>Contenido de Liderazgo Equipo Inclusivo</h2>
-            <p>Aquí puedes agregar el contenido adicional para la competencia de Liderazgo Equipo Inclusivo.</p>
-        </div>
-        <div>
-            <input type="checkbox" name="competencias" value="ejecucion" id="ejecucion" />
-            <label for="ejecucion">Ejecución</label>
-        </div>
-        <div id="ejecucionContent" style="display: none;">
-            <h2>Contenido de Ejecución</h2>
-            <p>Aquí puedes agregar el contenido adicional para la competencia de Ejecución.</p>
-        </div>
-        <div>
-            <input type="checkbox" name="competencias" value="ownership" id="ownership" />
-            <label for="ownership">Ownership</label>
-        </div>
-        <div id="ownershipContent" style="display: none;">
-            <h2>Contenido de Ownership</h2>
-            <p>Aquí puedes agregar el contenido adicional para la competencia de Ownership.</p>
-        </div>
-        <div>
-            <input type="checkbox" name="competencias" value="integridadCoraje" id="integridadCoraje" />
-            <label for="integridadCoraje">Integridad y Coraje</label>
-        </div>
-        <div id="integridadCorajeContent" style="display: none;">
-            <h2>Contenido de Integridad y Coraje</h2>
-            <p>Aquí puedes agregar el contenido adicional para la competencia de Integridad y Coraje.</p>
-        </div>
-        <div>
-            <input type="checkbox" name="competencias" value="enfoqueEstrategico" id="enfoqueEstrategico" />
-            <label for="enfoqueEstrategico">Enfoque Estratégico</label>
-        </div>
-        <div id="enfoqueEstrategicoContent" style="display: none;">
-            <h2>Contenido de Enfoque Estratégico</h2>
-            <p>Aquí puedes agregar el contenido adicional para la competencia de Enfoque Estratégico.</p>
-        </div>
-    </div>
-
-   <div id="todosCasillas" class="competencia" style="display: none;">
-        <div>
-            <input type="checkbox" name="competencias" value="compatibilidad" id="compatibilidad" onclick="iniciarCasillas(this)" />
-            <label for="compatibilidad">Compatibilidad</label>
-        </div>
-        <div id="compatibilidadContent" style="display: none;">
-            <h2>Contenido de Compatibilidad</h2>
-            <p>Aquí puedes agregar el contenido adicional para la competencia de Compatibilidad.</p>
-        </div>
-        <div>
-            <input type="checkbox" name="competencias" value="orientacionCliente" id="orientacionCliente" onclick="iniciarCasillas(this)" />
-            <label for="orientacionCliente">Orientación al Cliente</label>
-        </div>
-        <div id="orientacionClienteContent" style="display: none;">
-            <h2>Contenido de Orientación al Cliente</h2>
-            <p>Aquí puedes agregar el contenido adicional para la competencia de Orientación al Cliente.</p>
-        </div>
-        <div>
-            <input type="checkbox" name="competencias" value="trabajoBajoPresion" id="trabajoBajoPresion" onclick="iniciarCasillas(this)" />
-            <label for="trabajoBajoPresion">Trabajo bajo Presión</label>
-        </div>
-        <div id="trabajoBajoPresionContent" style="display: none;">
-            <h2>Contenido de Trabajo bajo Presión</h2>
-            <p>Aquí puedes agregar el contenido adicional para la competencia de Trabajo bajo Presión.</p>
-        </div>
-   </div>
-
-
-
-    <button onclick="obtenerResultados()">Iniciar Evaluación</button>
-    <button onclick="verTodasLasCompetencias()">Ver todas las competencias</button>
-
 </div>
 
 <script>
@@ -865,7 +849,59 @@
         casillasContainer.style.display = 'block';
     }
 
+    //// Manejador de clic para el botón "Generar PDF"
+    //$('#btnPrintToPdf').click(function () {
+    //    // Seleccionar el elemento que contiene el contenido que se desea incluir en el PDF
+    //    var contenido = document.getElementById('contenidoParaPdf');
+
+    //    // Configuración del PDF
+    //    var pdfConfig = {
+    //        margin: 10,
+    //        filename: 'mi_documento.pdf',
+    //        image: { type: 'jpeg', quality: 0.98 },
+    //        html2canvas: { scale: 2 },
+    //        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+    //    };
+
+    //    // Generar el PDF
+    //    html2pdf().from(contenido).set(pdfConfig).outputPdf().then(function (pdf) {
+    //        // Crear una URL del PDF generado
+    //        var pdfUrl = URL.createObjectURL(pdf);
+
+    //        // Redirigir a la URL del PDF generado para descargarlo
+    //        window.location.href = pdfUrl;
+    //    });
+    //});
+
+    function generarPDF() {
+        const $elementoParaConvertir = document.getElementById('contenidoParaPdf');
+
+        html2pdf()
+            .set({
+                margin: 1,
+                filename: `documento.pdf`,
+                image: {
+                    type: 'jpeg',
+                    quality: 0.98
+                },
+                html2canvas: {
+                    scale: 3, // A mayor escala, mejores gráficos, pero más peso
+                    letterRendering: true,
+                },
+                jsPDF: {
+                    unit: "in",
+                    format: "a3",
+                    orientation: 'portrait' // landscape o portrait
+                }
+            })
+            .from($elementoParaConvertir)
+            .save()
+            .catch(err => console.log(err));
+    }
 </script>
+
+</script>
+
 
 
 <a asp-action="Index">Volver a Usuarios</a>
