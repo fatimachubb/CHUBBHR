@@ -6,16 +6,60 @@
 }
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <style>
-        /* Estilos para tu contenido */
-        #contenidoParaPdf {
-            /* Estilos adicionales aquí */
-        }
-    </style>
+    <script>
+        $(document).ready(function () {
+            $("form").submit(function (e) {
+                e.preventDefault(); // Evita que se envíe el formulario de forma tradicional
+
+                var form = $(this);
+
+                $.ajax({
+                    url: form.attr("action"),
+                    method: form.attr("method"),
+                    data: form.serialize(),
+                    success: function (response) {
+                        if (response === "OK") {
+                            // Mostrar mensaje de éxito o realizar alguna acción adicional
+                            alert("Formulario enviado correctamente");
+                        } else {
+                            // Mostrar mensaje de error si la respuesta no es "OK"
+                            alert("Error al enviar el formulario");
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        // Manejo de errores, si es necesario
+                        alert("Error al enviar el formulario");
+                    }
+                });
+            });
+
+            // Manejador de clic para el botón "Generar PDF"
+            $('#btnPrintToPdf').click(function () {
+                // Seleccionar el elemento que contiene el contenido que se desea incluir en el PDF
+                var contenido = document.getElementById('contenidoParaPdf');
+
+                // Configuración del PDF
+                var pdfConfig = {
+                    margin: 10,
+                    filename: 'mi_documento.pdf',
+                    image: { type: 'jpeg', quality: 0.98 },
+                    html2canvas: { scale: 2 },
+                    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+                };
+
+                // Generar el PDF
+                html2pdf().from(contenido).set(pdfConfig).outputPdf().then(function (pdf) {
+                    // Crear una URL del PDF generado
+                    var pdfUrl = URL.createObjectURL(pdf);
+
+                    // Redirigir a la URL del PDF generado para descargarlo
+                    window.location.href = pdfUrl;
+                });
+            });
+        });
+    </script>
 </head>
 
 
@@ -780,12 +824,19 @@
 
 
 
-        <button onclick="obtenerResultados()">Iniciar Evaluación Digital </button>
-        <button onclick="generarPDF()">Generar PDF</button>
+        <button onclick="obtenerResultados()">Desplegar competencias </button>
+        <button onclick="imprimir()">Imprimir para evaluación presencial</button>
         <button onclick="verTodasLasCompetencias()">Ver todas las competencias</button>
 
     </div>
 </div>
+
+
+
+
+
+
+
 
 <script>
     function mostrarCasillas(opcion) {
@@ -849,58 +900,83 @@
         casillasContainer.style.display = 'block';
     }
 
-    //// Manejador de clic para el botón "Generar PDF"
-    //$('#btnPrintToPdf').click(function () {
-    //    // Seleccionar el elemento que contiene el contenido que se desea incluir en el PDF
-    //    var contenido = document.getElementById('contenidoParaPdf');
 
-    //    // Configuración del PDF
-    //    var pdfConfig = {
-    //        margin: 10,
-    //        filename: 'mi_documento.pdf',
-    //        image: { type: 'jpeg', quality: 0.98 },
-    //        html2canvas: { scale: 2 },
-    //        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-    //    };
+    function imprimir() {
+        // Obtener el contenido del elemento con id 'contenidoParaPdf'
+        var contenido = document.getElementById('contenidoParaPdf').innerHTML;
 
-    //    // Generar el PDF
-    //    html2pdf().from(contenido).set(pdfConfig).outputPdf().then(function (pdf) {
-    //        // Crear una URL del PDF generado
-    //        var pdfUrl = URL.createObjectURL(pdf);
+        // Obtener el valor de @ViewBag.UsuarioId para el encabezado superior izquierdo
+        var usuarioId = '@ViewBag.UsuarioId';
 
-    //        // Redirigir a la URL del PDF generado para descargarlo
-    //        window.location.href = pdfUrl;
-    //    });
-    //});
+        // Agregar encabezado superior izquierdo y derecho al contenido
+        contenido = `<div style="text-align: left;">${usuarioId}</div><div style="text-align: right;">CHUBB</div>${contenido}`;
+
+        // Crear un elemento temporal para ocultar los botones en el contenido antes de imprimir
+        var tempElement = document.createElement('div');
+        tempElement.innerHTML = contenido;
+
+        // Ocultar los botones en el contenido antes de imprimir
+        var buttons = tempElement.querySelectorAll('button');
+        buttons.forEach(button => button.style.display = 'none');
+
+        // Obtener el contenido actual del cuerpo del documento
+        var contenidoOriginal = document.body.innerHTML;
+
+        // Reemplazar el contenido actual del cuerpo del documento con el contenido modificado (sin botones y con encabezados)
+        document.body.innerHTML = tempElement.innerHTML;
+
+        // Imprimir el contenido
+        window.print();
+
+        // Restaurar el contenido original del cuerpo del documento después de la impresión
+        document.body.innerHTML = contenidoOriginal;
+    }
+
 
     function generarPDF() {
-        const $elementoParaConvertir = document.getElementById('contenidoParaPdf');
+        const contenido = document.getElementById('contenidoParaPdf'); // Selecciona el contenedor del contenido que deseas incluir en el PDF
 
-        html2pdf()
-            .set({
-                margin: 1,
-                filename: `documento.pdf`,
-                image: {
-                    type: 'jpeg',
-                    quality: 0.98
-                },
-                html2canvas: {
-                    scale: 3, // A mayor escala, mejores gráficos, pero más peso
-                    letterRendering: true,
-                },
-                jsPDF: {
-                    unit: "in",
-                    format: "a3",
-                    orientation: 'portrait' // landscape o portrait
-                }
-            })
-            .from($elementoParaConvertir)
-            .save()
-            .catch(err => console.log(err));
+        // Configuración del PDF
+        const pdfConfig = {
+            margin: 10,
+            filename: 'mi_documento.pdf',
+            image: { type: 'jpeg', quality: 0.98 },
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+
+        };
+
+        // Generar el PDF
+        html2pdf().from(contenido).set(pdfConfig).save();
     }
-</script>
+
+        //// Manejador de clic para el botón "Generar PDF"
+        //$('#btnPrintToPdf').click(function () {
+        //    // Seleccionar el elemento que contiene el contenido que se desea incluir en el PDF
+        //    var contenido = document.getElementById('contenidoParaPdf');
+
+        //    // Configuración del PDF
+        //    var pdfConfig = {
+        //        margin: 10,
+        //        filename: 'mi_documento.pdf',
+        //        image: { type: 'jpeg', quality: 0.98 },
+        //        html2canvas: { scale: 2 },
+        //        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        //    };
+
+        //    // Generar el PDF
+        //    html2pdf().from(contenido).set(pdfConfig).outputPdf().then(function (pdf) {
+        //        // Crear una URL del PDF generado
+        //        var pdfUrl = URL.createObjectURL(pdf);
+
+        //        // Redirigir a la URL del PDF generado para descargarlo
+        //        window.location.href = pdfUrl;
+        //    });
+        //});
+
 
 </script>
+
+
 
 
 
