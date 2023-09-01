@@ -19,11 +19,21 @@ namespace CHUBBHR.Controllers
         }
 
         // GET: Posicions
+      
+
         public async Task<IActionResult> Index()
         {
-              return _context.Posicions != null ? 
-                          View(await _context.Posicions.ToListAsync()) :
-                          Problem("Entity set 'RegistroContext.Posicions'  is null.");
+            if (_context.Posicions != null)
+            {
+                var posicions = await _context.Posicions.ToListAsync();
+                return View(posicions);
+            } else
+            {
+                // Manejar el caso cuando _context.Posicions es null
+                // Por ejemplo, puedes redirigir a una vista de error o hacer algo más.
+                return View("Error");
+            }
+           
         }
 
         // GET: Posicions/Details/5

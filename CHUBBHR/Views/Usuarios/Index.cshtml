@@ -3,13 +3,28 @@
 @{
     ViewData["Title"] = "Index";
 }
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - CHUBBHR</title>
 
+    <!-- Vincular archivo CSS de Bootstrap -->
+    <link rel="stylesheet" href="~/CHUBBHR/bootstrap-5.3.1-dist/css" />
+
+    <!-- Vincular archivo CSS de Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    
+
+    <!-- Vincular archivo de estilos personalizados -->
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/CHUBBHR.styles.css" asp-append-version="true" />
+</head>
 
 
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-purple" >Registra un entrevistado</a>
 </p>
 <table class="table">
     <thead>
@@ -39,11 +54,13 @@
                 @Html.DisplayFor(modelItem => item.PosicionFkNavigation.Id)
             </td>
             <td>
-                <a asp-action="Edit" class="btn btn-warning" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" class="btn btn-primary" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" class="btn btn-danger" asp-route-id="@item.Id">Delete</a>|
-                <a asp-action="Evaluar" class="btn btn-secondary" asp-route-id="@item.Id">Evaluar</a>
-                <a asp-action="Importar" class="btn btn-secondary" asp-route-id="@item.Id">Archivos PDF</a>
+                <a asp-action="Edit" class="btn btn-icon red" asp-route-id="@item.Id"><i class="fas fa-pencil-alt"></i></a>
+                <a asp-action="Details" class="btn btn-icon blue" asp-route-id="@item.Id"><i class="fas fa-info-circle"></i></a>
+                <a asp-action="Delete" class="btn btn-icon purple" asp-route-id="@item.Id"><i class="fas fa-trash-alt"></i></a>
+                <a asp-action="Evaluar" class="btn btn-icon yellow" asp-route-id="@item.Id">Evaluar</a>
+                <a asp-action="Importar" class="btn btn-icon yellow" asp-route-id="@item.Id"><i class="fas fa-file-import"></i></a>
+
+                    
 
 
             </td>

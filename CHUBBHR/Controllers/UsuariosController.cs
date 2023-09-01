@@ -20,7 +20,7 @@ namespace CHUBBHR.Controllers
 
 
         private readonly RegistroContext _context;
-        private string connectionString = "Server=localhost\\SQLEXPRESS02;Database=REGISTRO; integrated security=true; Encrypt=False;";
+        private string connectionString = "Server=LAPTOP-4IKMKHGF\\SQLEXPRESS;Database=REGISTRO; integrated security=true; Encrypt=False;";
 
         public UsuariosController(RegistroContext context)
         {
@@ -30,11 +30,11 @@ namespace CHUBBHR.Controllers
 
 
         // GET: Usuarios
-        public async Task<IActionResult> Index()
+        public  IActionResult Index()
         {
 
             var registroContext = _context.Usuarios.Include(u => u.PosicionFkNavigation);
-            return View(await registroContext.ToListAsync());
+            return View( registroContext.ToList());
         }
 
         // GET: Usuarios/Details/5
@@ -345,7 +345,7 @@ namespace CHUBBHR.Controllers
 
             // Saving the Excel file
             // Cambiar la ruta por tu propia computadora
-            string filePath = Path.Combine("C:\\Users\\CHFERMI\\Desktop\\Proyectos", fileName + ".xlsx");
+            string filePath = Path.Combine("C:\\Users\\GusTavo\\Documents\\HRFATIMA", fileName + ".xlsx");
 
             workbook.Save(filePath);
 

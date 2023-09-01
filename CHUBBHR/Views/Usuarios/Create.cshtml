@@ -32,15 +32,17 @@
                 <select asp-for="PosicionFk" class ="form-control" asp-items="ViewBag.PosicionFk"></select>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn" style="background-color: #00A0D1; color: white ; margin-bottom: 10px;" />
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
+
+<p>
+    <a asp-action="Index" class="btn btn-purple">Regresar</a>
+</p>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
