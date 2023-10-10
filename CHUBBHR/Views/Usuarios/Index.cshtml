@@ -13,7 +13,7 @@
 
     <!-- Vincular archivo CSS de Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    
+
 
     <!-- Vincular archivo de estilos personalizados -->
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
@@ -24,7 +24,7 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create" class="btn btn-purple" >Registra un entrevistado</a>
+    <a asp-action="Create" class="btn btn-purple">Registra un entrevistado</a>
 </p>
 <table class="table">
     <thead>
@@ -42,29 +42,30 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Fecha)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PosicionFkNavigation.Id)
-            </td>
-            <td>
-                <a asp-action="Edit" class="btn btn-icon red" asp-route-id="@item.Id"><i class="fas fa-pencil-alt"></i></a>
-                <a asp-action="Details" class="btn btn-icon blue" asp-route-id="@item.Id"><i class="fas fa-info-circle"></i></a>
-                <a asp-action="Delete" class="btn btn-icon purple" asp-route-id="@item.Id"><i class="fas fa-trash-alt"></i></a>
-                <a asp-action="Evaluar" class="btn btn-icon yellow" asp-route-id="@item.Id">Evaluar</a>
-                <a asp-action="Importar" class="btn btn-icon yellow" asp-route-id="@item.Id"><i class="fas fa-file-import"></i></a>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Fecha)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PosicionFkNavigation.Id)
+                </td>
+                <td>
+                    <a asp-action="Edit" class="btn btn-icon red" asp-route-id="@item.Id"><i class="fas fa-pencil-alt"></i></a>
+                    <a asp-action="Details" class="btn btn-icon blue" asp-route-id="@item.Id"><i class="fas fa-info-circle"></i></a>
+                    <a asp-action="Delete" class="btn btn-icon purple" asp-route-id="@item.Id"><i class="fas fa-trash-alt"></i></a>
+                    <a asp-action="Evaluar" class="btn btn-icon yellow" asp-route-id="@item.Id">Evaluar</a>
+                    <a asp-action="Importar" class="btn btn-icon yellow" asp-route-id="@item.Id"><i class="fas fa-file-import"></i></a>
 
-                    
 
 
-            </td>
-        </tr>
-}
+
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

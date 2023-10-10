@@ -1,8 +1,10 @@
 ﻿@model CHUBBHR.Models.Competencias
 
 
+
+
 @{
-    ViewData["Title"] = "Evaluar";
+    ViewData["Title"] = Localizer["Eval"];
 }
 
 <head>
@@ -111,11 +113,11 @@
 
 
 <div id="contenidoParaPdf">
-    <h1>Evaluación de Competencias</h1>
+    @Localizer["EvaluationOfCompetencies"]
     <div>
-        <button class="btn" onclick="mostrarCasillas('colaborador')">Colaborador Individual</button>
-        <button class="btn" onclick="mostrarCasillas('lideres')">Líderes</button>
-        <button class="btn" onclick="mostrarCasillas('todos')">Todos los Niveles</button>
+        <button class="btn" onclick="mostrarCasillas('colaborador')">@Localizer["Colabin"]</button>
+        <button class="btn" onclick="mostrarCasillas('lideres')">@Localizer["Leaders"]</button>
+        <button class="btn" onclick="mostrarCasillas('todos')">@Localizer["All"]</button>
     </div>
 
     <div id="casillasContainer" class="competencias-container" style="display: none;">
@@ -123,98 +125,99 @@
             <div>
                 <input type="checkbox" name="competencias" value="resolucionProblemas" id="resolucionProblemas" />
                 <label for="resolucionProblemas">
-                    <button class="button-style">Resolución de Problemas</button>
-                 </label>
+                    <button class="button-style">@Localizer["Rproblemas"]</button>
+                </label>
 
             </div>
             <div id="resolucionProblemasContent" style="display: none;">
-                <h2>Resolución de Problemas</h2>
-                <p>El candidato:</p>
+                <h2>@Localizer["Rproblemas"]</h2>
+                <p>@Localizer["TCandidate"]</p>
                 <ul>
-                    <li>Tiene un enfoque organizado y lógico para reflexionar sobre los problemas y asuntos complejos.</li>
-                    <li>Simplifica la complejidad desglosando los problemas en partes manejables.</li>
-                    <li>Busca más allá de lo obvio para lograr resultados.</li>
-                    <li>Desarrolla introspección de los problemas, asuntos y situaciones de forma efectiva y ágil.</li>
+                    <li>@Localizer["Rproblemas1"]</li>
+                    <li>@Localizer["Rproblemas2"]</li>
+                    <li>@Localizer["Rproblemas3"]</li>
+                    <li>@Localizer["Rproblemas4"]</li>
                 </ul>
 
-                <p> <strong>Selecciona 1 o 2 preguntas sugeridas para evaluar esta competencia</strong>.</p>
+                <p> <strong>@Localizer["select"]</strong>.</p>
 
                 <ol>
                     <li>
-                        Cuéntame de alguna situación en la que no pudiste cumplir con el tiempo establecido de entrega.
+                        @Localizer["tell"]
                         <ol type="a">
-                            <li>¿Qué pasó?</li>
-                            <li>¿Con qué obstáculos te enfrentaste?</li>
-                            <li>¿Cómo lo resolviste?</li>
-                            <li>¿Cuál fue el resultado?</li>
+                            <li>@Localizer["t1"]</li>
+                            <li>@Localizer["t2"]</li>
+                            <li>@Localizer["t3"]</li>
+                            <li>@Localizer["t4"]</li>
                         </ol>
                     </li>
                     <li>
-                        Descríbeme el mayor problema que hayas experimentado en tu rol actual.
+                        @Localizer["des"]
                         <ol type="a">
-                            <li>¿Qué sucedió?</li>
-                            <li>¿Qué te llevó a hacerlo de esa manera?</li>
-                            <li>¿Qué aprendiste?</li>
+                            <li>@Localizer["d1"]</li>
+                            <li>@Localizer["d2"]</li>
+                            <li>@Localizer["d3"]</li>
+                        
                         </ol>
                     </li>
                     <li>
-                        Cuéntame de alguna situación en la que tuviste que abordar un problema y no contabas con toda la información necesaria.
+                        @Localizer["sit"]
                         <ol type="a">
-                            <li>¿Qué se esperaba de ti?</li>
-                            <li>¿Qué acciones llevaste a cabo?</li>
-                            <li>¿Cuál fue el resultado de acuerdo con tus acciones?</li>
+                            <li>@Localizer["sit1"]</li>
+                            <li>@Localizer["sit2"]</li>
+                            <li>@Localizer["sit3"]</li>
                         </ol>
                     </li>
                     <li>
-                        Háblame de alguna ocasión en la que hayas tenido que cambiar tu estrategia para lograr solucionar un problema.
+                        @Localizer["oc"]
                         <ol type="a">
-                            <li>¿Qué pasó?</li>
-                            <li>¿Qué esperaban de ti?</li>
-                            <li>¿Qué hiciste?</li>
-                            <li>¿Cuál fue el resultado?</li>
+                            <li>@Localizer["t1"]</li>
+                            <li>@Localizer["sit1"]</li>
+                            <li>@Localizer["oc1"]</li>
+                            <li>@Localizer["t4"]</li>
                         </ol>
                     </li>
                 </ol>
 
-                <p> <strong>Documenta brevemente las respuestas del candidato, de acuerdo con el MODELO STAR</strong>.</p>
+                <p> <strong>@Localizer["STAR"]</strong>.</p>
 
                 @using (Html.BeginForm("GuardarEvaluacion", "Usuarios", FormMethod.Post, new { id = "formulario1" }))
                 {
                     @Html.Hidden("UsuarioId", (object)ViewBag.UsuarioId)
 
-                    @Html.Hidden("Nombre_C", "Resolucion de Problemas")
+                    @Html.Hidden("Nombre_C", @Localizer["Rproblemas"])
 
                     <table>
                         <tr>
-                            <th><label>Situacion:</label></th>
+                            <th><label>@Localizer["st"]</label></th>
                             <td>@Html.TextBoxFor(model => model.Situacion, new { @class = "textbox" })</td>
                         </tr>
                         <tr>
-                            <th><label>Tarea:</label></th>
+                            <th><label>@Localizer["ta"]</label></th>
                             <td>@Html.TextBoxFor(model => model.Tarea, new { @class = "textbox" })</td>
                         </tr>
                         <tr>
-                            <th><label>Acción:</label></th>
+                            <th><label>@Localizer["ac"]</label></th>
                             <td>@Html.TextBoxFor(model => model.Accion, new { @class = "textbox" })</td>
                         </tr>
                         <tr>
-                            <th><label>Resultado:</label></th>
+                            <th><label>@Localizer["re"]</label></th>
                             <td>@Html.TextBoxFor(model => model.Resultado, new { @class = "textbox" })</td>
                         </tr>
                     </table>
 
 
-                    <p> <strong>Comentarios / Observaciones Generales:</strong>.</p>
+                    <p> <strong>@Localizer["comen"]</strong>.</p>
 
                     @Html.TextAreaFor(model => model.Comentario, new { @class = "textarea" })
 
-                    <p> <strong>Evalúa la respuesta del candidato de acuerdo con la escala de calificación:</strong>.</p>
+                    <p> <strong>@Localizer["evaluate"]</strong>.</p>
 
-                
+
                     @Html.TextBoxFor(model => model.Puntaje, new { type = "number", min = "1", max = "5" })
 
 
-                    <input type="submit" value="Enviar" />
+                    <input type="submit" value=@Localizer["submit"] />
                 }
 
 
@@ -224,122 +227,124 @@
             <div>
                 <input type="checkbox" name="competencias" value="aprendizajeContinuo" id="aprendizajeContinuo" />
                 <label for="aprendizajeContinuo">
-                     <button class="button-purple-style">Aprendizaje Continuo</button>
+                    <button class="button-purple-style">@Localizer["Acontinuo"]</button>
                 </label>
 
             </div>
             <div id="aprendizajeContinuoContent" style="display: none;">
-                <h2>Aprendizaje Continuo</h2>
-                <p>El candidato:</p>
+                <h2>@Localizer["Acontinuo"]</h2>
+                <p>@Localizer["TCandidate"]</p>
                 <ul>
-                    <li>Demuestra el interés y capacidad de ampliar su experiencia profesional y desarrollar nuevas habilidades.</li>
-                    <li>Cuenta con autoaprendizaje y automotivación para adquirir nuevos conocimientos y profundizar la experiencia técnica de forma autónoma y desarrollar sus capacidades por su cuenta.</li>
-                    <li>Asume asignaciones de trabajo desafiantes que conducen a crecimiento profesional.</li>
+                    <li>@Localizer["dem"]</li>
+                    <li>@Localizer["apren"]</li>
+                    <li>@Localizer["asum"]</li>
 
                 </ul>
 
 
 
 
-                <p> <strong>Selecciona 1 o 2 preguntas sugeridas para evaluar esta competencia</strong>.</p>
+                <p> <strong>@Localizer["select"]</strong>.</p>
 
                 <ol>
                     <li>
-                        Cuéntame de alguna situación en la que no pudiste cumplir con el tiempo establecido de entrega.
+                        @Localizer["tell"]
                         <ol type="a">
-                            <li>¿Qué pasó?</li>
-                            <li>¿Con qué obstáculos te enfrentaste?</li>
-                            <li>¿Cómo lo resolviste?</li>
-                            <li>¿Cuál fue el resultado?</li>
+                            <li>@Localizer["t1"]</li>
+                            <li>@Localizer["t2"]</li>
+                            <li>@Localizer["t3"]</li>
+                            <li>@Localizer["t4"]</li>
                         </ol>
                     </li>
                     <li>
-                        Descríbeme el mayor problema que hayas experimentado en tu rol actual.
+                        @Localizer["des"]
                         <ol type="a">
-                            <li>¿Qué sucedió?</li>
-                            <li>¿Qué te llevó a hacerlo de esa manera?</li>
-                            <li>¿Qué aprendiste?</li>
+                            <li>@Localizer["d1"]</li>
+                            <li>@Localizer["d2"]</li>
+                            <li>@Localizer["d3"]</li>
+                        
                         </ol>
                     </li>
                     <li>
-                        Cuéntame de alguna situación en la que tuviste que abordar un problema y no contabas con toda la información necesaria.
+                        @Localizer["sit"]
                         <ol type="a">
-                            <li>¿Qué se esperaba de ti?</li>
-                            <li>¿Qué acciones llevaste a cabo?</li>
-                            <li>¿Cuál fue el resultado de acuerdo con tus acciones?</li>
+                            <li>@Localizer["sit1"]</li>
+                            <li>@Localizer["sit2"]</li>
+                            <li>@Localizer["sit3"]</li>
                         </ol>
                     </li>
                     <li>
-                        Háblame de alguna ocasión en la que hayas tenido que cambiar tu estrategia para lograr solucionar un problema.
+                        @Localizer["oc"]
                         <ol type="a">
-                            <li>¿Qué pasó?</li>
-                            <li>¿Qué esperaban de ti?</li>
-                            <li>¿Qué hiciste?</li>
-                            <li>¿Cuál fue el resultado?</li>
+                            <li>@Localizer["t1"]</li>
+                            <li>@Localizer["sit1"]</li>
+                            <li>@Localizer["oc1"]</li>
+                            <li>@Localizer["t4"]</li>
                         </ol>
+                       
                     </li>
                 </ol>
 
-                <p> <strong>Documenta brevemente las respuestas del candidato, de acuerdo con el MODELO STAR</strong>.</p>
+                <p> <strong>@Localizer["STAR"]</strong>.</p>
 
                 @using (Html.BeginForm("GuardarEvaluacion", "Usuarios", FormMethod.Post, new { id = "formulario2" }))
                 {
                     @Html.Hidden("UsuarioId", (object)ViewBag.UsuarioId)
 
-                    @Html.Hidden("Nombre_C", "Aprendizaje Continuo")
+                    @Html.Hidden("Nombre_C", @Localizer["Acontinuo"])
 
                     <table>
                         <tr>
-                            <th><label>Situacion:</label></th>
+                            <th><label>@Localizer["st"]</label></th>
                             <td>@Html.TextBoxFor(model => model.Situacion, new { @class = "textbox" })</td>
                         </tr>
                         <tr>
-                            <th><label>Tarea:</label></th>
+                            <th><label>@Localizer["ta"]</label></th>
                             <td>@Html.TextBoxFor(model => model.Tarea, new { @class = "textbox" })</td>
                         </tr>
                         <tr>
-                            <th><label>Acción:</label></th>
+                            <th><label>@Localizer["ac"]</label></th>
                             <td>@Html.TextBoxFor(model => model.Accion, new { @class = "textbox" })</td>
                         </tr>
                         <tr>
-                            <th><label>Resultado:</label></th>
+                            <th><label>@Localizer["re"]</label></th>
                             <td>@Html.TextBoxFor(model => model.Resultado, new { @class = "textbox" })</td>
                         </tr>
                     </table>
 
 
-                    <p> <strong>Comentarios / Observaciones Generales:</strong>.</p>
-
+                    <p> <strong>@Localizer["comen"]</strong>.</p>
 
                     @Html.TextAreaFor(model => model.Comentario, new { @class = "textarea" })
 
-                    <p> <strong>Evalúa la respuesta del candidato de acuerdo con la escala de calificación:</strong>.</p>
+                    <p> <strong>@Localizer["evaluate"]</strong>.</p>
+
 
                     @Html.TextBoxFor(model => model.Puntaje, new { type = "number", min = "1", max = "5" })
 
 
-                    <input type="submit" value="Enviar" />
+                    <input type="submit" value=@Localizer["submit"] />
                 }
 
             </div>
 
             <div>
                 <input type="checkbox" name="competencias" value="iniciativa" id="iniciativa" />
-                <label for="iniciativa"><button class="button-style">Iniciativa</button></label>
+                <label for="iniciativa"><button class="button-style">@Localizer["ini"]</button></label>
             </div>
             <div id="iniciativaContent" style="display: none;">
-                <h2>Iniciativa</h2>
-                <p>El candidato:</p>
+                <h2>@Localizer["ini"]</h2>
+                <p>@Localizer["TCandidate"]</p>
                 <ul>
-                    <li>Está dispuesto a hacer más de lo que se requiere o se espera.</li>
-                    <li>Propone y toma acciones con el fin de lograr un objetivo que contribuya a la visión del equipo, sin que se le haya solicitado.</li>
-                    <li>Muestra empuje y disposición de hacer un esfuerzo adicional, en términos de agilidad y energía.</li>
-                    <li>Es auto motivado y aprovecha oportunidades para hacer la diferencia y generar valor para su área y para los demás</li>
+                    <li>@Localizer["ini1"]</li>
+                    <li>@Localizer["ini2"]</li>
+                    <li>@Localizer["ini3"]</li>
+                    <li>@Localizer["ini4"]</li>
                 </ul>
 
 
 
-                <p> <strong>Selecciona 1 o 2 preguntas sugeridas para evaluar esta competencia</strong>.</p>
+                <p> <strong>@Localizer["select"]</strong>.</p>
 
                 <ol>
                     <li>
@@ -421,10 +426,10 @@
             </div>
             <div>
                 <input type="checkbox" name="competencias" value="adaptabilidad" id="adaptabilidad" />
-                <label for="adaptabilidad"><button class="button-purple-style">Adaptabilidad</button></label>
+                <label for="adaptabilidad"><button class="button-purple-style">@Localizer["adap"]</button></label>
             </div>
             <div id="adaptabilidadContent" style="display: none;">
-                <h2>Adaptabilidad</h2>
+                <h2>@Localizer["adap"]</h2>
                 <p>El candidato:</p>
                 <ul>
                     <li>Muestra habilidad para redireccionar esfuerzos personales en respuesta a circunstancias cambiantes.</li>
@@ -518,10 +523,10 @@
             </div>
             <div>
                 <input type="checkbox" name="competencias" value="orientacionResultados" id="orientacionResultados" />
-                <label for="orientacionResultados"><button class="button-style">Orientación a Resultados</button></label>
+                <label for="orientacionResultados"><button class="button-style">@Localizer["ores"]</button></label>
             </div>
             <div id="orientacionResultadosContent" style="display: none;">
-                <h2>Orientación a Resultados</h2>
+                <h2>@Localizer["ores"]</h2>
                 <p>El candidato:</p>
                 <ul>
                     <li>Ejecuta con eficacia y conforme a los planes; con enfoque a resultados, tomando responsabilidad por los resultados.</li>
@@ -616,10 +621,10 @@
             </div>
             <div>
                 <input type="checkbox" name="competencias" value="orientacionValores" id="orientacionValores" />
-                <label for="orientacionValores"><button class="button-purple-style">Orientación a Valores</button></label>
+                <label for="orientacionValores"><button class="button-purple-style">@Localizer["oval"]</button></label>
             </div>
             <div id="orientacionValoresContent" style="display: none;">
-                <h2>Orientación a Valores</h2>
+                <h2>@Localizer["oval"]</h2>
                 <p>El candidato:</p>
                 <ul>
                     <li>Sostiene y modela los valores Chubb y siempre hace lo correcto para la Compañía, los colegas y clientes.</li>
@@ -713,123 +718,123 @@
 
 
             </div>
-       </div>
-  
+        </div>
+
 
         <div id="lideresCasillas" class="competencia" style="display: none;">
             <div>
                 <input type="checkbox" name="competencias" value="visionNegocio" id="visionNegocio" />
-                <label for="visionNegocio"><button class="button-style">Visión de Negocio</button></label>
+                <label for="visionNegocio"><button class="button-style">@Localizer["visne"]</button></label>
             </div>
             <div id="visionNegocioContent" style="display: none;">
-                <h2>Visión de Negocio</h2>
-                    <p>El candidato:</p>
-                    <ul>
+                <h2>@Localizer["visne"]</h2>
+                <p>El candidato:</p>
+                <ul>
 
-                        <li>Muestra capacidad para aplicar su experiencia técnica, conocimientos y habilidades para mejorar el desempeño de la compañía..</li>
-                        <li>Logra definir el camino a seguir para alcanzar los objetivos de negocio.</li>
-                        <li>Muestra habilidad de comprender y prevenir los cambios de la organización y del mercado.</li>
-                        <li>Demuestra conocimiento técnico del negocio y del mercado; y le saca provecho en beneficio de la Compañía.</li>
-                        <li>Es analítico, se conduce según los datos y se basa en los hechos en la toma de decisiones.</li>
-                        <li>Se mantiene al día sobre las tendencias del mercado y de la competencia.</li>
-                    </ul>
+                    <li>Muestra capacidad para aplicar su experiencia técnica, conocimientos y habilidades para mejorar el desempeño de la compañía..</li>
+                    <li>Logra definir el camino a seguir para alcanzar los objetivos de negocio.</li>
+                    <li>Muestra habilidad de comprender y prevenir los cambios de la organización y del mercado.</li>
+                    <li>Demuestra conocimiento técnico del negocio y del mercado; y le saca provecho en beneficio de la Compañía.</li>
+                    <li>Es analítico, se conduce según los datos y se basa en los hechos en la toma de decisiones.</li>
+                    <li>Se mantiene al día sobre las tendencias del mercado y de la competencia.</li>
+                </ul>
 
-                    <p> <strong>Selecciona 1 o 2 preguntas sugeridas para evaluar esta competencia</strong>.</p>
+                <p> <strong>Selecciona 1 o 2 preguntas sugeridas para evaluar esta competencia</strong>.</p>
 
-                    <ol>
-                        <li>
-                            Cuéntame de alguna situación en la que, desde tu rol, identificaste oportunidades y/o amenazas para la compañía.
+                <ol>
+                    <li>
+                        Cuéntame de alguna situación en la que, desde tu rol, identificaste oportunidades y/o amenazas para la compañía.
 
-                            <ol type="a">
-                                <li>¿Qué hiciste?</li>
-                                <li>¿Por qué decidiste hacerlo?</li>
-                                <li>¿Qué impacto tuvo para el negocio?</li>
-                                <li>¿Cuál fue el resultado?</li>
-                            </ol>
-                        </li>
-                        <li>
-                            Descríbeme una ocasión donde generaste un proyecto para contribuir alguna mejora para la compañía.
-                            <ol type="a">
+                        <ol type="a">
+                            <li>¿Qué hiciste?</li>
+                            <li>¿Por qué decidiste hacerlo?</li>
+                            <li>¿Qué impacto tuvo para el negocio?</li>
+                            <li>¿Cuál fue el resultado?</li>
+                        </ol>
+                    </li>
+                    <li>
+                        Descríbeme una ocasión donde generaste un proyecto para contribuir alguna mejora para la compañía.
+                        <ol type="a">
 
-                                <li>¿Cómo la identificaste?</li>
-                                <li>¿Qué análisis previos hiciste antes de generar el proyecto?</li>
-                                <li>¿Qué acciones llevaste a cabo para ejecutarlo?</li>
-                                <li>¿Cuál fue el resultado?</li>
+                            <li>¿Cómo la identificaste?</li>
+                            <li>¿Qué análisis previos hiciste antes de generar el proyecto?</li>
+                            <li>¿Qué acciones llevaste a cabo para ejecutarlo?</li>
+                            <li>¿Cuál fue el resultado?</li>
 
-                            </ol>
-                        </li>
-                        <li>
-                            Cuéntame de una ocasión en la que hayas logrado un objetivo, teniendo en cuenta data del mercado.
-                            <ol type="a">
-                                <li>¿Por qué decidiste hacerlo?</li>
-                                <li>¿Cómo lo hiciste?</li>
-                                <li>¿Qué impacto tuvo?</li>
-                            </ol>
+                        </ol>
+                    </li>
+                    <li>
+                        Cuéntame de una ocasión en la que hayas logrado un objetivo, teniendo en cuenta data del mercado.
+                        <ol type="a">
+                            <li>¿Por qué decidiste hacerlo?</li>
+                            <li>¿Cómo lo hiciste?</li>
+                            <li>¿Qué impacto tuvo?</li>
+                        </ol>
 
-                        </li>
-                        <li>
-                            Cuéntame de un proyecto en donde hayas aplicado tus conocimientos y/o experiencias previas
-                            <ol type="a">
-                                <li>¿Cuál era tu rol?</li>
-                                <li>¿Qué se esperaba de ti?</li>
-                                <li>¿Qué hiciste?</li>
-                                <li>¿Cuál fue el resultado?</li>
-                            </ol>
-                        </li>
-                    </ol>
+                    </li>
+                    <li>
+                        Cuéntame de un proyecto en donde hayas aplicado tus conocimientos y/o experiencias previas
+                        <ol type="a">
+                            <li>¿Cuál era tu rol?</li>
+                            <li>¿Qué se esperaba de ti?</li>
+                            <li>¿Qué hiciste?</li>
+                            <li>¿Cuál fue el resultado?</li>
+                        </ol>
+                    </li>
+                </ol>
 
-                    <p> <strong>Documenta brevemente las respuestas del candidato, de acuerdo con el MODELO STAR</strong>.</p>
+                <p> <strong>Documenta brevemente las respuestas del candidato, de acuerdo con el MODELO STAR</strong>.</p>
 
-                    @using (Html.BeginForm("GuardarEvaluacion", "Usuarios", FormMethod.Post, new { id = "formulario7" }))
-                    {
-                        @Html.Hidden("UsuarioId", (object)ViewBag.UsuarioId)
-                        @Html.Hidden("Nombre_C", "Visión de Negocio")
+                @using (Html.BeginForm("GuardarEvaluacion", "Usuarios", FormMethod.Post, new { id = "formulario7" }))
+                {
+                    @Html.Hidden("UsuarioId", (object)ViewBag.UsuarioId)
+                    @Html.Hidden("Nombre_C", "Visión de Negocio")
 
-                        <table>
-                            <tr>
-                                <th><label>Situacion:</label></th>
-                                <td>@Html.TextBoxFor(model => model.Situacion, new { @class = "textbox" })</td>
-                            </tr>
-                            <tr>
-                                <th><label>Tarea:</label></th>
-                                <td>@Html.TextBoxFor(model => model.Tarea, new { @class = "textbox" })</td>
-                            </tr>
-                            <tr>
-                                <th><label>Acción:</label></th>
-                                <td>@Html.TextBoxFor(model => model.Accion, new { @class = "textbox" })</td>
-                            </tr>
-                            <tr>
-                                <th><label>Resultado:</label></th>
-                                <td>@Html.TextBoxFor(model => model.Resultado, new { @class = "textbox" })</td>
-                            </tr>
-                        </table>
-
-
-                        <p> <strong>Comentarios / Observaciones Generales:</strong>.</p>
+                    <table>
+                        <tr>
+                            <th><label>Situacion:</label></th>
+                            <td>@Html.TextBoxFor(model => model.Situacion, new { @class = "textbox" })</td>
+                        </tr>
+                        <tr>
+                            <th><label>Tarea:</label></th>
+                            <td>@Html.TextBoxFor(model => model.Tarea, new { @class = "textbox" })</td>
+                        </tr>
+                        <tr>
+                            <th><label>Acción:</label></th>
+                            <td>@Html.TextBoxFor(model => model.Accion, new { @class = "textbox" })</td>
+                        </tr>
+                        <tr>
+                            <th><label>Resultado:</label></th>
+                            <td>@Html.TextBoxFor(model => model.Resultado, new { @class = "textbox" })</td>
+                        </tr>
+                    </table>
 
 
-                        @Html.TextAreaFor(model => model.Comentario, new { @class = "textarea" })
-
-                        <p> <strong>Evalúa la respuesta del candidato de acuerdo con la escala de calificación:</strong>.</p>
-
-                        @Html.TextBoxFor(model => model.Puntaje, new { type = "number", min = "1", max = "5" })
+                    <p> <strong>Comentarios / Observaciones Generales:</strong>.</p>
 
 
-                        <input type="submit" value="Enviar" />
-                    }
+                    @Html.TextAreaFor(model => model.Comentario, new { @class = "textarea" })
+
+                    <p> <strong>Evalúa la respuesta del candidato de acuerdo con la escala de calificación:</strong>.</p>
+
+                    @Html.TextBoxFor(model => model.Puntaje, new { type = "number", min = "1", max = "5" })
 
 
-            
+                    <input type="submit" value="Enviar" />
+                }
+
+
+
 
 
             </div>
             <div>
                 <input type="checkbox" name="competencias" value="influencia" id="influencia" />
-                <label for="influencia"><button class="button-purple-style">Influencia</button></label>
+                <label for="influencia"><button class="button-purple-style">@Localizer["influ"]</button></label>
             </div>
             <div id="influenciaContent" style="display: none;">
-                <h2>Influencia</h2>
-            
+                <h2>@Localizer["influ"]</h2>
+
                 <p>El candidato:</p>
                 <ul>
                     <li>Muestra capacidad para aplicar su experiencia técnica, conocimientos y habilidades para mejorar el desempeño de la compañía..</li>
@@ -929,10 +934,10 @@
             </div>
             <div>
                 <input type="checkbox" name="competencias" value="liderazgoEquipoInclusivo" id="liderazgoEquipoInclusivo" />
-                <label for="liderazgoEquipoInclusivo"><button class="button-style">Liderazgo Equipo Inclusivo</button></label>
+                <label for="liderazgoEquipoInclusivo"><button class="button-style">@Localizer["lide"]</button></label>
             </div>
             <div id="liderazgoEquipoInclusivoContent" style="display: none;">
-                <h2>Liderazgo Equipo Inclusivo</h2>
+                <h2>@Localizer["lide"]</h2>
                 <p>El candidato:</p>
                 <ul>
                     <li>Gestiona el desempeño de los miembros de su equipo efectivamente, motivando e inspirando a otros a alcanzar metas específicas.</li>
@@ -1069,10 +1074,10 @@
             </div>
             <div>
                 <input type="checkbox" name="competencias" value="ejecucion" id="ejecucion" />
-                <label for="ejecucion"><button class="button-purple-style">Ejecución</button></label>
+                <label for="ejecucion"><button class="button-purple-style">@Localizer["ejec"]</button></label>
             </div>
             <div id="ejecucionContent" style="display: none;">
-                <h2>Ejecución</h2>
+                <h2>@Localizer["ejec"]</h2>
 
                 <p>El candidato:</p>
                 <ul>
@@ -1173,15 +1178,15 @@
 
 
 
-            
+
             </div>
             <div>
                 <input type="checkbox" name="competencias" value="ownership" id="ownership" />
-                <label for="ownership"><button class="button-style">Ownership</button></label>
+                <label for="ownership"><button class="button-style">@Localizer["owner"]</button></label>
             </div>
             <div id="ownershipContent" style="display: none;">
-                <h2>Ownership</h2>
-                
+                <h2>@Localizer["owner"]</h2>
+
                 <p>El candidato:</p>
                 <ul>
 
@@ -1282,10 +1287,10 @@
             </div>
             <div>
                 <input type="checkbox" name="competencias" value="integridadCoraje" id="integridadCoraje" />
-                <label for="integridadCoraje"><button class="button-purple-style">Integridad y Coraje</button></label>
+                <label for="integridadCoraje"><button class="button-purple-style">@Localizer["icor"]</button></label>
             </div>
             <div id="integridadCorajeContent" style="display: none;">
-                <h2>Integridad y Coraje</h2>
+                <h2>@Localizer["icor"]</h2>
                 <p>El candidato:</p>
                 <ul>
                     <li>Sustenta y modela los valores Chubb, incluso en situaciones desafiantes, en la toma de decisiones y al comunicarse con otros.</li>
@@ -1379,11 +1384,11 @@
             </div>
             <div>
                 <input type="checkbox" name="competencias" value="enfoqueEstrategico" id="enfoqueEstrategico" />
-                <label for="enfoqueEstrategico"><button class="button-style">Enfoque Estratégico</button></label>
+                <label for="enfoqueEstrategico"><button class="button-style">@Localizer["ees"]</button></label>
             </div>
             <div id="enfoqueEstrategicoContent" style="display: none;">
-                <h2>Enfoque Estratégico</h2>
-                
+                <h2>@Localizer["ees"]</h2>
+
                 <p>El candidato:</p>
                 <ul>
                     <li>Incorpora una perspectiva a largo plazo en Chubb y en los mercados en los que Chubb opera, tanto en la planificación, como en la ejecución </li>
@@ -1487,12 +1492,12 @@
         <div id="todosCasillas" class="competencia" style="display: none;">
             <div>
                 <input type="checkbox" name="competencias" value="compatibilidad" id="compatibilidad" />
-                <label for="compatibilidad"><button class="button-purple-style">Compatibilidad</button></label>
+                <label for="compatibilidad"><button class="button-purple-style">@Localizer["compa"]</button></label>
             </div>
             <div id="compatibilidadContent" style="display: none;">
-                <h2>Compatibilidad</h2>
+                <h2>@Localizer["compa"]</h2>
                 <ul>
-                    
+
                     <li>Identificar y conocer si las preferencias, valores, motivadores e intereses del candidato se conectan a las necesidades, objetivos y valores de la compañía.</li>
 
                 </ul>
@@ -1552,11 +1557,11 @@
             </div>
             <div>
                 <input type="checkbox" name="competencias" value="orientacionCliente" id="orientacionCliente" />
-                <label for="orientacionCliente"><button class="button-style">Orientación al Cliente</button></label>
+                <label for="orientacionCliente"><button class="button-style">@Localizer["ocli"]</button></label>
             </div>
             <div id="orientacionClienteContent" style="display: none;">
-                <h2>Orientación al Cliente</h2>
-                
+                <h2>@Localizer["ocli"]</h2>
+
                 <p>El candidato:</p>
 
                 <ul>
@@ -1648,11 +1653,11 @@
             </div>
             <div>
                 <input type="checkbox" name="competencias" value="trabajoBajoPresion" id="trabajoBajoPresion" />
-                <label for="trabajoBajoPresion"><button class="button-purple-style">Trabajo bajo Presión</button></label>
+                <label for="trabajoBajoPresion"><button class="button-purple-style">@Localizer["tp"]</button></label>
             </div>
             <div id="trabajoBajoPresionContent" style="display: none;">
-                <h2>Trabajo bajo Presión</h2>
-                
+                <h2>@Localizer["tp"]</h2>
+
                 <p>El candidato:</p>
                 <ul>
                     <li>Muestra capacidad para mantener estabilidad emocional al trabajar en situaciones de presión o adversidad.</li>
@@ -1698,7 +1703,7 @@
                     @Html.Hidden("Nombre_C", "Trabajo bajo Presión")
 
                     <table>
-                            <tr>
+                        <tr>
                             <th><label>Situacion    :</label></th>
                             <td>@Html.TextBoxFor(model => model.Situacion, new { @class = "textbox" })</td>
                         </tr>
@@ -1737,11 +1742,11 @@
         </div>
 
 
-        <button class="chubb-button" onclick="obtenerResultados()">Desplegar competencias</button>
-        <button class="chubb-button" onclick="imprimir()">Imprimir para evaluación presencial</button>
-        <button class="chubb-button" onclick="verTodasLasCompetencias()">Ver todas las competencias</button>
+        <button class="chubb-button" onclick="obtenerResultados()">@Localizer["descom"]</button>
+        <button class="chubb-button" onclick="imprimir()"><i class="fas fa-print"></i> </button>
+        <button class="chubb-button" onclick="verTodasLasCompetencias()">@Localizer["see"]</button>
 
-        
+
 
 
     </div>
@@ -1859,8 +1864,8 @@
     }
 </script>
 
-<a asp-action="EvaluacionCompleta" class="btn btn-secondary mt-3" asp-route-id="@ViewBag.UsuarioId">Exportar a excel o importar PDF</a>
-<a asp-action="Index" class="chubb-button mt-3">Volver a Usuarios</a>
+<a asp-action="EvaluacionCompleta" class="btn btn-secondary mt-3" asp-route-id="@ViewBag.UsuarioId">@Localizer["exportpdf"]</a>
+<a asp-action="Index" class="chubb-button mt-3"><i class="fas fa-arrow-left"></i></a>
 
 
 

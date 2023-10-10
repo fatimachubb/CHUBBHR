@@ -1,0 +1,303 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ac" xml:space="preserve">
+    <value>Action:</value>
+  </data>
+  <data name="Acontinuo" xml:space="preserve">
+    <value>Continuous learning</value>
+  </data>
+  <data name="adap" xml:space="preserve">
+    <value>Adaptability</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>All Levels</value>
+  </data>
+  <data name="apren" xml:space="preserve">
+    <value>Has self-learning and self-motivation to acquire new knowledge and deepen technical experience autonomously and develop their capabilities on their own.</value>
+  </data>
+  <data name="asum" xml:space="preserve">
+    <value>Takes on challenging work assignments that lead to professional growth.</value>
+  </data>
+  <data name="Colabin" xml:space="preserve">
+    <value>Individual Contributor</value>
+  </data>
+  <data name="comen" xml:space="preserve">
+    <value>Comments / General Observations:</value>
+  </data>
+  <data name="compa" xml:space="preserve">
+    <value>Compatibility</value>
+  </data>
+  <data name="d1" xml:space="preserve">
+    <value>What happened?</value>
+  </data>
+  <data name="d2" xml:space="preserve">
+    <value>What made you do it that way?</value>
+  </data>
+  <data name="d3" xml:space="preserve">
+    <value>You learned?</value>
+  </data>
+  <data name="dem" xml:space="preserve">
+    <value>Demonstrates the interest and ability to expand their professional experience and develop new skills.</value>
+  </data>
+  <data name="des" xml:space="preserve">
+    <value>Describe to me the biggest problem you have experienced in your current role.</value>
+  </data>
+  <data name="descom" xml:space="preserve">
+    <value>Deploy competencies</value>
+  </data>
+  <data name="ees" xml:space="preserve">
+    <value>Strategic approach</value>
+  </data>
+  <data name="ejec" xml:space="preserve">
+    <value>Execution</value>
+  </data>
+  <data name="Eval" xml:space="preserve">
+    <value>Evaluate</value>
+  </data>
+  <data name="evaluate" xml:space="preserve">
+    <value>Evaluate the candidate's response according to the rating scale:</value>
+  </data>
+  <data name="EvaluationOfCompetencies" xml:space="preserve">
+    <value>Evaluation of competencies</value>
+  </data>
+  <data name="exportpdf" xml:space="preserve">
+    <value>Export to Excel or import PDF</value>
+  </data>
+  <data name="icor" xml:space="preserve">
+    <value>Integrity and Courage</value>
+  </data>
+  <data name="influ" xml:space="preserve">
+    <value>Influence</value>
+  </data>
+  <data name="ini" xml:space="preserve">
+    <value>Initiative</value>
+  </data>
+  <data name="ini1" xml:space="preserve">
+    <value>Is willing to do more than is required or expected.</value>
+  </data>
+  <data name="ini2" xml:space="preserve">
+    <value>Proposes and takes actions in order to achieve an objective that contributes to the team's vision, without being asked.</value>
+  </data>
+  <data name="ini3" xml:space="preserve">
+    <value>Shows drive and willingness to go the extra mile, in terms of agility and energy.</value>
+  </data>
+  <data name="ini4" xml:space="preserve">
+    <value>Is self-motivated and takes advantage of opportunities to make a difference and generate value for his or her area and for others.</value>
+  </data>
+  <data name="Leaders" xml:space="preserve">
+    <value>Leaders</value>
+  </data>
+  <data name="lide" xml:space="preserve">
+    <value>Inclusive Team Leadership</value>
+  </data>
+  <data name="oc" xml:space="preserve">
+    <value>Tell me about a time when you had to change your strategy to solve a problem.</value>
+  </data>
+  <data name="oc1" xml:space="preserve">
+    <value>What did you do?</value>
+  </data>
+  <data name="ocli" xml:space="preserve">
+    <value>Customer orientation</value>
+  </data>
+  <data name="ores" xml:space="preserve">
+    <value>Orientation to results</value>
+  </data>
+  <data name="oval" xml:space="preserve">
+    <value>Values Orientation</value>
+  </data>
+  <data name="owner" xml:space="preserve">
+    <value>Ownership</value>
+  </data>
+  <data name="re" xml:space="preserve">
+    <value>Results:</value>
+  </data>
+  <data name="Rproblemas" xml:space="preserve">
+    <value>Problem resolution</value>
+  </data>
+  <data name="Rproblemas1" xml:space="preserve">
+    <value>Has an organized and logical approach to reflecting on complex problems and issues.</value>
+  </data>
+  <data name="Rproblemas2" xml:space="preserve">
+    <value>Simplifies complexity by breaking down problems into manageable parts.</value>
+  </data>
+  <data name="Rproblemas3" xml:space="preserve">
+    <value>Looks beyond the obvious to achieve results.</value>
+  </data>
+  <data name="Rproblemas4" xml:space="preserve">
+    <value>Develops introspection of problems, issues and situations in an effective and agile way.</value>
+  </data>
+  <data name="see" xml:space="preserve">
+    <value>See all competitions</value>
+  </data>
+  <data name="select" xml:space="preserve">
+    <value>Select 1 or 2 suggested questions to evaluate this competency</value>
+  </data>
+  <data name="sit" xml:space="preserve">
+    <value>Tell me about a situation in which you had to address a problem and did not have all the necessary information.</value>
+  </data>
+  <data name="sit1" xml:space="preserve">
+    <value>What was expected of you?</value>
+  </data>
+  <data name="sit2" xml:space="preserve">
+    <value>What actions did you take?</value>
+  </data>
+  <data name="sit3" xml:space="preserve">
+    <value>What was the result according to your actions?</value>
+  </data>
+  <data name="st" xml:space="preserve">
+    <value>Situation:</value>
+  </data>
+  <data name="STAR" xml:space="preserve">
+    <value>Briefly document the candidate's responses, according to the STAR MODEL</value>
+  </data>
+  <data name="submit" xml:space="preserve">
+    <value>Submit</value>
+  </data>
+  <data name="t1" xml:space="preserve">
+    <value>What happened?</value>
+  </data>
+  <data name="t2" xml:space="preserve">
+    <value>What obstacles did you face?</value>
+  </data>
+  <data name="t3" xml:space="preserve">
+    <value>How did you solve it?</value>
+  </data>
+  <data name="t4" xml:space="preserve">
+    <value>Which it was the result?</value>
+  </data>
+  <data name="ta" xml:space="preserve">
+    <value>Task:</value>
+  </data>
+  <data name="Tarea:" xml:space="preserve">
+    <value>Task:</value>
+  </data>
+  <data name="TCandidate" xml:space="preserve">
+    <value>The candidate:</value>
+  </data>
+  <data name="tell" xml:space="preserve">
+    <value>Tell me about a situation in which you could not meet the established delivery time.</value>
+  </data>
+  <data name="tp" xml:space="preserve">
+    <value>Work under pressure</value>
+  </data>
+  <data name="visne" xml:space="preserve">
+    <value>Business vision</value>
+  </data>
+</root>

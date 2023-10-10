@@ -11,7 +11,8 @@ using Aspose.Cells;
 using System.Data;
 using SkiaSharp;
 using System.Web;
-
+using Rotativa.AspNetCore;
+using Microsoft.Extensions.Localization;
 
 namespace CHUBBHR.Controllers
 {
@@ -20,11 +21,13 @@ namespace CHUBBHR.Controllers
 
 
         private readonly RegistroContext _context;
+        private readonly IStringLocalizer<UsuariosController> _localizer;
         private string connectionString = "Server=LAPTOP-4IKMKHGF\\SQLEXPRESS;Database=REGISTRO; integrated security=true; Encrypt=False;";
 
-        public UsuariosController(RegistroContext context)
+        public UsuariosController(RegistroContext context, IStringLocalizer<UsuariosController> localizer)
         {
             _context = context;
+            _localizer = localizer;
         }
 
 
@@ -33,8 +36,8 @@ namespace CHUBBHR.Controllers
         public  IActionResult Index()
         {
 
-            var registroContext = _context.Usuarios.Include(u => u.PosicionFkNavigation);
-            return View( registroContext.ToList());
+            var registroContext =  _context.Usuarios.Include(u => u.PosicionFkNavigation).ToList();
+            return View( registroContext);
         }
 
         // GET: Usuarios/Details/5
@@ -52,6 +55,8 @@ namespace CHUBBHR.Controllers
             {
                 return NotFound();
             }
+
+            ViewData["UserName"] = _localizer["UserName"];
 
             return View(usuario);
         }
@@ -440,6 +445,43 @@ namespace CHUBBHR.Controllers
         {
             return View("Importar");
         }
+
+
+        public ActionResult PrintViewToPdf()
+        {
+            var report = new ViewAsPdf("Usuarios/Evaluar", new { name = "Giorgio" })
+            {
+                FileName = "Test.pdf",
+                PageSize = Rotativa.AspNetCore.Options.Size.A4,
+                PageOrientation = Rotativa.AspNetCore.Options.Orientation.Portrait,
+                PageMargins = new Rotativa.AspNetCore.Options.Margins(0, 0, 0, 0),
+                CustomSwitches = "--disable-smart-shrinking"
+            };
+            return report;
+        }
+
+        public class ExampleClass
+        {
+            private readonly IStringLocalizer<ExampleClass> _localizer;
+
+            public ExampleClass(IStringLocalizer<ExampleClass> localizer)
+            {
+                _localizer = localizer;
+            }
+
+            public string GetLocalizedString()
+            {
+                return _localizer["MyLocalizedStringKey"];
+            }
+        }
+
+
+
+
+
+
+
+
 
 
     }

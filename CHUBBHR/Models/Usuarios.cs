@@ -19,4 +19,6 @@ public partial class Usuario
     public virtual ICollection<Competencias> Competencias { get; set; } = new List<Competencias>();
 
 
+
+
 }

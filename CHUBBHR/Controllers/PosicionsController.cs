@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CHUBBHR.Models;
 
+
 namespace CHUBBHR.Controllers
 {
     public class PosicionsController : Controller
@@ -19,21 +20,11 @@ namespace CHUBBHR.Controllers
         }
 
         // GET: Posicions
-      
-
         public async Task<IActionResult> Index()
         {
-            if (_context.Posicions != null)
-            {
-                var posicions = await _context.Posicions.ToListAsync();
-                return View(posicions);
-            } else
-            {
-                // Manejar el caso cuando _context.Posicions es null
-                // Por ejemplo, puedes redirigir a una vista de error o hacer algo más.
-                return View("Error");
-            }
-           
+              return _context.Posicions != null ? 
+                          View(await _context.Posicions.ToListAsync()) :
+                          Problem("Entity set 'RegistroContext.Posicions'  is null.");
         }
 
         // GET: Posicions/Details/5
@@ -170,4 +161,7 @@ namespace CHUBBHR.Controllers
           return (_context.Posicions?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
+
+    
+
 }
