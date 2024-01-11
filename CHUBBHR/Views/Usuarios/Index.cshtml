@@ -3,69 +3,125 @@
 @{
     ViewData["Title"] = "Index";
 }
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - CHUBBHR</title>
-
-    <!-- Vincular archivo CSS de Bootstrap -->
-    <link rel="stylesheet" href="~/CHUBBHR/bootstrap-5.3.1-dist/css" />
-
-    <!-- Vincular archivo CSS de Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
 
     <!-- Vincular archivo de estilos personalizados -->
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/CHUBBHR.styles.css" asp-append-version="true" />
-</head>
 
-
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create" class="btn btn-purple">Registra un entrevistado</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Nombre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Fecha)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PosicionFkNavigation)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nombre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Fecha)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PosicionFkNavigation.Id)
-                </td>
-                <td>
-                    <a asp-action="Edit" class="btn btn-icon red" asp-route-id="@item.Id"><i class="fas fa-pencil-alt"></i></a>
-                    <a asp-action="Details" class="btn btn-icon blue" asp-route-id="@item.Id"><i class="fas fa-info-circle"></i></a>
-                    <a asp-action="Delete" class="btn btn-icon purple" asp-route-id="@item.Id"><i class="fas fa-trash-alt"></i></a>
-                    <a asp-action="Evaluar" class="btn btn-icon yellow" asp-route-id="@item.Id">Evaluar</a>
-                    <a asp-action="Importar" class="btn btn-icon yellow" asp-route-id="@item.Id"><i class="fas fa-file-import"></i></a>
-
-
-
-
-                </td>
-            </tr>
+    <!-- Estilos para la tabla -->
+    <style>
+        .table {
+            width: 100%;
+            margin-bottom: 1rem;
+            color: #495057;
         }
-    </tbody>
-</table>
+
+            .table th,
+            .table td {
+                padding: 0.75rem;
+                vertical-align: top;
+                border-top: 1px solid #dee2e6;
+            }
+
+            .table thead th {
+                vertical-align: bottom;
+                border-bottom: 2px solid #dee2e6;
+            }
+
+            .table tbody + tbody {
+                border-top: 2px solid #dee2e6;
+            }
+
+            .table .table {
+                background-color: #fff;
+            }
+
+        .btn-icon {
+            padding: 0.375rem 0.75rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            border-radius: 0.2rem;
+        }
+
+        .btn-purple {
+            background-color: #6f42c1;
+            color: #fff;
+        }
+
+        .btn-red {
+            background-color: #dc3545;
+            color: #fff;
+        }
+
+        .btn-blue {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .btn-purple {
+            background-color: #6f42c1;
+            color: #fff;
+        }
+
+        .btn-yellow {
+            background-color: #ffc107;
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Index</h1>
+
+    <p>
+        <a asp-action="Create" class="btn btn-purple">Registra un entrevistado</a>
+    </p>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nombre)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Fecha)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PosicionFkNavigation)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Fecha)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PosicionFkNavigation.Id)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" class="btn btn-icon red" asp-route-id="@item.Id"><i class="fas fa-pencil-alt"></i></a>
+                        <a asp-action="Details" class="btn btn-icon blue" asp-route-id="@item.Id"><i class="fas fa-info-circle"></i></a>
+                        <a asp-action="Delete" class="btn btn-icon purple" asp-route-id="@item.Id"><i class="fas fa-trash-alt"></i></a>
+                        <a asp-action="Evaluar" class="btn btn-icon yellow" asp-route-id="@item.Id">Evaluar</a>
+                        <a asp-action="Importar" class="btn btn-icon yellow" asp-route-id="@item.Id"><i class="fas fa-file-import"></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</body>
+</html>
